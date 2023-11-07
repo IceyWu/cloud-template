@@ -10,9 +10,9 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 <br>
 
-<!-- <p align='center'>
-<a href="https://starter-web.netlify.app/">Live Demo</a>
-</p> -->
+<p align='center'>
+<a href="https://cloud-template.netlify.app/">Live Demo</a>
+</p>
 
 <br>
 
