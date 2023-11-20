@@ -55,7 +55,7 @@ export default defineConfig({
 		],
 		[
 			'icon-link',
-			'icon color-inherit op64 hover:op100 hover-text-sky-600 dark-hover-color-inherit',
+			'color-inherit op64 hover:op100 hover-text-sky-600 dark-hover-color-inherit',
 		],
 		[
 			'icon-text',
