@@ -43,7 +43,7 @@ const routes = getRoutes()
 		<div class="h-full flex items-center gap-5">
 			<!-- router list -->
 			<RouterLink v-for="r of routes" :key="r.path" :to="r.path">
-				<p icon-link>{{ t(r.name) }}</p>
+				<p class="icon-link">{{ t(r.name) }}</p>
 			</RouterLink>
 			<div>
 				<Dropdown />
