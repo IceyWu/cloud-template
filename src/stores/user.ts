@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
-import { getLogin, refreshTokenApi } from '@/api/admin'
-import { UserResult, RefreshTokenResult } from '@/api/user'
+import { getLogin, refreshTokenApi, UserResult } from '@/api/mock'
 import { setToken, removeToken } from '@/utils/auth'
 
 export const useUserStore = defineStore(
@@ -67,7 +66,7 @@ export const useUserStore = defineStore(
 		}
 
 		const handRefreshToken = (data: any) => {
-			return new Promise<RefreshTokenResult>((resolve, reject) => {
+			return new Promise<any>((resolve, reject) => {
 				refreshTokenApi(data)
 					.then((data) => {
 						if (data) {

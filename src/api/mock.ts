@@ -11,6 +11,14 @@ export type UserResult = {
 export const getLogin = (data?: object) => {
 	return http.request<any>('post', '/login', { data })
 }
+/** 登录 */
+export const refreshTokenApi = (data?: object) => {
+	return http.request<any>('post', '/refreshTokenApi', { data })
+}
+/** 登录 */
+export const RefreshTokenResult = (data?: object) => {
+	return http.request<any>('post', '/RefreshTokenResult', { data })
+}
 
 /** 获取管理员信息 */
 export const testRequestGet = (params?: object) => {
