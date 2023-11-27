@@ -1,6 +1,13 @@
 import { defineStore } from 'pinia'
 import { getLogin, refreshTokenApi, UserResult } from '@/api/mock'
-import { setToken, removeToken } from '@/utils/auth'
+import {
+	type DataInfo,
+	setToken,
+	removeToken,
+	AccessTokenKey,
+	RefreshTokenKey,
+	ExpiresKey,
+} from '@/utils/auth'
 
 export const useUserStore = defineStore(
 	'lp-user',
@@ -21,36 +28,24 @@ export const useUserStore = defineStore(
 			userInfo.value = data
 		}
 
-		const loginByUsername = (data: any) => {
+		const loginByUsername = (dataT: any) => {
 			return new Promise<UserResult>((resolve, reject) => {
-				getLogin(data)
-					.then((data) => {
-						if (data) {
-							console.log('-------login data------', data)
-							const {
-								code,
-								result,
-								result: {
-									admin,
-									admin: { name },
-									token: { access_token, refresh_token, expires_in },
-								},
-							} = data
-							if (code === 200 && result) {
-								const setParams = {
-									username: name,
-									roles: ['admin'],
-									accessToken: access_token,
-									refreshToken: refresh_token,
-									expires: new Date().getTime() + expires_in * 1000,
-								}
-								// console.log("setParams", setParams);
-								SET_USERINFO(admin)
-								setToken(setParams)
-								resolve(data)
-							} else {
-								reject(data)
+				getLogin(dataT)
+					.then((res) => {
+						const { code, data } = res
+						if (code === 200) {
+							const { admin, token } = data
+							const TokenInfo: DataInfo<number> = {
+								username: admin.name,
+								roles: [admin.name],
+								accessToken: token[AccessTokenKey],
+								refreshToken: token[RefreshTokenKey],
+								expires: token[ExpiresKey] * 1000,
 							}
+							setToken(TokenInfo, 'a')
+							resolve(res)
+						} else {
+							reject(res)
 						}
 					})
 					.catch((error) => {

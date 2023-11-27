@@ -30,6 +30,7 @@ export interface PureHttpRequestConfig extends AxiosRequestConfig {
 	isNeedToken?: boolean
 	isNeedLoading?: boolean
 	serverName?: string
+	roleName?: string
 }
 
 export default class PureHttp {

@@ -2,6 +2,7 @@
 import { testRequestGet } from '~/api/mock'
 import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
+import { useUserStore } from '~/stores/user'
 defineProps<{ msg: string }>()
 
 const titleRef = useTyped(['cloud template!  '])
@@ -32,6 +33,13 @@ const go404Page = () => {
 		path,
 	})
 }
+const handleLogin = () => {
+	useUserStore()
+		.loginByUsername({ username: 'admin', password: 'admin123' })
+		.then((res) => {
+			console.log('🌳-----res-----', res)
+		})
+}
 </script>
 
 <template>
@@ -49,6 +57,7 @@ const go404Page = () => {
 			{{ msg }}
 		</h1>
 		<div flex flex-wrap gap-2>
+			<button class="btn" @click="handleLogin">登录</button>
 			<button class="btn" @click="getData">数据获取</button>
 			<button class="btn" @click="counter.inc()">
 				pinia-{{ counter.count }}

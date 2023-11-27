@@ -67,7 +67,12 @@ class PureHttp {
 	private httpInterceptorsRequest(): void {
 		PureHttp.axiosInstance.interceptors.request.use(
 			async (config: PureHttpRequestConfig): Promise<any> => {
-				const { isNeedToken = true, isNeedLoading = false, serverName } = config
+				const {
+					isNeedToken = true,
+					isNeedLoading = false,
+					serverName,
+					roleName,
+				} = config
 				PureHttp.isNeedLoading = isNeedLoading
 				if (serverName) {
 					config.baseURL = baseUrl[serverName] || baseUrl['apiServer']
@@ -92,7 +97,7 @@ class PureHttp {
 				return !isNeedToken
 					? config
 					: new Promise((resolve) => {
-							const data = getToken()
+							const data = getToken(roleName)
 							if (data) {
 								const now = new Date().getTime()
 								const expired = parseInt(data.expires) - now <= 0
@@ -117,6 +122,7 @@ class PureHttp {
 								} else {
 									config.headers['Authorization'] = formatToken(
 										data.accessToken,
+										roleName,
 									)
 									resolve(config)
 								}
