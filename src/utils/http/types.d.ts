@@ -1,9 +1,8 @@
-import {
+import type {
 	Method,
 	AxiosError,
 	AxiosResponse,
 	AxiosRequestConfig,
-	InternalAxiosRequestConfig,
 } from 'axios'
 
 export type resultType = {
@@ -23,16 +22,7 @@ export interface PureHttpResponse extends AxiosResponse {
 	config: PureHttpRequestConfig
 }
 
-// eslint-disable-next-line no-unused-vars
-export interface PureHttpRequestConfig<T = any> extends AxiosRequestConfig {
-	// eslint-disable-next-line no-unused-vars
-	beforeRequestCallback?: (request: PureHttpRequestConfig) => void
-	// eslint-disable-next-line no-unused-vars
-	beforeResponseCallback?: (response: PureHttpResponse) => void
-}
-// eslint-disable-next-line no-unused-vars
-export interface PureHttpInterceptorsConfig<T = any>
-	extends InternalAxiosRequestConfig {
+export interface PureHttpRequestConfig extends AxiosRequestConfig {
 	// eslint-disable-next-line no-unused-vars
 	beforeRequestCallback?: (request: PureHttpRequestConfig) => void
 	// eslint-disable-next-line no-unused-vars

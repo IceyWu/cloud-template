@@ -1,36 +1,30 @@
-import Axios, {
-	AxiosInstance,
-	AxiosRequestConfig,
-	// CustomParamsSerializer,
-} from 'axios'
-import {
+import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import type {
 	PureHttpError,
 	RequestMethods,
 	PureHttpResponse,
 	PureHttpRequestConfig,
-	PureHttpInterceptorsConfig,
 } from './types.d'
 // import { stringify } from "qs";
 import NProgress from '../progress'
 import { getToken, formatToken } from '@/utils/auth'
-// import { useUserStoreHook } from "@/store/modules/user";
+// import { useUserStoreHook } from '@/store/modules/user'
 import baseUrl from './base.js'
-
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
 	// 当前使用mock模拟请求，将baseURL制空
 	baseURL: baseUrl.apiServer,
 	// 请求超时时间
 	timeout: 10000,
-	// headers: {
-	//   Accept: "application/json, text/plain, */*",
-	//   "Content-Type": "application/json",
-	//   "X-Requested-With": "XMLHttpRequest"
-	// }
-	// 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
-	// paramsSerializer: {
-	//   serialize: stringify as unknown as CustomParamsSerializer
-	// }
+	//   headers: {
+	//     Accept: "application/json, text/plain, */*",
+	//     "Content-Type": "application/json",
+	//     "X-Requested-With": "XMLHttpRequest",
+	//   },
+	//   // 数组格式参数序列化（https://github.com/axios/axios/issues/5142）
+	//   paramsSerializer: {
+	//     serialize: stringify as unknown as CustomParamsSerializer,
+	//   },
 }
 
 class PureHttp {
@@ -44,7 +38,6 @@ class PureHttp {
 
 	/** 防止重复刷新token */
 	private static isRefreshing = false
-
 	/** 防止重复刷新token */
 	private static isNeedLoading = false
 
@@ -73,7 +66,7 @@ class PureHttp {
 	/** 请求拦截 */
 	private httpInterceptorsRequest(): void {
 		PureHttp.axiosInstance.interceptors.request.use(
-			async (config: PureHttpInterceptorsConfig) => {
+			async (config: PureHttpRequestConfig): Promise<any> => {
 				const { isNeedToken = true, isNeedLoading = false, serverName } = config
 				PureHttp.isNeedLoading = isNeedLoading
 				if (serverName) {
@@ -84,7 +77,8 @@ class PureHttp {
 				}
 				// 开启进度条动画
 				isNeedLoading && NProgress.start()
-				// 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
+
+				// 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
 				if (typeof config.beforeRequestCallback === 'function') {
 					config.beforeRequestCallback(config)
 					return config
@@ -93,29 +87,32 @@ class PureHttp {
 					PureHttp.initConfig.beforeRequestCallback(config)
 					return config
 				}
-				return isNeedToken
-					? new Promise((resolve) => {
+				// console.log("🌳------------------------------>", config);
+				/** 请求白名单，放置一些不需要token的接口（通过设置请求白名单，防止token过期后再请求造成的死循环问题） */
+				return !isNeedToken
+					? config
+					: new Promise((resolve) => {
 							const data = getToken()
 							if (data) {
 								const now = new Date().getTime()
 								const expired = parseInt(data.expires) - now <= 0
+
 								if (expired) {
 									if (!PureHttp.isRefreshing) {
 										PureHttp.isRefreshing = true
 										// token过期刷新
 										// useUserStoreHook()
-										//   .handRefreshToken({ refreshToken: data.refreshToken })
-										//   .then(res => {
-										//     const token = res.data.accessToken;
-										//     config.headers["Authorization"] = formatToken(token);
-										//     PureHttp.requests.forEach(cb => cb(token));
-										//     PureHttp.requests = [];
-										//   })
-										//   .finally(() => {
-										//     PureHttp.isRefreshing = false;
-										//   });
+										// 	.handRefreshToken({ refreshToken: data.refreshToken })
+										// 	.then((res) => {
+										// 		const token = res.data.accessToken
+										// 		config.headers['Authorization'] = formatToken(token)
+										// 		PureHttp.requests.forEach((cb) => cb(token))
+										// 		PureHttp.requests = []
+										// 	})
+										// 	.finally(() => {
+										// 		PureHttp.isRefreshing = false
+										// 	})
 									}
-									// const newCOnfig = PureHttp.retryOriginalRequest(config)
 									resolve(PureHttp.retryOriginalRequest(config))
 								} else {
 									config.headers['Authorization'] = formatToken(
@@ -127,7 +124,6 @@ class PureHttp {
 								resolve(config)
 							}
 					  })
-					: config
 			},
 			(error) => {
 				return Promise.reject(error)
@@ -146,7 +142,6 @@ class PureHttp {
 					NProgress.done()
 				}
 				const { code } = response.data
-				console.log('🌵-----response-----', response)
 				// 业务异常code名单
 				if (PureHttp.errorCodes.includes(code)) {
 					PureHttp.isApiError = true
@@ -154,7 +149,7 @@ class PureHttp {
 					return response
 					// return Promise.reject(response)
 				}
-				// 优先判断post/get等方法是否传入回掉，否则执行初始化设置等回掉
+				// 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
 				if (typeof $config.beforeResponseCallback === 'function') {
 					$config.beforeResponseCallback(response)
 					return response.data
@@ -168,13 +163,13 @@ class PureHttp {
 			(error: PureHttpError) => {
 				const $error = error
 				$error.isCancelRequest = Axios.isCancel($error)
-				// const statusCode = error?.response?.data?.statusCode;
 				// 关闭进度条动画
 				NProgress.done()
 				// 所有的响应异常 区分来源为取消请求/非取消请求
-				return Promise.resolve({
-					...error.response.data,
-				})
+				return Promise.reject($error)
+				// return Promise.resolve({
+				//   ...error.response.data
+				// });
 			},
 		)
 	}
@@ -193,7 +188,7 @@ class PureHttp {
 			...axiosConfig,
 		} as PureHttpRequestConfig
 
-		// 单独处理自定义请求/响应回掉
+		// 单独处理自定义请求/响应回调
 		return new Promise((resolve, reject) => {
 			PureHttp.axiosInstance
 				.request(config)
