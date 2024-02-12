@@ -70,7 +70,7 @@ class PureHttp {
 				const {
 					isNeedToken = true,
 					isNeedLoading = false,
-					serverName,
+					serverName = 'apiServer',
 					roleName,
 				} = config
 				PureHttp.isNeedLoading = isNeedLoading
@@ -118,7 +118,8 @@ class PureHttp {
 										// 		PureHttp.isRefreshing = false
 										// 	})
 									}
-									resolve(PureHttp.retryOriginalRequest(config))
+									// resolve(PureHttp.retryOriginalRequest(config))
+									resolve(config)
 								} else {
 									config.headers['Authorization'] = formatToken(
 										data.accessToken,
@@ -129,7 +130,7 @@ class PureHttp {
 							} else {
 								resolve(config)
 							}
-					  })
+						})
 			},
 			(error) => {
 				return Promise.reject(error)
@@ -198,7 +199,7 @@ class PureHttp {
 		return new Promise((resolve, reject) => {
 			PureHttp.axiosInstance
 				.request(config)
-				.then((response: undefined) => {
+				.then((response: any) => {
 					resolve(response)
 				})
 				.catch((error) => {

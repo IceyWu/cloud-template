@@ -5,7 +5,7 @@ export default [
 		method: 'get',
 		response: () => {
 			return {
-				code: 0,
+				code: 200,
 				data: {
 					name: 'mock',
 				},
@@ -17,7 +17,7 @@ export default [
 		method: 'post',
 		timeout: 2000,
 		response: {
-			code: 0,
+			code: 200,
 			data: {
 				name: 'mock',
 			},

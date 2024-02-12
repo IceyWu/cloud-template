@@ -55,7 +55,7 @@ export function setToken(data: DataInfo<number>, roleName?: string) {
 	expires > 0
 		? Cookies.set(TokenKey, cookieString, {
 				expires: (expires - Date.now()) / 86400000,
-		  })
+			})
 		: Cookies.set(TokenKey, cookieString)
 
 	function setUserKey(username: string, roles: Array<string>) {

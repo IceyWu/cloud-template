@@ -3,6 +3,7 @@ import { testRequestGet } from '~/api/mock'
 import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
 import { useUserStore } from '~/stores/user'
+import { to } from '@iceywu/utils'
 defineProps<{ msg: string }>()
 
 const titleRef = useTyped(['cloud template!  '])
@@ -11,18 +12,36 @@ const { t } = useI18n()
 const counter = createCounter()
 
 const resData = ref<any>({})
-// api get
-const getData = () => {
-	testRequestGet({
+
+const getDataLoading = ref(false)
+const getData = async () => {
+	if (getDataLoading.value) return
+	getDataLoading.value = true
+	const params = {
 		id: 1,
-	})
-		.then((res) => {
-			console.log(res)
-			resData.value = res
-		})
-		.catch((err) => {
-			console.log(err)
-		})
+	}
+	// to is a function form (@iceywu/utils)
+	const [err, res] = await to(testRequestGet(params))
+	if (res) {
+		console.log('🌈-----接口请求成功-----', res)
+		const {
+			code,
+			msg,
+			data = [],
+		} = res || {
+			code: 500,
+			msg: '接口请求失败',
+		}
+		if (code === 200) {
+			resData.value = data
+		} else {
+			console.log('❗-----接口请求失败-----', msg)
+		}
+	}
+	if (err) {
+		console.log('❗-----接口请求失败-----')
+	}
+	getDataLoading.value = false
 }
 const router = useRouter()
 

@@ -18,7 +18,7 @@ export interface PureHttpError extends AxiosError {
 	isCancelRequest?: boolean
 }
 
-export interface PureHttpResponse extends AxiosResponse {
+export interface PureHttpResponse extends AxiosResponse<any, any> {
 	config: PureHttpRequestConfig
 }
 
@@ -31,6 +31,7 @@ export interface PureHttpRequestConfig extends AxiosRequestConfig {
 	isNeedLoading?: boolean
 	serverName?: string
 	roleName?: string
+	headers?: any
 }
 
 export default class PureHttp {
