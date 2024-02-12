@@ -1,6 +1,6 @@
 {
   "name": "cloud-template",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "vite + vue3 + ts 开箱即用现代开发模板",
   "type": "module",
   "scripts": {
