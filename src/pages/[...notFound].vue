@@ -9,13 +9,11 @@ const Lottie_Data_404 = computed(() => {
 </script>
 
 <template>
-	<div
-		class="h-screen flex flex-wrap items-center justify-around px-10 text-center"
-	>
-		<div class="desc font-blod flex-1">
+	<div class="h-screen flex flex-wrap items-center justify-around text-center">
+		<div class="desc font-blod">
 			<div class="code text-7xl">404</div>
 			<div ref="typedRef" class="content mb-5 text-3xl">The Page</div>
-			<RouterLink to="/">
+			<RouterLink :to="safeResolve('/')">
 				<button
 					class="rounded bg-light-800 px-5 py-2 text-lg transition"
 					hover="shadow-md"

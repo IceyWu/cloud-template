@@ -8,6 +8,7 @@ import {
 	LegendComponent,
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
+import type { EChartsOption } from 'echarts'
 const isDark = useDark()
 
 use([
@@ -23,7 +24,7 @@ provide(
 	computed(() => (isDark.value ? 'dark' : '')),
 )
 
-const option = ref({
+const option = ref<EChartsOption>({
 	title: {
 		text: 'Traffic Sources',
 		left: 'center',
@@ -63,11 +64,15 @@ const option = ref({
 </script>
 
 <template>
-	<v-chart class="chart" :option="option" autoresize />
+	<div>
+		<!-- @vue-ignore -->
+		<v-chart class="chart" :option="option" autoresize />
+	</div>
 </template>
 
 <style>
 .chart {
+	width: 100vw;
 	height: calc(100vh - 82px);
 }
 </style>
