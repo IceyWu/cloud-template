@@ -34,12 +34,15 @@ const getData = async () => {
 		}
 		if (code === 200) {
 			resData.value = data
+			toast.success('接口请求成功')
 		} else {
 			console.log('❗-----接口请求失败-----', msg)
+			toast.error(msg)
 		}
 	}
 	if (err) {
 		console.log('❗-----接口请求失败-----')
+		toast.error('接口请求失败')
 	}
 	getDataLoading.value = false
 }
