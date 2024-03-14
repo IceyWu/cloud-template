@@ -30,6 +30,7 @@
   },
   "packageManager": "pnpm@8.15.1",
   "devDependencies": {
+    "@iceywu/utils": "^0.0.37",
     "@iconify-json/carbon": "^1.1.30",
     "@intlify/unplugin-vue-i18n": "^2.0.0",
     "@types/ityped": "^1.0.3",
@@ -62,6 +63,7 @@
     "fs-extra": "^11.2.0",
     "husky": "^9.0.10",
     "ityped": "^1.0.3",
+    "js-cookie": "^3.0.5",
     "kolorist": "^1.8.0",
     "lightningcss": "^1.23.0",
     "lint-staged": "^15.2.2",
@@ -76,6 +78,7 @@
     "plop": "^4.0.1",
     "prettier": "^3.2.5",
     "prism-theme-vars": "^0.2.4",
+    "simple-git": "^3.22.0",
     "taze": "^0.13.3",
     "terser": "^5.27.0",
     "typescript": "^5.3.3",
@@ -136,9 +139,5 @@
     "not ie <= 11",
     "Android >= 4.0",
     "iOS >= 8"
-  ],
-  "dependencies": {
-    "@iceywu/utils": "^0.0.37",
-    "js-cookie": "^3.0.5"
-  }
+  ]
 }
