@@ -34,10 +34,15 @@ const routes = getRoutes()
 			:enter="{ opacity: 1, y: 0, scale: 1 }"
 			:variants="{ custom: { scale: 2 } }"
 			:hovered="{ scale: 1.2 }"
-			font-bold
 			text="2xl"
+			flex
+			items-center
+			font-bold
 		>
 			<img src="/logo.svg" class="h-8 w-8" alt="Vite logo" />
+			<div ml-5 h-auto w-40>
+				<Logo />
+			</div>
 		</div>
 		<div flex-1></div>
 		<div class="h-full flex items-center gap-5">
