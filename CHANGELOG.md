@@ -1,4 +1,26 @@
 
+## v0.1.0
+
+[compare changes](https://github.com/IceyWu/cloud-template/compare/v0.0.2...v0.1.0)
+
+### 🚀 Enhancements
+
+- Add svg animate logo ([5a8d189](https://github.com/IceyWu/cloud-template/commit/5a8d189))
+
+### 🩹 Fixes
+
+- 优化接口封装与调用 ([6b5ac74](https://github.com/IceyWu/cloud-template/commit/6b5ac74))
+- 接口请求增加toast ([08a90a6](https://github.com/IceyWu/cloud-template/commit/08a90a6))
+
+### 🏡 Chore
+
+- Update deps ([f9b5ae1](https://github.com/IceyWu/cloud-template/commit/f9b5ae1))
+- Update deps ([b0704d6](https://github.com/IceyWu/cloud-template/commit/b0704d6))
+
+### ❤️ Contributors
+
+- IceyWu ([@Life-Palette](http://github.com/Life-Palette))
+
 ## v0.0.2
 
 
