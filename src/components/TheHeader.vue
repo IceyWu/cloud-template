@@ -39,8 +39,8 @@ const routes = getRoutes()
 			items-center
 			font-bold
 		>
-			<img src="/logo.svg" class="h-8 w-8" alt="Vite logo" />
-			<div ml-5 h-auto w-40>
+			<!-- <img src="/logo.svg" class="h-8 w-8" alt="Vite logo" /> -->
+			<div ml-0 h-auto w-40>
 				<Logo />
 			</div>
 		</div>

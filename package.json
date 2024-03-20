@@ -30,7 +30,7 @@
   },
   "packageManager": "pnpm@8.15.1",
   "devDependencies": {
-    "@iceywu/utils": "^0.0.37",
+    "@iceywu/utils": "^0.0.38",
     "@iconify-json/carbon": "^1.1.31",
     "@intlify/unplugin-vue-i18n": "^3.0.1",
     "@types/ityped": "^1.0.3",
@@ -79,6 +79,7 @@
     "prettier": "^3.2.5",
     "prism-theme-vars": "^0.2.4",
     "simple-git": "^3.23.0",
+    "svg-animate-web": "^0.0.3",
     "taze": "^0.13.3",
     "terser": "^5.29.2",
     "typescript": "^5.4.2",
@@ -141,6 +142,6 @@
     "iOS >= 8"
   ],
   "dependencies": {
-    "svg-animate-web": "^0.0.3"
+    "element-plus": "^2.6.1"
   }
 }
