@@ -2,8 +2,8 @@
 	<div class="flex flex-col items-center justify-center">
 		<Lottie
 			ref="lottieRef"
-			width="25em"
-			height="25em"
+			width="15em"
+			height="15em"
 			:json-data="lottieJsonData"
 		/>
 		<div v-if="desc" class="desc">

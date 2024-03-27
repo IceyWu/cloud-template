@@ -53,3 +53,10 @@ html.dark ::-webkit-scrollbar-track {
 html.dark ::-webkit-scrollbar-thumb {
 	background-color: #343a40;
 }
+
+@font-face {
+	font-family: 'SmileySansOblique';
+	src: url('@/assets/font/SmileySans-Oblique.ttf');
+	font-weight: normal;
+	font-style: normal;
+}

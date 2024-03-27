@@ -91,13 +91,13 @@ const toggleShow = () => {
 		<template v-else>
 			<div v-motion-roll-right class="mx-auto mt-5 max-w-2xl text-center">
 				<h1
-					class="block text-5xl text-gray-800 font-bold font-italic lg:text-7xl md:text-6xl dark:text-gray-200"
+					class="base-font block text-5xl text-gray-800 font-bold lg:text-7xl md:text-6xl dark:text-gray-200"
 				>
 					<span v-if="showText" class="block"> Start your Project in </span>
 					<span ref="titleRef" class="block"></span>
 					<span
 						v-if="hasTypeonFinished"
-						class="from-blue-600 to-violet-600 bg-gradient-to-tl bg-clip-text text-transparent"
+						class="mt-3 block from-blue-600 to-violet-600 bg-gradient-to-tl bg-clip-text text-transparent"
 						>minutes!</span
 					>
 				</h1>
@@ -127,5 +127,9 @@ const toggleShow = () => {
 		transform: translateY(0);
 		opacity: 1;
 	}
+}
+
+.base-font {
+	font-family: 'SmileySansOblique';
 }
 </style>
