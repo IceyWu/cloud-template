@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<HelloWorld msg="Hello " />
+		<HelloWorld msg="minutes" />
 	</div>
 </template>
 

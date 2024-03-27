@@ -6,7 +6,10 @@ import { useUserStore } from '~/stores/user'
 import { to } from '@iceywu/utils'
 defineProps<{ msg: string }>()
 
-const titleRef = useTyped(['cloud template!  '])
+const hasTypeonFinished = ref(false)
+let titleRef = useTyped(['Start your Project in '], () => {
+	hasTypeonFinished.value = true
+})
 
 const { t } = useI18n()
 const counter = createCounter()
@@ -62,32 +65,49 @@ const handleLogin = () => {
 			console.log('🌳-----res-----', res)
 		})
 }
+const isShowBtns = ref<Boolean>(false)
+const showText = ref(false)
+const toggleShow = () => {
+	isShowBtns.value = !isShowBtns.value
+	showText.value = true
+}
 </script>
 
 <template>
 	<div class="mt-10 flex flex-col items-center space-y-7">
 		<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" />
-		<h1
-			ref="titleRef"
-			linear-text
-			shape-bl
-			trans
-			class="text-4xl font-italic c-context::#C084FC"
-			:from="!isDark ? '#4facfe' : '#e0c3fc'"
-			:to="!isDark ? '#00f2fe' : '#8ec5fc'"
-		>
-			{{ msg }}
-		</h1>
-		<div flex flex-wrap gap-2>
-			<button class="btn" @click="handleLogin">登录</button>
-			<button class="btn" @click="getData">数据获取</button>
-			<button class="btn" @click="counter.inc()">
-				pinia-{{ counter.count }}
-			</button>
-			<button class="btn" @click="go404Page">404</button>
-		</div>
-		<!-- res -->
-		<div>{{ t('resData') }}: {{ resData }}</div>
+
+		<template v-if="isShowBtns">
+			<div v-motion-roll-bottom flex flex-wrap gap-2>
+				<button class="btn" @click="handleLogin">登录</button>
+				<button class="btn" @click="getData">数据获取</button>
+				<button class="btn" @click="counter.inc()">
+					pinia-{{ counter.count }}
+				</button>
+				<button class="btn" @click="go404Page">404</button>
+			</div>
+			<div>{{ t('resData') }}: {{ resData }}</div>
+		</template>
+		<template v-else>
+			<div v-motion-roll-right class="mx-auto mt-5 max-w-2xl text-center">
+				<h1
+					class="block text-5xl text-gray-800 font-bold font-italic lg:text-7xl md:text-6xl dark:text-gray-200"
+				>
+					<span v-if="showText" class="block"> Start your Project in </span>
+					<span ref="titleRef" class="block"></span>
+					<span
+						v-if="hasTypeonFinished"
+						class="from-blue-600 to-violet-600 bg-gradient-to-tl bg-clip-text text-transparent"
+						>minutes!</span
+					>
+				</h1>
+			</div>
+		</template>
+		<button
+			v-show="hasTypeonFinished"
+			class="i-carbon-ibm-data-product-exchange text-5xl btn"
+			@click="toggleShow"
+		></button>
 	</div>
 </template>
 
