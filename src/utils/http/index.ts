@@ -10,6 +10,7 @@ import NProgress from '../progress'
 import { getToken, formatToken } from '@/utils/auth'
 // import { useUserStoreHook } from '@/store/modules/user'
 import baseUrl from './base.js'
+import { isEmpty } from '@iceywu/utils'
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
 	// 当前使用mock模拟请求，将baseURL制空
@@ -72,6 +73,7 @@ class PureHttp {
 					isNeedLoading = false,
 					serverName = 'apiServer',
 					roleName,
+					headers = {},
 				} = config
 				PureHttp.isNeedLoading = isNeedLoading
 				if (serverName) {
@@ -82,6 +84,13 @@ class PureHttp {
 				}
 				// 开启进度条动画
 				isNeedLoading && NProgress.start()
+
+				// header信息
+				if (!isEmpty(headers)) {
+					Object.keys(headers).forEach((key: string) => {
+						config.headers.set(key, headers[key])
+					})
+				}
 
 				// 优先判断post/get等方法是否传入回调，否则执行初始化设置等回调
 				if (typeof config.beforeRequestCallback === 'function') {
