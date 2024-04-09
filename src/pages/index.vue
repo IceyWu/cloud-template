@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<HelloWorld msg="minutes" />
+		<div h-100vh></div>
 	</div>
 </template>
 

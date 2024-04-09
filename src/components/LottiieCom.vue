@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col items-center justify-center">
+	<div class="flex flex-col items-center justify-center -z-2">
 		<Lottie
 			ref="lottieRef"
 			width="15em"

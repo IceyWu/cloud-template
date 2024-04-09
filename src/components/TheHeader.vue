@@ -25,8 +25,7 @@ const routes = getRoutes()
 
 <template>
 	<div
-		:class="isDark ? 'header-dark' : 'header-normal'"
-		class="box-border h-[55px] w-full flex items-center px-[40px]"
+		class="bg-background/75 sticky top-0 z-50 box-border h-[55px] w-full flex items-center border-b border-gray-200 px-[40px] backdrop-blur -mb-px lg:mb-0 lg:border-0 dark:border-gray-800"
 	>
 		<div
 			v-motion-roll-bottom
@@ -39,7 +38,6 @@ const routes = getRoutes()
 			items-center
 			font-bold
 		>
-			<!-- <img src="/logo.svg" class="h-8 w-8" alt="Vite logo" /> -->
 			<div ml-0 h-auto w-40>
 				<Logo />
 			</div>
@@ -136,20 +134,3 @@ const routes = getRoutes()
 		</div>
 	</div>
 </template>
-
-<style scoped>
-.header-normal {
-	background-image: radial-gradient(transparent 1px, #fff 1px);
-
-	background-size: 4px 4px;
-	backdrop-filter: saturate(50%) blur(4px);
-	border-bottom: 1px solid #dcdfe6;
-}
-.header-dark {
-	background-image: radial-gradient(transparent 1px, #141414 1px);
-	background-size: 4px 4px;
-	backdrop-filter: saturate(50%) blur(4px);
-
-	border-bottom: 1px solid #4c4d4f;
-}
-</style>

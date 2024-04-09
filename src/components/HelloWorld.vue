@@ -74,7 +74,7 @@ const toggleShow = () => {
 </script>
 
 <template>
-	<div class="mt-10 flex flex-col items-center space-y-7">
+	<div class="mt-25 flex flex-col items-center space-y-7">
 		<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" />
 
 		<template v-if="isShowBtns">
