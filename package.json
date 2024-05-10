@@ -1,8 +1,15 @@
 {
   "name": "cloud-template",
+  "type": "module",
   "version": "0.1.0",
   "description": "vite + vue3 + ts 开箱即用现代开发模板",
-  "type": "module",
+  "author": "IceyWu <https://github.com/IceyWu/>",
+  "repository": {
+    "url": "https://github.com/IceyWu/cloud-template"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  },
   "scripts": {
     "dev": "vite",
     "test": "vitest",
@@ -25,18 +32,15 @@
     "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs",
     "lint:fix": "eslint --fix"
   },
-  "engines": {
-    "node": ">=20.11.0"
-  },
   "devDependencies": {
-		"@antfu/eslint-config": "^2.17.0",
+    "@antfu/eslint-config": "^2.17.0",
     "@iceywu/utils": "^0.0.40",
     "@iconify-json/carbon": "^1.1.32",
     "@intlify/unplugin-vue-i18n": "^4.0.0",
     "@types/ityped": "^1.0.3",
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.11",
-		"@unocss/eslint-config": "^0.60.0",
+    "@unocss/eslint-config": "^0.60.0",
     "@unocss/reset": "^0.60.0",
     "@unocss/transformer-directives": "^0.60.0",
     "@unocss/transformer-variant-group": "^0.60.0",
@@ -56,7 +60,7 @@
     "defu": "^6.1.4",
     "echarts": "^5.5.0",
     "element-plus": "^2.7.2",
-		"eslint": "^9.2.0",
+    "eslint": "^9.2.0",
     "eslint-plugin-cypress": "^3.2.0",
     "eslint-plugin-format": "^0.1.1",
     "fs-extra": "^11.2.0",
@@ -108,11 +112,7 @@
     "vue-router": "^4.3.2",
     "vue-toastification": "2.0.0-rc.5"
   },
-  "lint-staged": {
-		"*": "eslint --fix"
-  },
   "overrides": {
-    "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest",
     "array-includes": "npm:@nolyfill/array-includes@latest",
     "array.prototype.findlastindex": "npm:@nolyfill/array.prototype.findlastindex@latest",
     "array.prototype.flat": "npm:@nolyfill/array.prototype.flat@latest",
@@ -126,12 +126,13 @@
     "object.entries": "npm:@nolyfill/object.entries@latest",
     "object.fromentries": "npm:@nolyfill/object.fromentries@latest",
     "object.values": "npm:@nolyfill/object.values@latest",
+    "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@latest",
     "vue-demi": "npm:vue-demi@latest"
   },
-  "repository": {
-    "url": "https://github.com/IceyWu/cloud-template"
+  "lint-staged": {
+    "*": "eslint --fix"
   },
-  "author": "IceyWu <https://github.com/IceyWu/>",
+
   "browserslist": [
     ">= 0.25%",
     "last 2 versions",
