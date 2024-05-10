@@ -260,6 +260,9 @@ export default function () {
 						// add any other imports you were relying on
 						'vue-router/auto': ['useLink'],
 					},
+					{
+              "@iceywu/utils": ["to", "list", "sleep","consolePlus"],
+          },
 				],
 				resolvers: detectResolvers({
 					onlyExist: [

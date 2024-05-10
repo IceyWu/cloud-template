@@ -71,6 +71,9 @@ const toggleShow = () => {
 	isShowBtns.value = !isShowBtns.value
 	showText.value = true
 }
+onMounted(() => {
+	consolePlus.log("welcome to use cloud-template")
+})
 </script>
 
 <template>
