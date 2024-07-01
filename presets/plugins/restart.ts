@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
 import { utimes } from 'fs/promises'
 import { r } from '../shared/path'
-import { debounce } from 'perfect-debounce'
+import { debounce } from '@iceywu/utils'
 import { resolve } from 'path'
 import { slash } from 'vite-layers'
 
