@@ -40,22 +40,22 @@ import Vue from '@vitejs/plugin-vue'
 import Jsx from '@vitejs/plugin-vue-jsx'
 
 // 内置插件
+import type { PluginOption } from 'vite'
 import {
 	Alias,
+	Layers,
 	Lightningcss,
+	Optimize,
 	Restart,
 	Warmup,
-	Layers,
-	Optimize,
 } from './plugins'
 import { defaultBuildTargets, detectResolvers, useEnv } from './shared/detect'
 import { r } from './shared/path'
-import type { PluginOption } from 'vite'
 
 export default function () {
 	const env = useEnv()
-	const safelist =
-		'prose px-2 sm:px-0 md:prose-lg lg:prose-lg dark:prose-invert text-left w-screen prose-slate prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600'
+	const safelist
+		= 'prose px-2 sm:px-0 md:prose-lg lg:prose-lg dark:prose-invert text-left w-screen prose-slate prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600'
 
 	const plugins: PluginOption[] = [
 		/**
@@ -184,7 +184,6 @@ export default function () {
 		 * https://github.com/vbenjs/vite-plugin-compression
 		 */
 		Compression({
-			// @ts-ignore
 			algorithm: env.VITE_APP_COMPRESSINON_ALGORITHM,
 		}),
 		/**
@@ -261,7 +260,7 @@ export default function () {
 						'vue-router/auto': ['useLink'],
 					},
 					{
-              "@iceywu/utils": ["to", "list", "sleep","consolePlus"],
+              '@iceywu/utils': ['to', 'list', 'sleep', 'consolePlus'],
           },
 				],
 				resolvers: detectResolvers({

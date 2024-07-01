@@ -1,11 +1,11 @@
-import { existsSync } from 'fs'
+import { existsSync } from 'node:fs'
+import { basename } from 'node:path'
 import { gray } from 'kolorist'
-import { basename } from 'path'
-import { r } from '../shared/path'
-import { Restart } from './restart'
 import { createConsola } from 'consola'
 import type { Plugin, UserConfig } from 'vite'
-import { Layers as loadLayer, detectMode } from 'vite-layers'
+import { detectMode, Layers as loadLayer } from 'vite-layers'
+import { r } from '../shared/path'
+import { Restart } from './restart'
 
 const logger = createConsola().withTag('layers')
 
@@ -15,15 +15,15 @@ const logger = createConsola().withTag('layers')
  */
 export function Layers(): Plugin {
 	const mode = detectMode()
-	const modeFiles = [mode.slice(0, 3), mode].map((mode) =>
+	const modeFiles = [mode.slice(0, 3), mode].map(mode =>
 		r(`vite.config.${mode}.ts`),
 	)
 	return {
-		...Restart(modeFiles.map((modeFile) => basename(modeFile))),
+		...Restart(modeFiles.map(modeFile => basename(modeFile))),
 		name: 'vite-plugin-layers',
 		enforce: 'post',
 		async config(config) {
-			const modeFile = modeFiles.find((modeFile) => existsSync(modeFile))
+			const modeFile = modeFiles.find(modeFile => existsSync(modeFile))
 			if (modeFile) {
 				logger
 					.withTag(mode)

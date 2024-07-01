@@ -23,14 +23,14 @@
     "typecheck": "npx vue-tsc --noEmit",
     "preview:host": "vite preview --host",
     "preview:open": "vite preview --open",
-    "lint": "eslint .ts,.js,.jsx,.vue .",
+    "lint": "eslint .",
     "release": "plop --plopfile scripts/release.cjs",
     "auto:remove": "plop --plopfile scripts/remove.cjs",
     "auto:create": "plop --plopfile scripts/create.cjs",
     "build:debug": "cross-env NODE_ENV=debug vite build",
     "safe:init": "plop --plopfile scripts/safe-init.cjs",
     "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.21.2",

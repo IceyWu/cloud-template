@@ -1,8 +1,9 @@
+const { execSync } = require('node:child_process')
 const { createConsola } = require('consola')
-const { execSync } = require('child_process')
-const { repository } = require('../package.json')
 const { gray } = require('kolorist')
 const { simpleGit } = require('simple-git')
+const { repository } = require('../package.json')
+
 const logger = createConsola().withTag('release')
 
 /**
@@ -24,7 +25,8 @@ async function release(plop) {
 		allowRelease = await logger.prompt(`是否发布到 ${gray(repository.url)}`, {
 			type: 'confirm',
 		})
-	} else {
+	}
+ else {
 		allowRelease = true
 	}
 

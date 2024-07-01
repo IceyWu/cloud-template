@@ -1,7 +1,7 @@
-const { resolve } = require('path')
+const { resolve } = require('node:path')
+const { existsSync, lstatSync } = require('node:fs')
 const { gray, green } = require('kolorist')
 const { createConsola } = require('consola')
-const { existsSync, lstatSync } = require('fs')
 const { removeSync, emptyDirSync } = require('fs-extra')
 
 function slash(path) {
@@ -25,7 +25,7 @@ const entrys = [
 	'locales/English',
 ]
 
-const resolvedEntrys = entrys.map((entry) => r(entry))
+const resolvedEntrys = entrys.map(entry => r(entry))
 
 /**
  * 安全初始化

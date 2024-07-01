@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<HelloWorld msg="minutes" />
-		<div h-100vh></div>
+		<div h-100vh />
 	</div>
 </template>
 
@@ -11,20 +11,20 @@
 } */
 
 p {
-	padding: 0 10px;
+  padding: 0 10px;
 }
 
 .logo {
-	width: 10em;
-	height: 10em;
-	padding: 1.5rem;
-	will-change: filter;
-	transition: filter 300ms;
+  width: 10em;
+  height: 10em;
+  padding: 1.5rem;
+  will-change: filter;
+  transition: filter 300ms;
 }
 .logo:hover {
-	filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em #646cffaa);
 }
 .logo.vue:hover {
-	filter: drop-shadow(0 0 2em #42b883aa);
+  filter: drop-shadow(0 0 2em #42b883aa);
 }
 </style>

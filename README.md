@@ -39,16 +39,15 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 - 🦾 [Api](./src/api) - a simple wrapper for [axios]
 
 <!-- - 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library -->
+
 - 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library
 <!-- - 🚀  自动版本更新并生成 `CHANGELOG` -->
 - 🚀 auto version update and generate `CHANGELOG`
 <!-- - 🌈  自动版本更新并生成 `CHANGELOG` -->
 
-
 <br>
 
-
-## Motivation 
+## Motivation
 
 Why do this **template**?
 
@@ -62,12 +61,11 @@ Why do this **template**?
 该模板受 **[vitesse](https://github.com/antfu/vitesse)** 启发，如果你有 `SSG`
 的场景，推荐你使用 **[vitesse](https://github.com/antfu/vitesse)**。 -->
 
-## Inspiration 
+## Inspiration
 
 This template is inspired by **[tov-template](https://github.com/dishait/tov-template)**
 
 <br />
-
 
 ## Usage
 

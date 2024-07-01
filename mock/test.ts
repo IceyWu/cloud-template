@@ -1,4 +1,5 @@
-import { MockMethod } from 'vite-plugin-mock'
+import type { MockMethod } from 'vite-plugin-mock'
+
 export default [
 	{
 		url: '/api/mock/get',
@@ -68,7 +69,8 @@ export default [
 						},
 					},
 				}
-			} else {
+			}
+ else {
 				return {
 					code: 200,
 					msg: '请求成功',

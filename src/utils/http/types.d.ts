@@ -1,11 +1,11 @@
 import type {
-	Method,
 	AxiosError,
-	AxiosResponse,
 	AxiosRequestConfig,
+	AxiosResponse,
+	Method,
 } from 'axios'
 
-export type resultType = {
+export interface resultType {
 	accessToken?: string
 }
 
@@ -23,9 +23,9 @@ export interface PureHttpResponse extends AxiosResponse<any, any> {
 }
 
 export interface PureHttpRequestConfig extends AxiosRequestConfig {
-	// eslint-disable-next-line no-unused-vars
+
 	beforeRequestCallback?: (request: PureHttpRequestConfig) => void
-	// eslint-disable-next-line no-unused-vars
+
 	beforeResponseCallback?: (response: PureHttpResponse) => void
 	isNeedToken?: boolean
 	isNeedLoading?: boolean
@@ -36,23 +36,23 @@ export interface PureHttpRequestConfig extends AxiosRequestConfig {
 
 export default class PureHttp {
 	request<T>(
-		// eslint-disable-next-line no-unused-vars
+
 		method: RequestMethods,
-		// eslint-disable-next-line no-unused-vars
+
 		url: string,
-		// eslint-disable-next-line no-unused-vars
+
 		param?: AxiosRequestConfig,
-		// eslint-disable-next-line no-unused-vars
+
 		axiosConfig?: PureHttpRequestConfig,
 	): Promise<T>
 	post<T, P>(
-		// eslint-disable-next-line no-unused-vars
+
 		url: string,
-		// eslint-disable-next-line no-unused-vars
+
 		params?: T,
-		// eslint-disable-next-line no-unused-vars
+
 		config?: PureHttpRequestConfig,
 	): Promise<P>
-	// eslint-disable-next-line no-unused-vars
+
 	get<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>
 }
