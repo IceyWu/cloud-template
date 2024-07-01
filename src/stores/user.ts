@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
-import { getLogin, refreshTokenApi, UserResult } from '@/api/mock'
+import type { UserResult } from '@/api/mock'
+import { getLogin, refreshTokenApi } from '@/api/mock'
 import {
-	type DataInfo,
-	setToken,
-	removeToken,
 	AccessTokenKey,
-	RefreshTokenKey,
+	type DataInfo,
 	ExpiresKey,
+	RefreshTokenKey,
+	removeToken,
+	setToken,
 } from '@/utils/auth'
 
 export const useUserStore = defineStore(
@@ -44,7 +45,8 @@ export const useUserStore = defineStore(
 							}
 							setToken(TokenInfo, 'a')
 							resolve(res)
-						} else {
+						}
+ else {
 							reject(res)
 						}
 					})

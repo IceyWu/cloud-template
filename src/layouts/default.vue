@@ -10,7 +10,7 @@
 			<router-view v-if="$route.meta.keepAlive" v-slot="{ Component }">
 				<transition name="move" mode="out-in">
 					<keep-alive>
-						<component :is="Component"></component>
+						<component :is="Component" />
 					</keep-alive>
 				</transition>
 			</router-view>
@@ -27,11 +27,11 @@
 <style>
 .fade-enter-active,
 .fade-leave-active {
-	transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-	opacity: 0;
+  opacity: 0;
 }
 </style>

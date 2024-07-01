@@ -1,11 +1,11 @@
 interface ProxyStorage {
-	// eslint-disable-next-line no-unused-vars
-	setItem<T>(k: string, v: T): void
-	// eslint-disable-next-line no-unused-vars
-	getItem<T>(k: string): T
-	// eslint-disable-next-line no-unused-vars
-	removeItem(k: string): void
-	clear(): void
+
+	setItem: <T>(k: string, v: T) => void
+
+	getItem: <T>(k: string) => T
+
+	removeItem: (k: string) => void
+	clear: () => void
 }
 
 // declare class sessionStorageProxy implements ProxyStorage {

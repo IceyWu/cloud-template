@@ -1,17 +1,3 @@
-<template>
-	<div class="flex flex-col items-center justify-center -z-2">
-		<Lottie
-			ref="lottieRef"
-			width="15em"
-			height="15em"
-			:json-data="lottieJsonData"
-		/>
-		<div v-if="desc" class="desc">
-			{{ desc }}
-		</div>
-	</div>
-</template>
-
 <script setup lang="ts">
 interface Props {
 	desc?: string
@@ -28,5 +14,19 @@ watch(
 	},
 )
 </script>
+
+<template>
+	<div class="flex flex-col items-center justify-center -z-2">
+		<Lottie
+			ref="lottieRef"
+			width="15em"
+			height="15em"
+			:json-data="lottieJsonData"
+		/>
+		<div v-if="desc" class="desc">
+			{{ desc }}
+		</div>
+	</div>
+</template>
 
 <style lang="less" scoped></style>

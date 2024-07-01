@@ -19,7 +19,7 @@ export function Alias(): Plugin {
 				},
 				{
 					find: /^@\//,
-					replacement: src + '/',
+					replacement: `${src}/`,
 				},
 			]
 		},

@@ -1,6 +1,6 @@
-const { unlinkSync } = require('fs')
-const { readdir } = require('fs/promises')
-const { basename } = require('path')
+const { unlinkSync } = require('node:fs')
+const { readdir } = require('node:fs/promises')
+const { basename } = require('node:path')
 const { showDir, moduleTypes } = require('./shared/base.cjs')
 
 /**
@@ -30,7 +30,7 @@ function remove(plop) {
 						recursive: false,
 						withFileTypes: true,
 					})
-					const dirs = entrys.filter((e) => e.isDirectory())
+					const dirs = entrys.filter(e => e.isDirectory())
 					const types = moduleTypes.filter((type) => {
 						const dir = showDir(type)
 						return dirs.includes(`./src/${dir}`)
@@ -50,7 +50,7 @@ function remove(plop) {
 						recursive: false,
 						withFileTypes: true,
 					})
-					let modules = entrys.filter((e) => e.isFile())
+					let modules = entrys.filter(e => e.isFile())
 					modules = modules.map((module) => {
 						return basename(module)
 					})

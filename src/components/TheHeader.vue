@@ -8,7 +8,7 @@ const { t } = useI18n()
 // }
 
 const routes = getRoutes()
-	.filter((r) => !r.path.includes('notFound'))
+	.filter(r => !r.path.includes('notFound'))
 	.map((r) => {
 		let { path, name } = r
 		if (path === '/') {
@@ -42,11 +42,13 @@ const routes = getRoutes()
 				<Logo />
 			</div>
 		</div>
-		<div flex-1></div>
+		<div flex-1 />
 		<div class="z-99 h-full flex items-center gap-5">
 			<!-- router list -->
 			<RouterLink v-for="r of routes" :key="r.path" :to="r.path">
-				<p icon-link>{{ t(r.name) }}</p>
+				<p icon-link>
+{{ t(r.name) }}
+</p>
 			</RouterLink>
 			<div>
 				<Dropdown />
@@ -121,8 +123,7 @@ const routes = getRoutes()
 							repeatCount="indefinite"
 							values="11;11;7;7;11;11"
 						/>
-					</rect></svg
-			></a>
+					</rect></svg></a>
 
 			<div
 				i-carbon-sun

@@ -24,7 +24,7 @@ export const ExpiresKey = 'expiresIn'
  * 从而支持多标签页打开已经登录的系统后无需再登录。
  * 浏览器完全关闭后`multiple-tabs`将自动从`cookie`中销毁，
  * 再次打开浏览器需要重新登录系统
- * */
+ */
 export const multipleTabsKey = 'multiple-tabs'
 
 /** 获取`token` */
@@ -44,7 +44,6 @@ export function getToken(roleName?: string): DataInfo<number> {
  * 将`username`、`roles`、`refreshToken`、`expires`这四条信息放在key值为`user-info`的localStorage里（利用`multipleTabsKey`当浏览器完全关闭后自动销毁）
  */
 export function setToken(data: DataInfo<number>, roleName?: string) {
-	console.log('🐠-----data-----', data)
 	const TokenKey = roleName ? `${roleName}-${TokenKeyBase}` : TokenKeyBase
 	const userKey = roleName ? `${roleName}-${userKeyBase}` : userKeyBase
 	let expires = 0
@@ -70,11 +69,12 @@ export function setToken(data: DataInfo<number>, roleName?: string) {
 	if (data.username && data.roles) {
 		const { username, roles } = data
 		setUserKey(username, roles)
-	} else {
-		const username =
-			storageSession().getItem<DataInfo<number>>(userKey)?.username ?? ''
-		const roles =
-			storageSession().getItem<DataInfo<number>>(userKey)?.roles ?? []
+	}
+ else {
+		const username
+			= storageSession().getItem<DataInfo<number>>(userKey)?.username ?? ''
+		const roles
+			= storageSession().getItem<DataInfo<number>>(userKey)?.roles ?? []
 		setUserKey(username, roles)
 	}
 }
@@ -87,6 +87,6 @@ export function removeToken(roleName?: string) {
 }
 
 /** 格式化token（jwt格式） */
-export const formatToken = (token: string, authName?: string): string => {
+export function formatToken(token: string, authName?: string): string {
 	return authName ? `${authName} ${token}` : token
 }

@@ -3,12 +3,13 @@ import { use } from 'echarts/core'
 import { PieChart } from 'echarts/charts'
 import { CanvasRenderer } from 'echarts/renderers'
 import {
+	LegendComponent,
 	TitleComponent,
 	TooltipComponent,
-	LegendComponent,
 } from 'echarts/components'
 import VChart, { THEME_KEY } from 'vue-echarts'
 import type { EChartsOption } from 'echarts'
+
 const isDark = useDark()
 
 use([
@@ -66,13 +67,13 @@ const option = ref<EChartsOption>({
 <template>
 	<div>
 		<!-- @vue-ignore -->
-		<v-chart class="chart" :option="option" autoresize />
+		<VChart class="chart" :option="option" autoresize />
 	</div>
 </template>
 
 <style>
 .chart {
-	width: 100vw;
-	height: calc(100vh - 82px);
+  width: 100vw;
+  height: calc(100vh - 82px);
 }
 </style>

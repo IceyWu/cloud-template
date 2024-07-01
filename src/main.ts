@@ -6,8 +6,8 @@ import 'virtual:unocss-devtools'
 // 你自定义的 css
 import './styles/main.css'
 
-import App from './App.vue'
 import { MotionPlugin } from '@vueuse/motion'
+import App from './App.vue'
 
 const app = createApp(App)
 app.use(MotionPlugin)

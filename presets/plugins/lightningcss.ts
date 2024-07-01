@@ -1,4 +1,4 @@
-import { existsSync } from 'fs'
+import { existsSync } from 'node:fs'
 import { gray } from 'kolorist'
 import type { Plugin } from 'vite'
 import { createConsola } from 'consola'
@@ -20,22 +20,22 @@ export function Lightningcss(): Plugin {
 		config(config) {
 			config.css ??= {}
 			config.build ??= {}
-			const hasPreprocessor = packages.some((p) => isPackageExists(p))
+			const hasPreprocessor = packages.some(p => isPackageExists(p))
 
 			const { postcss, modules, transformer } = config.css
 			const conflictConfiguration = [postcss, modules, transformer].some(
-				(c) => !isUndefined(c),
+				c => !isUndefined(c),
 			)
 
 			const hasPostcssConfigFile = [
 				'postcss.config.js',
 				'postcss.config.cts',
 				'postcss.config.ts',
-			].some((c) => existsSync(c))
+			].some(c => existsSync(c))
 
 			// 如果有预处理器，冲突配置或者 postcss 配置文件则禁用
-			const disabled =
-				hasPreprocessor || conflictConfiguration || hasPostcssConfigFile
+			const disabled
+				= hasPreprocessor || conflictConfiguration || hasPostcssConfigFile
 			if (!disabled) {
 				const transformer = 'lightningcss'
 				config.css.transformer = transformer
@@ -48,8 +48,8 @@ export function Lightningcss(): Plugin {
 
 				if (isUndefined(config.css.lightningcss?.targets)) {
 					config.css.lightningcss ??= {}
-					config.css.lightningcss.targets =
-						browserslistToTargets(defaultBuildTargets)
+					config.css.lightningcss.targets
+						= browserslistToTargets(defaultBuildTargets)
 				}
 				logger.success(tip)
 			}

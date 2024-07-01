@@ -1,7 +1,7 @@
 /**
  * 接口域名的管理
- * @param {String} apiServer [api服务器]
- * @param {String} knobbleServer [小节内容上传服务器]
+ * @param {string} apiServer [api服务器]
+ * @param {string} knobbleServer [小节内容上传服务器]
  */
 const baseLsit = [
 	{

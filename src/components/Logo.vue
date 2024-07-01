@@ -9,7 +9,8 @@ onMounted(() => {
 const isDark = useDark({
 	onChanged() {
 		nextTick(() => {
-			if (svgRef.value) setSVGAnim()
+			if (svgRef.value)
+setSVGAnim()
 		})
 	},
 })

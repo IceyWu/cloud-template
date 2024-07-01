@@ -1,16 +1,16 @@
 import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import { isEmpty } from '@iceywu/utils'
+import NProgress from '../progress'
 import type {
 	PureHttpError,
-	RequestMethods,
-	PureHttpResponse,
 	PureHttpRequestConfig,
+	PureHttpResponse,
+	RequestMethods,
 } from './types.d'
 // import { stringify } from "qs";
-import NProgress from '../progress'
-import { getToken, formatToken } from '@/utils/auth'
-// import { useUserStoreHook } from '@/store/modules/user'
 import baseUrl from './base.js'
-import { isEmpty } from '@iceywu/utils'
+import { formatToken, getToken } from '@/utils/auth'
+// import { useUserStoreHook } from '@/store/modules/user'
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {
 	// 当前使用mock模拟请求，将baseURL制空
@@ -58,7 +58,7 @@ class PureHttp {
 	private static retryOriginalRequest(config: PureHttpRequestConfig) {
 		return new Promise((resolve) => {
 			PureHttp.requests.push((token: string) => {
-				config.headers['Authorization'] = formatToken(token)
+				config.headers.Authorization = formatToken(token)
 				resolve(config)
 			})
 		})
@@ -77,7 +77,7 @@ class PureHttp {
 				} = config
 				PureHttp.isNeedLoading = isNeedLoading
 				if (serverName) {
-					config.baseURL = baseUrl[serverName] || baseUrl['apiServer']
+					config.baseURL = baseUrl[serverName] || baseUrl.apiServer
 				}
 				if (import.meta.env.VITE_APP_MOCK_IN_DEVELOPMENT === 'true') {
 					config.baseURL = ''
@@ -101,7 +101,7 @@ class PureHttp {
 					PureHttp.initConfig.beforeRequestCallback(config)
 					return config
 				}
-				// console.log("🌳------------------------------>", config);
+
 				/** 请求白名单，放置一些不需要token的接口（通过设置请求白名单，防止token过期后再请求造成的死循环问题） */
 				return !isNeedToken
 					? config
@@ -109,7 +109,7 @@ class PureHttp {
 							const data = getToken(roleName)
 							if (data) {
 								const now = new Date().getTime()
-								const expired = parseInt(data.expires) - now <= 0
+								const expired = Number.parseInt(data.expires) - now <= 0
 
 								if (expired) {
 									if (!PureHttp.isRefreshing) {
@@ -129,14 +129,16 @@ class PureHttp {
 									}
 									// resolve(PureHttp.retryOriginalRequest(config))
 									resolve(config)
-								} else {
-									config.headers['Authorization'] = formatToken(
+								}
+ else {
+									config.headers.Authorization = formatToken(
 										data.accessToken,
 										roleName,
 									)
 									resolve(config)
 								}
-							} else {
+							}
+ else {
 								resolve(config)
 							}
 						})
@@ -161,7 +163,7 @@ class PureHttp {
 				// 业务异常code名单
 				if (PureHttp.errorCodes.includes(code)) {
 					PureHttp.isApiError = true
-					console.log('请求异常，请稍后再试')
+
 					return response
 					// return Promise.reject(response)
 				}

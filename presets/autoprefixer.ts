@@ -1,7 +1,7 @@
 import type { Preset } from 'unocss'
 import browserslist from 'browserslist'
-import { defaultBuildTargets } from './shared/detect'
 import { browserslistToTargets, transformStyleAttribute } from 'lightningcss'
+import { defaultBuildTargets } from './shared/detect'
 
 export default function autoprefixerPreset(
 	targets: string[] = defaultBuildTargets,
@@ -13,8 +13,8 @@ export default function autoprefixerPreset(
 			const { code } = transformStyleAttribute({
 				code: Buffer.from(
 					entries
-						.filter((item) => !item[0].startsWith('--un'))
-						.map((x) => x.join(':'))
+						.filter(item => !item[0].startsWith('--un'))
+						.map(x => x.join(':'))
 						.join(';'),
 				),
 				targets: browserslistToTargets(browserslist(targets)),
@@ -22,11 +22,11 @@ export default function autoprefixerPreset(
 			})
 
 			util.entries = [
-				...entries.filter((item) => item[0].startsWith('--un')),
+				...entries.filter(item => item[0].startsWith('--un')),
 				...(code
 					.toString()
 					.split(';')
-					.map((i) => i.split(':')) as [string, string | number][]),
+					.map(i => i.split(':')) as [string, string | number][]),
 			]
 		},
 	}
