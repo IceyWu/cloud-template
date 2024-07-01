@@ -22,7 +22,7 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 <br>
 
-## Features
+## 🐳Features
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
 
@@ -38,12 +38,19 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 - 🦾 [Api](./src/api) - a simple wrapper for [axios]
 
-<!-- - 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library -->
-
 - 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library
 <!-- - 🚀  自动版本更新并生成 `CHANGELOG` -->
 - 🚀 auto version update and generate `CHANGELOG`
-<!-- - 🌈  自动版本更新并生成 `CHANGELOG` -->
+<!-- Lottie -->
+- 🎨 [Lottie](https://github.com/airbnb/lottie-web) - a Javascript library for web and react native that parses After Effects animations exported as json with bodymovin and renders them natively on your web page or react native app
+<!-- echarts,vue echarts 封装 -->
+- 📊 [Echarts](https://echarts.apache.org/zh/index.html) - use Echarts in Vue
+
+<!-- iceywu/utils -->
+
+- 📊 [Utils-@iceywu/utils](https://github.com/iceywu/utils) - a set of common utils
+<!-- i18n -->
+- 🌐 [i18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme) - internationalization
 
 <br>
 
@@ -71,7 +78,7 @@ This template is inspired by **[tov-template](https://github.com/dishait/tov-tem
 
 ### Development
 
-Just run and visit http://localhost:9527
+Just run and visit http://localhost:5173/
 
 ```bash
 pnpm dev
