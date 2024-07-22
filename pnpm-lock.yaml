@@ -99,7 +99,7 @@ importers:
         specifier: ^11.2.0
         version: 11.2.0
       husky:
-        specifier: ^9.0.11
+        specifier: ^9.1.1
         version: 9.1.1
       ityped:
         specifier: ^1.0.3
