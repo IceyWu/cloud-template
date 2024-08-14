@@ -35,7 +35,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
 
 import I18N from '@intlify/unplugin-vue-i18n/vite'
-import Legacy from 'vite-plugin-legacy-swc'
+import Legacy from '@vitejs/plugin-legacy'
 import Vue from '@vitejs/plugin-vue'
 import Jsx from '@vitejs/plugin-vue-jsx'
 
