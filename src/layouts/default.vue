@@ -6,7 +6,7 @@
 	>
 		<div class="sticky top-0 z-999"><TheHeader /></div>
 
-		<div class="box-border w-full flex flex-col items-center justify-center">
+		<div class="box-border h-full w-full flex flex-col items-center justify-center">
 			<router-view v-if="$route.meta.keepAlive" v-slot="{ Component }">
 				<transition name="move" mode="out-in">
 					<keep-alive>

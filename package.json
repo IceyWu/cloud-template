@@ -97,7 +97,6 @@
     "vite-plugin-env-types": "^0.1.4",
     "vite-plugin-mock": "2.9.8",
     "vite-plugin-removelog": "^0.2.2",
-    "vite-plugin-use-modules": "^1.4.8",
     "vite-plugin-vue-devtools": "^7.3.8",
     "vite-plugin-vue-layouts": "^0.11.0",
     "vitest": "^2.0.5",

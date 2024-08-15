@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="h-full">
 		<HelloWorld msg="minutes" />
 		<div h-100vh />
 	</div>

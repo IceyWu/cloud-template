@@ -81,7 +81,7 @@ onMounted(() => {
 		<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" />
 
 		<template v-if="isShowBtns">
-			<div v-motion-roll-bottom flex flex-wrap gap-2>
+			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
 				<button class="btn" @click="handleLogin">
 登录
 </button>

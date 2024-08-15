@@ -200,9 +200,6 @@ importers:
       vite-plugin-removelog:
         specifier: ^0.2.2
         version: 0.2.2(vue@3.4.37(typescript@5.5.4))
-      vite-plugin-use-modules:
-        specifier: ^1.4.8
-        version: 1.4.8(vite@5.4.0(@types/node@22.2.0)(lightningcss@1.26.0)(terser@5.31.6))(vue@3.4.37(typescript@5.5.4))
       vite-plugin-vue-devtools:
         specifier: ^7.3.8
         version: 7.3.8(@nuxt/kit@3.12.2(rollup@4.13.1))(rollup@4.13.1)(vite@5.4.0(@types/node@22.2.0)(lightningcss@1.26.0)(terser@5.31.6))(vue@3.4.37(typescript@5.5.4))
@@ -5442,12 +5439,6 @@ packages:
 
   vite-plugin-removelog@0.2.2:
     resolution: {integrity: sha512-lVfQxdDIpvjbxxWZbSRAtQNYFHuf/JniL6x2mKpmM5HsCDk4XmxbMSFjRmr6K89JM5iohFjhzhNcdVLQp2/gtg==}
-
-  vite-plugin-use-modules@1.4.8:
-    resolution: {integrity: sha512-SydvdNUuwuwk9YjeA2sE6acK2xmTOgpVarEiTcccczcNL7JIMZ2C3Cbw2bvmkH2Od8JDtdIxIpMvswJ8rlEufA==}
-    peerDependencies:
-      vite: '>=2.0.0'
-      vue: '>=3.0.0'
 
   vite-plugin-vue-devtools@7.3.8:
     resolution: {integrity: sha512-b5t4wxCb5g5cjh+odNpgnB7iX7gA6FJnKugFqX2/YZX9I4fvMjlj1bUnCKnvPlmwnFxClYgdmgZcCh2RyhZgvw==}
@@ -11735,12 +11726,6 @@ snapshots:
       m-type-tools: 0.4.1
     transitivePeerDependencies:
       - vue
-
-  vite-plugin-use-modules@1.4.8(vite@5.4.0(@types/node@22.2.0)(lightningcss@1.26.0)(terser@5.31.6))(vue@3.4.37(typescript@5.5.4)):
-    dependencies:
-      local-pkg: 0.5.0
-      vite: 5.4.0(@types/node@22.2.0)(lightningcss@1.26.0)(terser@5.31.6)
-      vue: 3.4.37(typescript@5.5.4)
 
   vite-plugin-vue-devtools@7.3.8(@nuxt/kit@3.12.2(rollup@4.13.1))(rollup@4.13.1)(vite@5.4.0(@types/node@22.2.0)(lightningcss@1.26.0)(terser@5.31.6))(vue@3.4.37(typescript@5.5.4)):
     dependencies:

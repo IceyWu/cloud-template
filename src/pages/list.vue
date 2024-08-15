@@ -134,7 +134,7 @@ onMounted(() => {
 					{{ data.content }}
 				</p>
 				<a href="#" class="inline-block"><button
-						class="flex select-none items-center gap-2 rounded-lg px-6 py-3 text-center align-middle text-xs text-gray-900 font-bold font-sans uppercase transition-all disabled:pointer-events-none active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:shadow-none"
+						class="flex select-none items-center rounded-lg px-6 py-3 text-center align-middle text-xs text-gray-900 font-bold font-sans uppercase transition-all disabled:pointer-events-none space-x-2 space-y-2 active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:shadow-none"
 						type="button"
 						@click="handleItemClick(data)"
 					>
@@ -157,8 +157,8 @@ onMounted(() => {
 	</DefineTemplate>
 	<div class="box-border h-90vh w-[95%] p-5">
 		<ScrollList v-model="listObj" @on-load="onLoad">
-			<div grid="~ cols-1 md:cols-2 lg:cols-3 xl:cols-4 gap-6">
-				<div v-for="(items, idx) of parts" :key="idx" flex="~ col gap-4">
+			<div grid="~ cols-1 md:cols-2 lg:cols-3 xl:cols-4  gap-6 ">
+				<div v-for="(items, idx) of parts" :key="idx" flex="~ col  " space-y-4>
 					<ReuseTemplate v-for="data of items" :key="data.id" :data />
 				</div>
 			</div>

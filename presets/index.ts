@@ -99,15 +99,6 @@ export default function () {
 			extensions: ['.md', '.vue', '.tsx', '.jsx'],
 		}),
 		/**
-		 * 自动安装 vue 插件
-		 * https://github.com/dishait/vite-plugin-use-modules
-		 */
-		Modules({
-			auto: true,
-			// 内部使用虚拟模块，运行在前端，所以不需要 r 重写路径
-			target: 'src/plugins',
-		}),
-		/**
 		 * vue 官方插件，用来解析 sfc 单文件组件
 		 * https://www.npmjs.com/package/@vitejs/plugin-vue
 		 */
