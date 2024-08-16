@@ -4,6 +4,7 @@ import { testRequestGet } from '~/api/mock'
 import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
 import { useUserStore } from '~/stores/user'
+import { showDlg } from '~/hooks/customDlg'
 
 defineProps<{ msg: string }>()
 
@@ -74,6 +75,16 @@ function toggleShow() {
 onMounted(() => {
 	consolePlus.log('welcome to use cloud-template')
 })
+function testFunc() {
+	showDlg({
+		title: 'iceywu',
+	})
+	// .then((res) => {
+	// 	console.log('🌈------------------------------>', res)
+	// }).catch((err) => {
+	// 	console.log('🌵------------------------------>', err)
+	// })
+}
 </script>
 
 <template>
@@ -82,6 +93,9 @@ onMounted(() => {
 
 		<template v-if="isShowBtns">
 			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
+				<button class="btn" @click="testFunc">
+弹窗
+</button>
 				<button class="btn" @click="handleLogin">
 登录
 </button>

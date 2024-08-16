@@ -16,6 +16,7 @@ export default antfu(
 			'node/prefer-global/buffer': 'off',
 			'unused-imports/no-unused-vars': 'off',
 			'vue/singleline-html-element-content-newline': 'off',
+			'ts/no-unused-expressions': 'off',
 		},
   },
 )

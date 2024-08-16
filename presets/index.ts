@@ -30,7 +30,6 @@ import Compression from 'vite-plugin-compression'
 import EnvTypes from 'vite-plugin-env-types'
 import { viteMockServe as Mock } from 'vite-plugin-mock'
 import Removelog from 'vite-plugin-removelog'
-import Modules from 'vite-plugin-use-modules'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-layouts'
 
