@@ -3,6 +3,7 @@
  */
 import { h } from 'vue'
 import { domAdd } from '~/utils/domAdd'
+import ElpDialog from '~/components/IcDialog/ElpDlg'
 import CustomPopupBase from '@/components/Popup/base.vue'
 
 function domSet(el: HTMLDivElement) {
@@ -34,6 +35,53 @@ export function showDlg({ title = '我是标题' }) {
 					onClose: handleClose,
 					onOk: handleOk,
 					onCancel: handleCancel,
+				},
+
+			),
+			{ domSet },
+		)
+		popupInstance.add()
+	})
+}
+export function showDlgTest(options: any) {
+	const { renderer, ...data } = options
+	return new Promise((resolve, reject) => {
+		let popupInstance: any
+		const testDom = h(ElpDialog as any, {
+			data,
+		})
+		const handleClose = () => {
+			popupInstance?.destroy()
+		}
+		const handleCancel = () => {
+			popupInstance?.destroy()
+			reject(new Error('cancel'))
+		}
+		const handleOk = () => {
+			resolve({
+				done:	popupInstance?.destroy,
+			})
+		}
+		const done = () => {
+			resolve({
+				done:	popupInstance?.destroy,
+				data,
+			})
+		}
+		popupInstance = domAdd(
+			h(
+				testDom,
+				{
+					...data,
+					onClose: handleClose,
+					onOk: done,
+					onCancel: handleCancel,
+				},
+				{
+					header: renderer?.header,
+					default: renderer?.default,
+					footer: renderer?.footer,
+
 				},
 
 			),

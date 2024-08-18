@@ -9,6 +9,8 @@ import { MotionPlugin } from '@vueuse/motion'
 import i18n from './plugins/i18n'
 import routes from './plugins/router'
 import pinia from './plugins/pinia'
+// element-plus
+import 'element-plus/dist/index.css'
 
 import App from './App.vue'
 

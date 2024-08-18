@@ -4,7 +4,7 @@ import { testRequestGet } from '~/api/mock'
 import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
 import { useUserStore } from '~/stores/user'
-import { showDlg } from '~/hooks/customDlg'
+import { showDlgTest } from '~/hooks/customDlg'
 
 defineProps<{ msg: string }>()
 
@@ -76,7 +76,7 @@ onMounted(() => {
 	consolePlus.log('welcome to use cloud-template')
 })
 function testFunc() {
-	showDlg({
+	showDlgTest({
 		title: 'iceywu',
 	})
 	// .then((res) => {
