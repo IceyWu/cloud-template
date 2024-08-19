@@ -21,7 +21,8 @@ export function showDlg({ title = '我是标题' }) {
 		}
 		const handleCancel = () => {
 			popupInstance?.destroy()
-			reject(new Error('cancel'))
+			// eslint-disable-next-line prefer-promise-reject-errors
+			reject('cancel')
 		}
 		const handleOk = () => {
 			popupInstance?.destroy()
@@ -55,7 +56,8 @@ export function showDlgTest(options: any) {
 		}
 		const handleCancel = () => {
 			popupInstance?.destroy()
-			reject(new Error('cancel'))
+			// eslint-disable-next-line prefer-promise-reject-errors
+			reject('cancel')
 		}
 		const handleOk = () => {
 			resolve({

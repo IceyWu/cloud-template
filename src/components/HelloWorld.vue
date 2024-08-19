@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { to } from '@iceywu/utils'
+import { h } from 'vue'
 import { testRequestGet } from '~/api/mock'
 import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
 import { useUserStore } from '~/stores/user'
 import { showDlgTest } from '~/hooks/customDlg'
+import TestForm from '~/components/TestForm.vue'
 
 defineProps<{ msg: string }>()
 
@@ -62,9 +64,7 @@ function go404Page() {
 function handleLogin() {
 	useUserStore()
 		.loginByUsername({ username: 'admin', password: 'admin123' })
-		.then((res) => {
-
-		})
+		.then((res) => {})
 }
 const isShowBtns = ref<boolean>(false)
 const showText = ref(false)
@@ -75,15 +75,33 @@ function toggleShow() {
 onMounted(() => {
 	consolePlus.log('welcome to use cloud-template')
 })
+const formRef = ref()
 function testFunc() {
 	showDlgTest({
 		title: 'iceywu',
+		renderer: {
+			default: () =>
+				h(TestForm, {
+					ref: formRef,
+					formInline: {
+						name: 'qw',
+					},
+				}),
+		},
 	})
-	// .then((res) => {
-	// 	console.log('🌈------------------------------>', res)
-	// }).catch((err) => {
-	// 	console.log('🌵------------------------------>', err)
-	// })
+		.then(({ done }: any) => {
+			const FormRef = formRef.value.getRef()
+			FormRef.validate((valid: boolean) => {
+				if (valid) {
+					setTimeout(() => {
+						done()
+					}, 2000)
+				}
+			})
+		})
+		// .catch((err) => {
+		// 	// console.log('🌵------------------------------>', err)
+		// })
 }
 </script>
 
@@ -93,23 +111,15 @@ function testFunc() {
 
 		<template v-if="isShowBtns">
 			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
-				<button class="btn" @click="testFunc">
-弹窗
-</button>
-				<button class="btn" @click="handleLogin">
-登录
-</button>
-				<button class="btn" @click="getData">
-数据获取
-</button>
+				<button class="btn" @click="testFunc">弹窗</button>
+				<button class="btn" @click="handleLogin">登录</button>
+				<button class="btn" @click="getData">数据获取</button>
 				<button class="btn" @click="counter.inc()">
 					pinia-{{ counter.count }}
 				</button>
-				<button class="btn" @click="go404Page">
-404
-</button>
+				<button class="btn" @click="go404Page">404</button>
 			</div>
-			<div>{{ t('resData') }}: {{ resData }}</div>
+			<div>{{ t("resData") }}: {{ resData }}</div>
 		</template>
 		<template v-else>
 			<div v-motion-roll-right class="mx-auto mt-5 max-w-2xl text-center">
