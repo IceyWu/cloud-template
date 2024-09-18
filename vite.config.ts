@@ -6,5 +6,11 @@ const env = useEnv()
 
 export default defineConfig({
 	base: env.VITE_BASE_URL,
+	server: {
+		// host: '0.0.0.0',
+		port: 9527,
+		// 是否开启 https
+		// https: false,
+	},
 	plugins: [Tov()],
 })
