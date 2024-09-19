@@ -1,4 +1,3 @@
-import { defineStore } from 'pinia'
 import type { UserResult } from '@/api/mock'
 import { getLogin, refreshTokenApi } from '@/api/mock'
 import {
@@ -9,6 +8,7 @@ import {
 	removeToken,
 	setToken,
 } from '@/utils/auth'
+import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore(
 	'lp-user',

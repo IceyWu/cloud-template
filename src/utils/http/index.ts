@@ -1,15 +1,15 @@
-import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
-import { isEmpty } from '@iceywu/utils'
-import NProgress from '../progress'
 import type {
 	PureHttpError,
 	PureHttpRequestConfig,
 	PureHttpResponse,
 	RequestMethods,
 } from './types.d'
+import { formatToken, getToken } from '@/utils/auth'
+import { isEmpty } from '@iceywu/utils'
+import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import NProgress from '../progress'
 // import { stringify } from "qs";
 import baseUrl from './base.js'
-import { formatToken, getToken } from '@/utils/auth'
 // import { useUserStoreHook } from '@/store/modules/user'
 // 相关配置请参考：www.axios-js.com/zh-cn/docs/#axios-request-config-1
 const defaultConfig: AxiosRequestConfig = {

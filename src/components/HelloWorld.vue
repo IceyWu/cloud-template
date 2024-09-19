@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { to } from '@iceywu/utils'
 import { testRequestGet } from '~/api/mock'
-import lottieNoData from '~/assets/lottie/6.json'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
+import lottieNoData from '~/assets/lottie/6.json'
 import { useUserStore } from '~/stores/user'
 
 defineProps<{ msg: string }>()
