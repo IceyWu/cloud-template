@@ -1,28 +1,29 @@
-import { deepClone, getObjVal } from '@iceywu/utils'
+import { deepClone, getObjVal, isArray } from '@iceywu/utils'
 
 import { reactive, ref } from 'vue'
 import { requestTo } from '~/composables/requestTo'
-import type { ApiObjOpt, ListObj, ParamsObj } from '~/utils/http/listGet'
-import { ApiListGetData, baseDefaultPageKey } from '~/utils/http/listGet'
+import type { ApiObjOpt, ListObj, ParamsObj } from '~/utils/http/requestList'
+import { ApiListGetData, baseDefaultPageKey } from '~/utils/http/requestList'
 
 const defaultSearchVal = {
   label_type: null,
 }
 
-export function useGetListData(target?: string) {
+export function useRequest(target?: string) {
   const ApiObj: ApiObjOpt = ApiListGetData
   /**
    * 查询条件
    */
   const search = ref({})
 
-  const listObj = ref<ListObj>({
-    list: [],
+  const result = ref<ListObj>({
+    data: [],
     loading: false,
     finished: false,
     refreshing: false,
     total: 0,
   })
+	const loading = ref(false)
   const paramsObj = reactive<ParamsObj>({
     page: 0,
     size: 10,
@@ -32,9 +33,9 @@ export function useGetListData(target?: string) {
 	 * 数据初始化
 	 */
   function initData() {
-    listObj.value.finished = false
-    listObj.value.refreshing = false
-    listObj.value.list = []
+    result.value.finished = false
+    result.value.refreshing = false
+    result.value.data = []
     paramsObj.page = 0
 		paramsObj.size = 10
   }
@@ -66,16 +67,25 @@ export function useGetListData(target?: string) {
     return tempParams
   }
 
+	const setDefaultVal = (res: any) => {
+		if (isArray(res)) {
+			result.value.data = result.value.data.concat(res || [])
+		}
+else {
+			result.value.data = res
+		}
+	}
+
 /**
  * 加载数据
  * @param isReload 是否重新加载
  */
   async function onLoad(isReload = false) {
-    if (listObj.value.loading || listObj.value.finished)
+    if (result.value.loading || result.value.finished || loading.value)
 return
-    const totalNumTemp = listObj.value.list.length || 0
+    const totalNumTemp = result.value.data.length || 0
     if (isReload && totalNumTemp > 0) {
-    return await getData(listObj.value.list.length)
+    return await getData(result.value.data.length)
     }
  else {
       paramsObj.page++
@@ -87,22 +97,26 @@ return
       // 参数重置
       initData()
       // 初始化状态
-      listObj.value.refreshing = true
+      result.value.refreshing = true
     }
  else {
-      listObj.value.loading = false
-      listObj.value.finished = false
+      result.value.loading = false
+      result.value.finished = false
+			loading.value = false
     }
    return await onLoad(isReload)
   }
 
   async function getData(reloadSize?: number) {
-    listObj.value.loading = true
+    result.value.loading = true
+		loading.value = true
     const { requestApi, listFormat, totalFormat } = getTargetInfo()
 		if (!requestApi) {
 			console.error('requestApi is not defined')
-			listObj.value.finished = true
-			listObj.value.loading = false
+			result.value.finished = true
+			result.value.loading = false
+			result.value.refreshing = false
+			loading.value = false
 			return
 		}
     const tempParams = getParamsVal(reloadSize)
@@ -111,40 +125,43 @@ return
 			isOnlyData: false,
 		})
 
-    if (listObj.value.refreshing) {
-      listObj.value.list = []
-      listObj.value.refreshing = false
+    if (result.value.refreshing) {
+      result.value.data = []
+      result.value.refreshing = false
     }
     const total = totalFormat ? totalFormat(resData) : getObjVal(resData, 'length', 0)
 		const tempList = listFormat ? listFormat(resData) : resData
 
-    listObj.value.total = total
+    result.value.total = total
 
     if (reloadSize) {
-      listObj.value.list = tempList || []
+      result.value.data = tempList || []
     }
  else {
-      listObj.value.list = listObj.value.list.concat(tempList || [])
+      // result.value.data = result.value.data.concat(tempList || [])
+			setDefaultVal(tempList)
     }
-    listObj.value.finished = listObj.value.list.length >= total
+    result.value.finished = result.value.data.length >= total
 
     if (err) {
-      listObj.value.finished = true
+      result.value.finished = true
     }
 
     // 加载状态停止
-    listObj.value.loading = false
+    result.value.loading = false
+		loading.value = false
   }
   // 删除列表项
   const removeListItemByIndex = (index: number) => {
-    listObj.value.list.splice(index, 1)
+    result.value.data.splice(index, 1)
   }
   // 更新列表项
   const updateListItemByIndex = (index: number, item: never) => {
     if (index > -1) {
-      listObj.value.list[index] = item
+      result.value.data[index] = item
     }
   }
+
   // 重置
   function reset() {
     search.value = deepClone(defaultSearchVal)
@@ -156,10 +173,11 @@ return
     search,
     onRefresh,
     onLoad,
-    listObj,
+    result,
     removeListItemByIndex,
     updateListItemByIndex,
     reset,
     getParamsVal,
+		loading,
   }
 }

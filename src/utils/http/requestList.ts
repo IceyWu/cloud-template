@@ -1,5 +1,5 @@
 import { getObjVal } from '@iceywu/utils'
-// import { listGet } from '~/api/mock'
+import { listGet } from '~/api/mock'
 
 export interface ApiObjOpt {
   [key: string]: {
@@ -16,7 +16,7 @@ export interface ApiObjOpt {
 }
 
 export interface ListObj {
-	list: any[]
+	data: any[]
 	loading: boolean
 	finished: boolean
 	refreshing: boolean
@@ -34,8 +34,8 @@ export const baseDefaultPageKey = {
 
 export const ApiListGetData: ApiObjOpt = {
 	default: {
-		// requestApi: listGet,
-		requestApi: null,
+		requestApi: listGet,
+		// requestApi: null,
 		isNeedPageAndSize: false,
 		defaultPageKey: baseDefaultPageKey,
 		listFormat: (data: any) => getObjVal(data, 'data', []),
