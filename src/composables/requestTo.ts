@@ -14,7 +14,7 @@ export function isRequestSuccess(data: any) {
 }
  const requestValOptions = [
   {
-    keys: ['code', 'data'],
+    keys: ['code', 'result'],
   },
 ]
 interface RequestToOptions {

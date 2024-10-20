@@ -231,7 +231,7 @@ export default function () {
 	 */
 	if (env.VITE_APP_API_AUTO_IMPORT) {
 		const dirs = env.VITE_APP_DIR_API_AUTO_IMPORT
-			? ['src/stores/**', 'src/composables/**', 'src/api/**']
+			? ['src/stores/**', 'src/composables/**', 'src/api/**', 'src/hooks/**']
 			: []
 		plugins.push(
 			AutoImport({
