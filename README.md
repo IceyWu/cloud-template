@@ -52,6 +52,8 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 <!-- i18n -->
 - 🌐 [i18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme) - internationalization
 
+- 🎨 [shadcn/ui](https://www.shadcn-vue.com/) - Re-usable components built with Radix Vue, and Tailwind CSS.
+
 <br>
 
 ## Motivation
