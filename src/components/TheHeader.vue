@@ -1,11 +1,16 @@
 <script setup lang="ts">
+import {
+	NavigationMenu,
+	NavigationMenuContent,
+	NavigationMenuItem,
+	NavigationMenuLink,
+	NavigationMenuList,
+	NavigationMenuTrigger,
+	navigationMenuTriggerStyle,
+} from '@/components/ui/navigation-menu'
 import { getRoutes } from '@/plugins/router'
 
 const { t } = useI18n()
-
-// const toUpper = (str: string) => {
-// 	return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
-// }
 
 const routes = getRoutes()
 	.filter(r => !r.path.includes('notFound'))
@@ -21,11 +26,13 @@ const routes = getRoutes()
 		const nameVal = name.toString().slice(1).replaceAll('/', ' · ')
 		return { path, name: nameVal }
 	})
+
+const { availableLocales, locale } = useI18n()
 </script>
 
 <template>
 	<div
-		class="bg-background/75 sticky top-0 z-50 box-border h-[55px] w-full flex items-center border-b border-gray-200 px-[40px] backdrop-blur -mb-px lg:mb-0 lg:border-0 dark:border-gray-800"
+		class="sticky top-0 z-50 box-border h-[55px] w-full flex items-center border-b border-gray-200 bg-background/55 px-[40px] backdrop-blur -mb-px lg:mb-0 lg:border-0 dark:border-gray-800"
 	>
 		<div
 			v-motion-roll-bottom
@@ -45,14 +52,46 @@ const routes = getRoutes()
 		<div flex-1 />
 		<div class="z-99 h-full flex items-center space-x-5">
 			<!-- router list -->
-			<RouterLink v-for="r of routes" :key="r.path" :to="r.path">
-				<p icon-link>
-{{ t(r.name) }}
-</p>
-			</RouterLink>
-			<div>
-				<Dropdown />
-			</div>
+			<NavigationMenu>
+				<NavigationMenuList>
+					<NavigationMenuItem>
+						<NavigationMenuTrigger>
+							<i class="i-carbon-ibm-watson-language-translator" />
+						</NavigationMenuTrigger>
+						<NavigationMenuContent>
+							<ul
+								class="grid w-[180px] gap-3 p-4 md:grid-cols-1"
+							>
+								<li
+v-for="availableLocale of availableLocales"
+								:key="availableLocale"
+>
+									<NavigationMenuLink as-child>
+										<a
+										:class="
+							locale === availableLocale
+								? 'bg-accent  text-accent-foreground'
+								: ''
+						"
+											class="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors space-y-1 focus:bg-accent hover:bg-accent focus:text-accent-foreground hover:text-accent-foreground"
+										>
+											<div class="text-sm font-medium leading-none" @click="locale = availableLocale">
+												{{ availableLocale }}
+											</div>
+
+										</a>
+									</NavigationMenuLink>
+								</li>
+							</ul>
+						</NavigationMenuContent>
+					</NavigationMenuItem>
+					<NavigationMenuItem v-for="r of routes" :key="r.path">
+						<RouterLink :to="r.path" :class="navigationMenuTriggerStyle()">
+							{{ t(r.name) }}
+						</RouterLink>
+					</NavigationMenuItem>
+				</NavigationMenuList>
+			</NavigationMenu>
 
 			<a
 				icon-btn
