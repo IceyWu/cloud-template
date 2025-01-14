@@ -1,169 +1,199 @@
-<script setup lang="ts">
-import { list, sleep, to } from '@iceywu/utils'
-import { breakpointsTailwind } from '@vueuse/core'
-// imp
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
-interface BaseParamsProps {
-	page: number
-	page_size: number
-}
-const listObj = ref({
-	list: [],
-	loading: false,
-	finished: false,
-	refreshing: false,
-})
-const baseParams = reactive<BaseParamsProps>({
-	page: 1,
-	page_size: 10,
-})
-const breakpoints = useBreakpoints(breakpointsTailwind)
+<script lang="ts" setup>
+import Dialog from '@/components/Dialog.vue'
+import { nextTick, ref } from 'vue'
 
-const cols = computed(() => {
-	if (breakpoints.xl.value)
-return 4
-	if (breakpoints.lg.value)
-return 3
-	if (breakpoints.md.value)
-return 2
-	return 1
-})
-
-const parts = computed(() => {
-	const result = Array.from(
-		{ length: cols.value },
-		() => [] as typeof listObj.value.list,
-	)
-	listObj.value.list.forEach((item, i) => {
-		result[i % cols.value].push(item)
-	})
-	return result
-})
-function handleItemClick(data: any) {
-
-}
-// 触底加载
-async function onLoad() {
-	if (listObj.value.loading || listObj.value.finished)
-return
-	baseParams.page++
-	getData()
-}
-async function getAllMessages(params: BaseParamsProps): any {
-	await sleep(500)
-	const { page = 1, page_size = 10 } = params
-	const data = list(0, page_size - 1, (index) => {
-		const indexVal = page_size * (page - 1) + index + 1
-		const width = Math.floor(Math.random() * 200 + 200)
-		const height = Math.floor(Math.random() * 300 + 300)
-		return {
-			id: indexVal,
-			title: `消息标题${indexVal}`,
-			cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
-			content: `消息内容${indexVal}`,
-			create_time: '2021-08-01 12:00:00',
+// const showMask = ref(false)
+async function loadImg(src: string): Promise<{ realWidth: number, realHeight: number }> {
+	const maxImageHeight = window.innerHeight - 64
+	return new Promise((resolve, reject) => {
+		const img = new Image()
+		img.src = src
+		img.onload = (e) => {
+			const realWidth = (maxImageHeight / e.target.height) * e.target.width
+			resolve({
+				realWidth,
+				realHeight: maxImageHeight,
+			})
+		}
+		img.onerror = (error) => {
+		// 处理图片加载错误
+			reject(error)
 		}
 	})
-	return {
-		code: 200,
-		msg: 'success',
-		data,
-	}
 }
 
-async function getData() {
-	listObj.value.loading = true
-	const params = {
-		...toRaw(baseParams),
-	}
-	const [err, ReData] = await to(getAllMessages(params))
-	if (err) {
-		listObj.value.finished = true
-		listObj.value.loading = false
-		return
+function useDialog() {
+	const showMask = ref(false)
+	const dialogMediaWidth = ref(0)
+	const zoom = ref(1)
+	let firstInfo = {}
+	let lastInfo = {}
+	let dialogNode = null
+	let maskNode = null
+	let convertY = 0
+	let convertX = 0
+
+	const openDialogHandler = async (e: MouseEvent, imageUrl: string) => {
+		firstInfo = e.target.getBoundingClientRect()
+		const { realWidth } = await loadImg(imageUrl)
+		dialogMediaWidth.value = realWidth
+		showMask.value = true
+
+		nextTick(() => {
+			dialogNode = document.querySelector('.dialog-content')
+			maskNode = document.querySelector('.dialog')
+			lastInfo = dialogNode.getBoundingClientRect()
+			zoom.value = firstInfo.width / dialogMediaWidth.value
+			convertX = firstInfo.x - lastInfo.x
+			convertY = firstInfo.y - lastInfo.y
+
+			dialogNode.style.transform = `translate(calc(-50% + ${convertX}px), calc(-50% + ${convertY}px)) scale(${zoom.value})`
+			dialogNode.style.transformOrigin = 'left top'
+
+			requestAnimationFrame(() => {
+				dialogNode.style.transition = 'transform 0.4s, width 0.4s'
+				dialogNode.style.width = `${lastInfo.width}px`
+				dialogNode.style.transform = ''
+				maskNode.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+			})
+		})
 	}
 
-	const { code, data } = ReData || {}
-	if (code === 200 && data) {
-		const content = data || []
-		listObj.value.list.push(...content)
+	const closeDialogHandler = () => {
+		const dialogFirstInfo = dialogNode.getBoundingClientRect()
+		dialogNode.style.left = `${firstInfo.x}px`
+		dialogNode.style.top = `${firstInfo.y}px`
+		dialogNode.style.transition = 'none'
+		dialogNode.style.width = `${dialogMediaWidth.value}px`
+		dialogNode.style.overflow = 'hidden'
+		dialogNode.style.transform = `scale(${zoom.value})`
+
+		nextTick(() => {
+			const dialogLastInfo = dialogNode.getBoundingClientRect()
+			const convertX = dialogFirstInfo.x - dialogLastInfo.x
+			const convertY = dialogFirstInfo.y - dialogLastInfo.y
+			dialogNode.style.width = `${dialogFirstInfo.width}px`
+			dialogNode.style.overflow = 'visible'
+			dialogNode.style.transform = `translate(${convertX}px, ${convertY}px) scale(1)`
+
+			requestAnimationFrame(() => {
+				dialogNode.style.transition = 'transform 0.4s, width 0.4s'
+				dialogNode.style.width = `${dialogMediaWidth.value}px`
+				dialogNode.style.overflow = 'hidden'
+				dialogNode.style.transform = `scale(${zoom.value})`
+				maskNode.style.backgroundColor = 'transparent'
+			})
+
+			dialogNode.addEventListener('transitionend', () => {
+				showMask.value = false
+			})
+		})
 	}
- else {
-		listObj.value.finished = true
-	}
-	// 加载状态停止;
-	listObj.value.loading = false
+
+	return { showMask, openDialog: openDialogHandler, closeDialog: closeDialogHandler, mediaWidth: dialogMediaWidth }
 }
-function initData() {
-	// 获取数据
-	getData()
-}
-onMounted(() => {
-	initData()
-})
+
+const { showMask, openDialog, closeDialog, mediaWidth } = useDialog()
+
+const list = ref([
+	{ width: 250, height: 300 },
+	{ width: 250, height: 420 },
+	{ width: 250, height: 280 },
+	{ width: 250, height: 320 },
+	{ width: 250, height: 360 },
+	{ width: 250, height: 300 },
+	{ width: 250, height: 400 },
+	{ width: 250, height: 340 },
+])
+const imageUrl = 'http://nest-js.oss-accelerate.aliyuncs.com/nestTest/1/1733058970611.JPG'
 </script>
 
 <template>
-	<DefineTemplate v-slot="{ data }">
-		<div
-			class="relative w-full flex flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
-		>
+	<div class="animation-page">
+		<div class="left-side" />
+		<div class="flip-animation">
 			<div
-				class="relative m-0 max-h-80 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700"
+				v-for="(item, index) in list"
+				:key="index"
+				class="flip-card"
+				@click="(e) => openDialog(e, imageUrl)"
 			>
 				<img
-					:src="data.cover"
-					alt="card-image"
-					class="h-full w-full object-cover"
+					:src="imageUrl"
+					alt=""
 				>
-			</div>
-			<div class="w-full p-6">
-				<h6
-					class="mb-4 block text-base text-gray-700 font-semibold leading-relaxed tracking-normal font-sans uppercase antialiased"
-				>
-					startups
-				</h6>
-				<h4
-					class="mb-2 block text-2xl text-blue-gray-900 font-semibold leading-snug tracking-normal font-sans antialiased"
-				>
-					{{ data.title }}
-				</h4>
-				<p
-					class="mb-8 block text-base text-gray-700 font-normal leading-relaxed font-sans antialiased"
-				>
-					{{ data.content }}
-				</p>
-				<a href="#" class="inline-block"><button
-						class="flex select-none items-center rounded-lg px-6 py-3 text-center align-middle text-xs text-gray-900 font-bold font-sans uppercase transition-all disabled:pointer-events-none space-x-2 space-y-2 active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:shadow-none"
-						type="button"
-						@click="handleItemClick(data)"
-					>
-						Learn More<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-							class="h-4 w-4"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-							/>
-						</svg></button></a>
 			</div>
 		</div>
-	</DefineTemplate>
-	<div class="box-border h-90vh w-[95%] p-5">
-		<ScrollList v-model="listObj" @on-load="onLoad">
-			<div grid="~ cols-1 md:cols-2 lg:cols-3 xl:cols-4  gap-6 ">
-				<div v-for="(items, idx) of parts" :key="idx" flex="~ col  " space-y-4>
-					<ReuseTemplate v-for="data of items" :key="data.id" :data />
-				</div>
-			</div>
-		</ScrollList>
+		<Dialog v-if="showMask" :media-width="mediaWidth" :image-url="imageUrl" @close="closeDialog" />
 	</div>
 </template>
 
-<style lang="less" scoped></style>
+<style scoped>
+.animation-page {
+  display: flex;
+  align-content: flex-start;
+  width: 1650px;
+  margin: 0 auto;
+  padding-top: 120px;
+  .left-side {
+    width: 260px;
+  }
+  .flip-animation {
+    display: grid;
+    grid-template-columns: repeat(5, 250px);
+    grid-gap: 10px;
+  }
+}
+.flip-card {
+  > img {
+    width: 100%;
+    border-radius: 20px;
+  }
+}
+.dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  transition: background-color 0.4s;
+  z-index: 9999;
+  .dialog-content {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+    height: calc(100% - 64px);
+    background-color: #fff;
+    border-radius: 20px;
+    overflow: visible;
+    .left-container {
+      flex-shrink: 0;
+      flex-grow: 0;
+      height: 100%;
+      border-radius: 20px 0 0 20px;
+      overflow: hidden;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    }
+    .right-container {
+      width: 440px;
+      flex-shrink: 0;
+      flex-grow: 1;
+      border-radius: 0 20px 20px 0;
+      overflow: hidden;
+      padding: 10px;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+</style>
