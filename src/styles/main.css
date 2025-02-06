@@ -1,3 +1,5 @@
+@import 'tailwindcss';
+
 @import './md.css';
 
 html.dark {
@@ -13,7 +15,7 @@ html.dark {
 }
 
 #nprogress .bar {
-  @apply bg-blue-700 bg-opacity-75;
+  /* @apply bg-blue-700 bg-opacity-75; */
 
   background: repeating-linear-gradient(90deg, #00dc82 0, #34cdfe 50%, #0047e1);
   position: fixed;

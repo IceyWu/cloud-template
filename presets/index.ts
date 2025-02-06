@@ -1,13 +1,13 @@
 // 内置插件
 import type { PluginOption } from 'vite'
 import I18N from '@intlify/unplugin-vue-i18n/vite'
+import tailwindcss from '@tailwindcss/vite'
 import Legacy from '@vitejs/plugin-legacy'
 import Vue from '@vitejs/plugin-vue'
 import Jsx from '@vitejs/plugin-vue-jsx'
 import Prism from 'markdown-it-prism'
-import UnoCss from 'unocss/vite'
-import AutoImport from 'unplugin-auto-import/vite'
 
+import AutoImport from 'unplugin-auto-import/vite'
 import {
 	AntDesignVueResolver,
 	ArcoResolver,
@@ -33,8 +33,8 @@ import { VueRouterAutoImports } from 'unplugin-vue-router'
 import VueRouter from 'unplugin-vue-router/vite'
 import { AutoGenerateImports, vue3Presets } from 'vite-auto-import-resolvers'
 import Compression from 'vite-plugin-compression'
-import EnvTypes from 'vite-plugin-env-types'
 
+import EnvTypes from 'vite-plugin-env-types'
 import { viteMockServe as Mock } from 'vite-plugin-mock'
 import Removelog from 'vite-plugin-removelog'
 import VueDevTools from 'vite-plugin-vue-devtools'
@@ -186,13 +186,9 @@ export default function () {
 		 * 如果 package.json 或 pnpm-lock.yaml 更新的话，强制重启
 		 */
 		Restart(),
-		/**
-		 * css 原子引擎
-		 * https://github.com/unocss/unocss
-		 */
-		UnoCss({
-			safelist: env.VITE_APP_MARKDOWN ? safelist.split(' ') : undefined,
-		}),
+
+		tailwindcss(),
+
 	]
 	/**
 	 * 开发面板

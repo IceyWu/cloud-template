@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
 import { to } from '@iceywu/utils'
 import { testRequestGet } from '~/api/mock'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
@@ -83,18 +82,18 @@ onMounted(() => {
 
 		<template v-if="isShowBtns">
 			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
-				<Button @click="handleLogin">
+				<button @click="handleLogin">
 登录
-</Button>
-				<Button @click="getData">
+</button>
+				<button @click="getData">
 数据获取
-</Button>
-				<Button @click="counter.inc()">
+</button>
+				<button @click="counter.inc()">
 					pinia-{{ counter.count }}
-				</Button>
-				<Button @click="go404Page">
+				</button>
+				<button @click="go404Page">
 404
-</Button>
+</button>
 			</div>
 			<div>{{ t('resData') }}: {{ resData }}</div>
 		</template>
