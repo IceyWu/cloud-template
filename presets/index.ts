@@ -5,7 +5,7 @@ import Legacy from '@vitejs/plugin-legacy'
 import Vue from '@vitejs/plugin-vue'
 import Jsx from '@vitejs/plugin-vue-jsx'
 import Prism from 'markdown-it-prism'
-import UnoCss from 'unocss/vite'
+import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
 import {
@@ -190,7 +190,7 @@ export default function () {
 		 * css 原子引擎
 		 * https://github.com/unocss/unocss
 		 */
-		UnoCss({
+		UnoCSS({
 			safelist: env.VITE_APP_MARKDOWN ? safelist.split(' ') : undefined,
 		}),
 	]
