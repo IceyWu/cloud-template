@@ -2,11 +2,11 @@
 	<div
 		font-sans
 		text="center gray-700 dark:gray-200"
-		class="box-border h-screen w-full flex flex-col"
+		class="flex flex-col h-screen w-full box-border"
 	>
-		<div class="sticky top-0 z-999"><TheHeader /></div>
+		<div class="top-0 sticky z-999"><TheHeader /></div>
 
-		<div class="box-border h-full w-full flex flex-col items-center justify-center">
+		<div class="flex flex-col h-full w-full items-center box-border justify-center">
 			<router-view v-if="$route.meta.keepAlive" v-slot="{ Component }">
 				<transition name="move" mode="out-in">
 					<keep-alive>

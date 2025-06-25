@@ -1,5 +1,6 @@
+import type { CSSObject } from 'unocss'
 import {
-	type CSSObject,
+
 	defineConfig,
 	presetAttributify,
 	presetIcons,

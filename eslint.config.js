@@ -1,5 +1,6 @@
 // @ts-check
 import antfu from '@antfu/eslint-config'
+import oxlint from 'eslint-plugin-oxlint'
 
 export default antfu(
   {
@@ -17,5 +18,14 @@ export default antfu(
 			'unused-imports/no-unused-vars': 'off',
 			'vue/singleline-html-element-content-newline': 'off',
 		},
+  },
+  // 集成 oxlint 插件，自动禁用与 oxlint 冲突的 ESLint 规则
+  {
+    plugins: {
+      oxlint,
+    },
+    rules: {
+      ...oxlint.configs.recommended.rules,
+    },
   },
 )

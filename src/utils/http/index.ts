@@ -1,12 +1,13 @@
+import type { AxiosInstance, AxiosRequestConfig } from 'axios'
 import type {
 	PureHttpError,
 	PureHttpRequestConfig,
 	PureHttpResponse,
 	RequestMethods,
 } from './types.d'
-import { formatToken, getToken } from '@/utils/auth'
 import { isEmpty } from '@iceywu/utils'
-import Axios, { type AxiosInstance, type AxiosRequestConfig } from 'axios'
+import Axios from 'axios'
+import { formatToken, getToken } from '@/utils/auth'
 import NProgress from '../progress'
 // import { stringify } from "qs";
 import baseUrl from './base.js'

@@ -22,14 +22,16 @@
     "typecheck": "npx vue-tsc --noEmit",
     "preview:host": "vite preview --host",
     "preview:open": "vite preview --open",
-    "lint": "eslint .",
+    "lint": "oxlint . && eslint .",
+    "lint:eslint": "eslint .",
+    "lint:oxlint": "oxlint .",
+    "lint:fix": "oxlint --fix . && eslint . --fix",
     "release": "plop --plopfile scripts/release.cjs",
     "auto:remove": "plop --plopfile scripts/remove.cjs",
     "auto:create": "plop --plopfile scripts/create.cjs",
     "build:debug": "cross-env NODE_ENV=debug vite build",
     "safe:init": "plop --plopfile scripts/safe-init.cjs",
-    "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs",
-    "lint:fix": "eslint . --fix"
+    "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs"
   },
   "dependencies": {
     "@rolldown/binding-win32-x64-msvc": "1.0.0-beta.19",
@@ -69,6 +71,7 @@
     "element-plus": "^2.10.2",
     "eslint": "^9.29.0",
     "eslint-plugin-format": "^1.0.1",
+    "eslint-plugin-oxlint": "^1.3.0",
     "fs-extra": "^11.3.0",
     "husky": "^9.1.7",
     "ityped": "^1.0.3",
@@ -81,6 +84,7 @@
     "lucide-vue-next": "^0.523.0",
     "markdown-it-prism": "^3.0.0",
     "nprogress": "^0.2.0",
+    "oxlint": "^1.3.0",
     "pinia": "^3.0.3",
     "pinia-plugin-persistedstate": "^4.3.0",
     "plop": "^4.0.1",
@@ -136,7 +140,10 @@
     "vue-demi": "npm:vue-demi@latest"
   },
   "lint-staged": {
-    "*": "eslint --fix"
+    "*.{js,jsx,ts,tsx,vue}": [
+      "oxlint --fix",
+      "eslint --fix"
+    ]
   },
   "browserslist": [
     ">= 0.25%",

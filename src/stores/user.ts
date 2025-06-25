@@ -1,14 +1,15 @@
 import type { UserResult } from '@/api/mock'
+import type { DataInfo } from '@/utils/auth'
+import { defineStore } from 'pinia'
 import { getLogin, refreshTokenApi } from '@/api/mock'
 import {
 	AccessTokenKey,
-	type DataInfo,
+
 	ExpiresKey,
 	RefreshTokenKey,
 	removeToken,
 	setToken,
 } from '@/utils/auth'
-import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore(
 	'lp-user',

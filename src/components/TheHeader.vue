@@ -32,7 +32,7 @@ const { availableLocales, locale } = useI18n()
 
 <template>
 	<div
-		class="sticky top-0 z-50 box-border h-[55px] w-full flex items-center border-b border-gray-200 bg-background/55 px-[40px] backdrop-blur -mb-px lg:mb-0 lg:border-0 dark:border-gray-800"
+		class="px-[40px] border-b border-gray-200 bg-background/55 flex h-[55px] w-full items-center box-border top-0 sticky z-50 backdrop-blur -mb-px lg:mb-0 lg:border-0 dark:border-gray-800"
 	>
 		<div
 			v-motion-roll-bottom
@@ -41,16 +41,14 @@ const { availableLocales, locale } = useI18n()
 			:variants="{ custom: { scale: 2 } }"
 			:hovered="{ scale: 1.2 }"
 			text="2xl"
-			flex
-			items-center
-			font-bold
+			font-bold flex items-center
 		>
 			<div ml-0 h-auto w-40>
 				<Logo />
 			</div>
 		</div>
 		<div flex-1 />
-		<div class="z-99 h-full flex items-center space-x-5">
+		<div class="flex h-full items-center z-99 space-x-5">
 			<!-- router list -->
 			<NavigationMenu>
 				<NavigationMenuList>
@@ -60,7 +58,7 @@ const { availableLocales, locale } = useI18n()
 						</NavigationMenuTrigger>
 						<NavigationMenuContent>
 							<ul
-								class="grid w-[180px] gap-3 p-4 md:grid-cols-1"
+								class="p-4 gap-3 grid w-[180px] md:grid-cols-1"
 							>
 								<li
 v-for="availableLocale of availableLocales"
@@ -73,9 +71,9 @@ v-for="availableLocale of availableLocales"
 								? 'bg-accent  text-accent-foreground'
 								: ''
 						"
-											class="block select-none rounded-md p-3 leading-none no-underline outline-none transition-colors space-y-1 focus:bg-accent hover:bg-accent focus:text-accent-foreground hover:text-accent-foreground"
+											class="leading-none p-3 outline-none rounded-md no-underline block select-none transition-colors focus:text-accent-foreground hover:text-accent-foreground focus:bg-accent hover:bg-accent space-y-1"
 										>
-											<div class="text-sm font-medium leading-none" @click="locale = availableLocale">
+											<div class="text-sm leading-none font-medium" @click="locale = availableLocale">
 												{{ availableLocale }}
 											</div>
 

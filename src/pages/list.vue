@@ -106,10 +106,10 @@ onMounted(() => {
 <template>
 	<DefineTemplate v-slot="{ data }">
 		<div
-			class="relative w-full flex flex-row rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
+			class="text-gray-700 rounded-xl bg-white flex flex-row w-full shadow-md relative bg-clip-border"
 		>
 			<div
-				class="relative m-0 max-h-80 w-2/5 shrink-0 overflow-hidden rounded-xl rounded-r-none bg-white bg-clip-border text-gray-700"
+				class="text-gray-700 m-0 rounded-xl rounded-r-none bg-white shrink-0 max-h-80 w-2/5 relative overflow-hidden bg-clip-border"
 			>
 				<img
 					:src="data.cover"
@@ -117,24 +117,24 @@ onMounted(() => {
 					class="h-full w-full object-cover"
 				>
 			</div>
-			<div class="w-full p-6">
+			<div class="p-6 w-full">
 				<h6
-					class="mb-4 block text-base text-gray-700 font-semibold leading-relaxed tracking-normal font-sans uppercase antialiased"
+					class="text-base text-gray-700 leading-relaxed tracking-normal font-sans font-semibold mb-4 block uppercase antialiased"
 				>
 					startups
 				</h6>
 				<h4
-					class="mb-2 block text-2xl text-blue-gray-900 font-semibold leading-snug tracking-normal font-sans antialiased"
+					class="text-blue-gray-900 text-2xl leading-snug tracking-normal font-sans font-semibold mb-2 block antialiased"
 				>
 					{{ data.title }}
 				</h4>
 				<p
-					class="mb-8 block text-base text-gray-700 font-normal leading-relaxed font-sans antialiased"
+					class="text-base text-gray-700 leading-relaxed font-normal font-sans mb-8 block antialiased"
 				>
 					{{ data.content }}
 				</p>
 				<a href="#" class="inline-block"><button
-						class="flex select-none items-center rounded-lg px-6 py-3 text-center align-middle text-xs text-gray-900 font-bold font-sans uppercase transition-all disabled:pointer-events-none space-x-2 space-y-2 active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:shadow-none"
+						class="text-xs text-gray-900 font-bold font-sans px-6 py-3 text-center align-middle rounded-lg flex select-none uppercase transition-all items-center active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none space-x-2 space-y-2"
 						type="button"
 						@click="handleItemClick(data)"
 					>
@@ -155,7 +155,7 @@ onMounted(() => {
 			</div>
 		</div>
 	</DefineTemplate>
-	<div class="box-border h-90vh w-[95%] p-5">
+	<div class="p-5 h-90vh w-[95%] box-border">
 		<ScrollList v-model="listObj" @on-load="onLoad">
 			<div grid="~ cols-1 md:cols-2 lg:cols-3 xl:cols-4  gap-6 ">
 				<div v-for="(items, idx) of parts" :key="idx" flex="~ col  " space-y-4>
