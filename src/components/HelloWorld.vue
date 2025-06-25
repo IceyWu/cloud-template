@@ -62,9 +62,7 @@ function go404Page() {
 function handleLogin() {
 	useUserStore()
 		.loginByUsername({ username: 'admin', password: 'admin123' })
-		.then((res) => {
-
-		})
+		.then((res) => {})
 }
 const isShowBtns = ref<boolean>(false)
 const showText = ref(false)
@@ -99,17 +97,12 @@ onMounted(() => {
 					<span
 						v-if="hasTypeonFinished"
 						class="bg-gradient-to-tl text-transparent mt-3 block from-blue-600 to-violet-600 bg-clip-text"
-						>minutes!</span>
+						>minutes!</span
+					>
 				</h1>
 			</div>
 		</template>
-		<Button
-			v-show="hasTypeonFinished"
-
-			@click="toggleShow"
-		>
-	切换
-</Button>
+		<Button v-show="hasTypeonFinished" @click="toggleShow">切换 </Button>
 	</div>
 </template>
 
