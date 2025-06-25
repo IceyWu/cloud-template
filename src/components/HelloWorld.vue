@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { Button } from '@/components/ui/button'
 import { to } from '@iceywu/utils'
+import { Button } from '@/components/ui/button'
 import { testRequestGet } from '~/api/mock'
 import Lottie_Data_404 from '~/assets/lottie/4.json'
 import lottieNoData from '~/assets/lottie/6.json'
@@ -80,9 +80,11 @@ onMounted(() => {
 <template>
 	<div class="mt-25 flex flex-col items-center space-y-7">
 		<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" />
-
+1
 		<template v-if="isShowBtns">
+			2
 			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
+				3
 				<Button @click="handleLogin">
 登录
 </Button>
@@ -99,22 +101,22 @@ onMounted(() => {
 			<div>{{ t('resData') }}: {{ resData }}</div>
 		</template>
 		<template v-else>
-			<div v-motion-roll-right class="mx-auto mt-5 max-w-2xl text-center">
+			<div v-motion-roll-right class="mx-auto mt-5 text-center max-w-2xl">
 				<h1
-					class="base-font block text-5xl text-gray-800 font-bold lg:text-7xl md:text-6xl dark:text-gray-200"
+					class="base-font text-5xl text-gray-800 font-bold block lg:text-7xl md:text-6xl dark:text-gray-200"
 				>
 					<span v-if="showText" class="block"> Start your Project in </span>
 					<span ref="titleRef" class="block" />
 					<span
 						v-if="hasTypeonFinished"
-						class="mt-3 block from-blue-600 to-violet-600 bg-gradient-to-tl bg-clip-text text-transparent"
+						class="bg-gradient-to-tl text-transparent mt-3 block from-blue-600 to-violet-600 bg-clip-text"
 						>minutes!</span>
 				</h1>
 			</div>
 		</template>
 		<button
 			v-show="hasTypeonFinished"
-			class="i-carbon-ibm-data-product-exchange text-5xl btn"
+			class="i-carbon-ibm-data-product-exchange btn text-5xl"
 			@click="toggleShow"
 		/>
 	</div>

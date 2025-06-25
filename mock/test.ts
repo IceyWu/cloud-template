@@ -1,6 +1,6 @@
-import type { MockMethod } from 'vite-plugin-mock'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
-export default [
+export default defineFakeRoute([
 	{
 		url: '/api/mock/get',
 		method: 'get',
@@ -98,4 +98,4 @@ export default [
 			}
 		},
 	},
-] as MockMethod[]
+])
