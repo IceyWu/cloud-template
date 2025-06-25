@@ -29,7 +29,7 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
 
-- 🚀 [Rolldown-Vite](https://rolldown.rs/) - 基于 Rust 的下一代构建工具，极致性能
+<!-- - 🚀 [Rolldown-Vite](https://rolldown.rs/) - 基于 Rust 的下一代构建工具，极致性能 -->
 
 - 📦 [组件自动导入](./src/components)
 

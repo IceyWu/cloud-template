@@ -26,7 +26,7 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 - ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
 
-- � [Rolldown-Vite](https://rolldown.rs/) - Next-generation bundler powered by Rust for extreme performance
+<!-- - � [Rolldown-Vite](https://rolldown.rs/) - Next-generation bundler powered by Rust for extreme performance -->
 
 - �📦 [Components auto importing](./src/components)
 
