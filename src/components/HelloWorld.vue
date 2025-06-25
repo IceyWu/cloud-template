@@ -80,23 +80,12 @@ onMounted(() => {
 <template>
 	<div class="mt-25 flex flex-col items-center space-y-7">
 		<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" />
-1
 		<template v-if="isShowBtns">
-			2
 			<div v-motion-roll-bottom class="flex flex-wrap space-x-2">
-				3
-				<Button @click="handleLogin">
-登录
-</Button>
-				<Button @click="getData">
-数据获取
-</Button>
-				<Button @click="counter.inc()">
-					pinia-{{ counter.count }}
-				</Button>
-				<Button @click="go404Page">
-404
-</Button>
+				<Button @click="handleLogin">登录</Button>
+				<Button @click="getData">数据获取</Button>
+				<Button @click="counter.inc()">pinia-{{ counter.count }}</Button>
+				<Button @click="go404Page">404</Button>
 			</div>
 			<div>{{ t('resData') }}: {{ resData }}</div>
 		</template>
@@ -114,11 +103,13 @@ onMounted(() => {
 				</h1>
 			</div>
 		</template>
-		<button
+		<Button
 			v-show="hasTypeonFinished"
-			class="i-carbon-ibm-data-product-exchange btn text-5xl"
+
 			@click="toggleShow"
-		/>
+		>
+	切换
+</Button>
 	</div>
 </template>
 

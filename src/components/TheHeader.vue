@@ -163,9 +163,11 @@ v-for="availableLocale of availableLocales"
 					</rect></svg></a>
 
 			<div
+
 				i-carbon-sun
 				dark:i-carbon-moon
 				icon-btn
+				ml-5
 				title="Change Theme"
 				@click="toggleDark()"
 			/>

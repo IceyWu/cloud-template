@@ -16,7 +16,7 @@ watch(
 </script>
 
 <template>
-	<div class="flex flex-col items-center justify-center -z-2">
+	<div class="flex flex-col items-center justify-center">
 		<Lottie
 			ref="lottieRef"
 			width="15em"
