@@ -35,7 +35,7 @@ import { AutoGenerateImports, vue3Presets } from 'vite-auto-import-resolvers'
 import Compression from 'vite-plugin-compression'
 import EnvTypes from 'vite-plugin-env-types'
 
-import { viteMockServe as Mock } from 'vite-plugin-mock'
+// import { viteMockServe as Mock } from 'vite-plugin-mock'
 import Removelog from 'vite-plugin-removelog'
 import VueDevTools from 'vite-plugin-vue-devtools'
 
@@ -115,9 +115,9 @@ export default function () {
 		 * mock 服务
 		 * https://github.com/vbenjs/vite-plugin-mock
 		 */
-		Mock({
-			prodEnabled: env.VITE_APP_MOCK_IN_PRODUCTION,
-		}),
+		// Mock({
+		// 	prodEnabled: env.VITE_APP_MOCK_IN_PRODUCTION,
+		// }),
 		/**
 		 * 组件自动按需引入
 		 * https://github.com/antfu/unplugin-vue-components
