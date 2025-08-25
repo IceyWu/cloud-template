@@ -4,6 +4,7 @@ import i18n from './plugins/i18n'
 
 import pinia from './plugins/pinia'
 import routes from './plugins/router'
+import vueQuery from './plugins/vue-query'
 // https://unocss.dev/ 原子 css 库
 import '@unocss/reset/tailwind.css'
 import 'virtual:uno.css'
@@ -20,5 +21,6 @@ app.use(routes)
 app.use(MotionPlugin)
 app.use(i18n)
 app.use(pinia)
+vueQuery(app)
 
 app.mount('#app')
