@@ -44,7 +44,7 @@ const isEmpty = computed(() => {
 		</template>
 		<!-- nomore -->
 		<template v-if="listObj.finished && !isEmpty">
-			<p class="mt-5 f-c-c">
+			<p class="mt-5 flex items-center justify-center">
 到底啦~
 </p>
 		</template>

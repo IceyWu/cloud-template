@@ -1,12 +1,10 @@
 <template>
 	<div
-		font-sans
-		text="center gray-700 dark:gray-200"
-		class="flex flex-col h-screen w-full box-border"
+		class="flex flex-col h-screen w-full box-border font-sans text-center text-gray-700 dark:text-gray-200"
 	>
-		<div class="top-0 sticky z-999"><TheHeader /></div>
+		<div class="top-0 sticky z-[999]"><TheHeader /></div>
 
-		<div class="flex flex-col h-full w-full items-center box-border justify-center">
+		<div class="flex flex-col flex-1 w-full items-center box-border overflow-auto">
 			<router-view v-if="$route.meta.keepAlive" v-slot="{ Component }">
 				<transition name="move" mode="out-in">
 					<keep-alive>

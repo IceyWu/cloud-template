@@ -47,7 +47,7 @@ import { r } from "./shared/path";
 export default function () {
   const env = useEnv();
   const safelist =
-    "prose px-2 sm:px-0 md:prose-lg lg:prose-lg dark:prose-invert text-left w-screen prose-slate prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600";
+    "prose prose-gray px-4 sm:px-6 md:prose-lg lg:prose-lg dark:prose-invert text-left max-w-4xl mx-auto prose-img:rounded-xl prose-a:text-blue-600";
 
   const plugins: PluginOption[] = [
     /**

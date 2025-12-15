@@ -116,7 +116,7 @@ const totalVisits = computed(() => {
 </script>
 
 <template>
-	<div class="p-6 w-full h-full overflow-auto">
+	<div class="p-6 w-full min-h-full overflow-auto">
 		<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
 			<!-- Traffic Sources Card -->
 			<Card class="col-span-1">
@@ -134,8 +134,10 @@ const totalVisits = computed(() => {
 					</Badge>
 				</CardHeader>
 				<CardContent>
-					<!-- @vue-ignore -->
-					<VChart class="h-80 w-full" :option="pieOption" autoresize />
+					<div class="h-80 w-full">
+						<!-- @vue-ignore -->
+						<VChart class="h-full w-full" :option="pieOption" autoresize />
+					</div>
 				</CardContent>
 			</Card>
 
@@ -155,8 +157,10 @@ const totalVisits = computed(() => {
 					</Badge>
 				</CardHeader>
 				<CardContent>
-					<!-- @vue-ignore -->
-					<VChart class="h-80 w-full" :option="barOption" autoresize />
+					<div class="h-80 w-full">
+						<!-- @vue-ignore -->
+						<VChart class="h-full w-full" :option="barOption" autoresize />
+					</div>
 				</CardContent>
 			</Card>
 		</div>
