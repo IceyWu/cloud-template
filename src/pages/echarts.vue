@@ -1,40 +1,71 @@
 <script setup lang="ts">
 import type { EChartsOption } from "echarts";
-import { PieChart } from "echarts/charts";
-import { LegendComponent, TitleComponent, TooltipComponent } from "echarts/components";
+import { BarChart, PieChart } from "echarts/charts";
+import {
+  GridComponent,
+  LegendComponent,
+  TitleComponent,
+  TooltipComponent,
+} from "echarts/components";
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
-import { THEME_KEY } from "vue-echarts";
+import VChart, { THEME_KEY } from "vue-echarts";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 const isDark = useDark();
 
-use([CanvasRenderer, PieChart, TitleComponent, TooltipComponent, LegendComponent]);
+use([
+  CanvasRenderer,
+  PieChart,
+  BarChart,
+  TitleComponent,
+  TooltipComponent,
+  LegendComponent,
+  GridComponent,
+]);
 
 provide(
   THEME_KEY,
   computed(() => (isDark.value ? "dark" : ""))
 );
 
-const option = ref<EChartsOption>({
-  title: {
-    text: "Traffic Sources",
-    left: "center",
-  },
+const pieOption = ref<EChartsOption>({
   tooltip: {
     trigger: "item",
-    formatter: "{a} <br/>{b} : {c} ({d}%)",
+    formatter: "{b} : {c} ({d}%)",
   },
   legend: {
-    orient: "vertical",
-    left: "left",
+    orient: "horizontal",
+    bottom: "0",
     data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"],
   },
   series: [
     {
       name: "Traffic Sources",
       type: "pie",
-      radius: "55%",
-      center: ["50%", "60%"],
+      radius: ["40%", "70%"],
+      center: ["50%", "45%"],
+      avoidLabelOverlap: false,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: "transparent",
+        borderWidth: 2,
+      },
+      label: {
+        show: false,
+        position: "center",
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 20,
+          fontWeight: "bold",
+        },
+      },
+      labelLine: {
+        show: false,
+      },
       data: [
         { value: 335, name: "Direct" },
         { value: 310, name: "Email" },
@@ -42,28 +73,92 @@ const option = ref<EChartsOption>({
         { value: 135, name: "Video Ads" },
         { value: 1548, name: "Search Engines" },
       ],
-      emphasis: {
-        itemStyle: {
-          shadowBlur: 10,
-          shadowOffsetX: 0,
-          shadowColor: "rgba(0, 0, 0, 0.5)",
-        },
+    },
+  ],
+});
+
+const barOption = ref<EChartsOption>({
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow",
+    },
+  },
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true,
+  },
+  xAxis: {
+    type: "category",
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+  },
+  yAxis: {
+    type: "value",
+  },
+  series: [
+    {
+      name: "Visits",
+      type: "bar",
+      data: [120, 200, 150, 80, 70, 110, 130],
+      itemStyle: {
+        borderRadius: [6, 6, 0, 0],
       },
     },
   ],
 });
+
+const totalVisits = computed(() => {
+  const data = pieOption.value.series?.[0]?.data as { value: number }[];
+  return data?.reduce((sum, item) => sum + item.value, 0) || 0;
+});
 </script>
 
 <template>
-	<div>
-		<!-- @vue-ignore -->
-		<VChart class="chart" :option="option" autoresize />
+	<div class="p-6 w-full h-full overflow-auto">
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+			<!-- Traffic Sources Card -->
+			<Card class="col-span-1">
+				<CardHeader class="flex flex-row items-center justify-between pb-2">
+					<div>
+						<CardTitle class="text-lg font-semibold">
+							Traffic Sources
+						</CardTitle>
+						<CardDescription>
+							Website traffic distribution
+						</CardDescription>
+					</div>
+					<Badge variant="secondary">
+						{{ totalVisits.toLocaleString() }} total
+					</Badge>
+				</CardHeader>
+				<CardContent>
+					<!-- @vue-ignore -->
+					<VChart class="h-80 w-full" :option="pieOption" autoresize />
+				</CardContent>
+			</Card>
+
+			<!-- Weekly Visits Card -->
+			<Card class="col-span-1">
+				<CardHeader class="flex flex-row items-center justify-between pb-2">
+					<div>
+						<CardTitle class="text-lg font-semibold">
+							Weekly Visits
+						</CardTitle>
+						<CardDescription>
+							Daily visitor statistics
+						</CardDescription>
+					</div>
+					<Badge variant="outline">
+						This Week
+					</Badge>
+				</CardHeader>
+				<CardContent>
+					<!-- @vue-ignore -->
+					<VChart class="h-80 w-full" :option="barOption" autoresize />
+				</CardContent>
+			</Card>
+		</div>
 	</div>
 </template>
-
-<style>
-.chart {
-  width: 100vw;
-  height: calc(100vh - 82px);
-}
-</style>

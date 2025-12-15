@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.92.1",
+    "reka-ui": "^2.6.1",
     "vite-plugin-fake-server": "^2.2.2"
   },
   "devDependencies": {
