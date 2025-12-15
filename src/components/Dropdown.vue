@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { vOnClickOutside } from '@vueuse/components'
+import { vOnClickOutside } from "@vueuse/components";
 
-const visiable = ref(false)
+const visiable = ref(false);
 function dropdownHandler() {
-	visiable.value = false
+  visiable.value = false;
 }
 
-const { availableLocales, locale } = useI18n()
+const { availableLocales, locale } = useI18n();
 </script>
 
 <template>

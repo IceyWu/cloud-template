@@ -1,27 +1,27 @@
 <script setup lang="ts">
 interface Props {
-	disAbleInfinite?: boolean
+  disAbleInfinite?: boolean;
 }
 withDefaults(defineProps<Props>(), {
-	disAbleInfinite: false,
-})
-const emit = defineEmits(['onRefresh', 'onLoad'])
+  disAbleInfinite: false,
+});
+const emit = defineEmits(["onRefresh", "onLoad"]);
 const listObj = defineModel({
-	type: Object,
-	default: () => {
-		return {
-			loading: false,
-			finished: false,
-			list: [],
-		}
-	},
-})
+  type: Object,
+  default: () => {
+    return {
+      loading: false,
+      finished: false,
+      list: [],
+    };
+  },
+});
 function load() {
-	emit('onLoad')
+  emit("onLoad");
 }
 const isEmpty = computed(() => {
-	return listObj.value.list?.length === 0 && !listObj.value?.loading
-})
+  return listObj.value.list?.length === 0 && !listObj.value?.loading;
+});
 </script>
 
 <template>

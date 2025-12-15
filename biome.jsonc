@@ -1,0 +1,113 @@
+{
+  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
+  "extends": ["ultracite/core"],
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
+  "files": {
+    "includes": [
+      "src/**",
+      "mock/**",
+      "presets/**",
+      "!src/style",
+      "!src/assets"
+    ],
+    "ignoreUnknown": true
+  },
+  "linter": {
+    "rules": {
+      "suspicious": {
+        "noExplicitAny": "off",
+        "noEvolvingTypes": "off",
+        "noDuplicateProperties": "off",
+        "noDuplicateCustomProperties": "off",
+        "noEmptyBlockStatements": "off",
+        "useAwait": "warn"
+      },
+      "correctness": {
+        "noUnusedVariables": "off",
+        "noUndeclaredVariables": "off",
+        "noUnusedImports": "off",
+        "noUnusedFunctionParameters": "off",
+        "noUnusedPrivateClassMembers": "off"
+      },
+      "style": {
+        "useConsistentTypeDefinitions": "off",
+        "useFilenamingConvention": "off",
+        "useBlockStatements": "off",
+        "noNonNullAssertion": "warn",
+        "noParameterAssign": "off",
+        "useForOf": "off",
+        "noNestedTernary": "off",
+        "noExportedImports": "off",
+        "useConsistentMemberAccessibility": "off"
+      },
+      "nursery": {
+        "noIncrementDecrement": "off",
+        "useConsistentArrowReturn": "off",
+        "noEmptySource": "off",
+        "noShadow": "warn",
+        "noUnusedExpressions": "off"
+      },
+      "performance": {
+        "noBarrelFile": "off",
+        "useTopLevelRegex": "off"
+      },
+      "complexity": {
+        "noExcessiveCognitiveComplexity": "off",
+        "noForEach": "off"
+      }
+    }
+  },
+  "overrides": [
+    {
+      "includes": ["src/assets/**"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["src/style/**"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["src/components/ui/**"],
+      "linter": {
+        "enabled": false
+      },
+      "formatter": {
+        "enabled": false
+      }
+    },
+    {
+      "includes": ["**/*.vue"],
+      "linter": {
+        "rules": {
+          "nursery": {
+            "useVueHyphenatedAttributes": "off",
+            "useVueMultiWordComponentNames": "off",
+            "useVueValidVElse": "off",
+            "useVueValidVBind": "off",
+            "useVueValidVElseIf": "off"
+          }
+        }
+      }
+    }
+  ],
+  "formatter": {
+    "enabled": true,
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 100
+  }
+}

@@ -22,10 +22,8 @@
     "typecheck": "npx vue-tsc --noEmit",
     "preview:host": "vite preview --host",
     "preview:open": "vite preview --open",
-    "lint": "oxlint . && eslint .",
-    "lint:eslint": "eslint .",
-    "lint:oxlint": "oxlint .",
-    "lint:fix": "oxlint --fix . && eslint . --fix",
+    "lint": "ultracite check",
+    "lint:fix": "ultracite fix",
     "release": "plop --plopfile scripts/release.cjs",
     "auto:remove": "plop --plopfile scripts/remove.cjs",
     "auto:create": "plop --plopfile scripts/create.cjs",
@@ -34,14 +32,11 @@
     "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs"
   },
   "dependencies": {
-    "@rolldown/binding-win32-x64-msvc": "1.0.0-beta.33",
     "@tanstack/vue-query": "^5.92.1",
-    "qs": "^6.14.0",
-    "vite-plugin-fake-server": "^2.2.2",
-    "vue-hooks-pure": "^0.0.33"
+    "vite-plugin-fake-server": "^2.2.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^6.7.1",
+    "@biomejs/biome": "2.3.8",
     "@iceywu/utils": "^0.0.51",
     "@iconify-json/carbon": "^1.2.15",
     "@intlify/unplugin-vue-i18n": "^11.0.3",
@@ -49,7 +44,6 @@
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^24.10.4",
     "@types/nprogress": "^0.2.3",
-    "@unocss/eslint-config": "^66.5.10",
     "@unocss/reset": "^66.5.10",
     "@unocss/transformer-directives": "^66.5.10",
     "@unocss/transformer-variant-group": "^66.5.10",
@@ -62,7 +56,6 @@
     "@vueuse/motion": "^3.0.3",
     "axios": "^1.13.2",
     "browserslist": "^4.28.1",
-    "c8": "^10.1.3",
     "changelogen": "^0.6.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -71,9 +64,6 @@
     "defu": "^6.1.4",
     "echarts": "^6.0.0",
     "element-plus": "^2.12.0",
-    "eslint": "^9.39.2",
-    "eslint-plugin-format": "^1.1.0",
-    "eslint-plugin-oxlint": "^1.32.0",
     "fs-extra": "^11.3.2",
     "husky": "^9.1.7",
     "ityped": "^1.0.3",
@@ -86,11 +76,9 @@
     "lucide-vue-next": "^0.561.0",
     "markdown-it-prism": "^3.0.1",
     "nprogress": "^0.2.0",
-    "oxlint": "^1.32.0",
     "pinia": "^3.0.4",
     "pinia-plugin-persistedstate": "^4.7.1",
     "plop": "^4.0.4",
-    "prettier": "^3.7.4",
     "prism-theme-vars": "^0.2.5",
     "radix-vue": "^1.9.17",
     "simple-git": "^3.30.0",
@@ -99,10 +87,10 @@
     "taze": "^19.9.2",
     "terser": "^5.44.1",
     "typescript": "^5.9.3",
+    "ultracite": "6.4.1",
     "unocss": "^66.5.10",
     "unocss-preset-animations": "^1.3.0",
     "unocss-preset-shadcn": "^1.0.1",
-    "unocss-preset-theme": "^0.14.1",
     "unocss-preset-useful": "^1.0.1",
     "unplugin-auto-import": "^20.3.0",
     "unplugin-vue-components": "^30.0.0",
@@ -120,7 +108,6 @@
     "vue": "^3.5.25",
     "vue-echarts": "^8.0.1",
     "vue-i18n": "^11.2.2",
-    "vue-request": "2.0.4",
     "vue-router": "^4.6.4",
     "vue-toastification": "2.0.0-rc.5"
   },
@@ -143,8 +130,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": [
-      "oxlint --fix",
-      "eslint --fix"
+      "ultracite fix"
     ]
   },
   "browserslist": [

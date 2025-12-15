@@ -3,7 +3,7 @@
  */
 
 // 导出一个空对象作为占位符
-export const tools = {}
+export const tools = {};
 
 // 您可以在这里添加其他工具函数
 // export function someUtilFunction() {

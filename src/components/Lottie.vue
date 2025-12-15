@@ -1,62 +1,62 @@
 <script setup lang="ts">
-import lottie from 'lottie-web'
+import lottie from "lottie-web";
 
 const props = defineProps({
-	width: {
-		type: String,
-		default: '100px',
-	},
-	height: {
-		type: String,
-		default: '100px',
-	},
-	src: {
-		type: String,
-		default: 'https://assets10.lottiefiles.com/packages/lf20_dyiqnus5.json',
-	},
-	jsonData: {
-		type: Object,
-		default: () => null,
-	},
-	autoplay: {
-		type: Boolean,
-		default: true,
-	},
-	loop: {
-		type: Boolean,
-		default: false,
-	},
-})
+  width: {
+    type: String,
+    default: "100px",
+  },
+  height: {
+    type: String,
+    default: "100px",
+  },
+  src: {
+    type: String,
+    default: "https://assets10.lottiefiles.com/packages/lf20_dyiqnus5.json",
+  },
+  jsonData: {
+    type: Object,
+    default: () => null,
+  },
+  autoplay: {
+    type: Boolean,
+    default: true,
+  },
+  loop: {
+    type: Boolean,
+    default: false,
+  },
+});
 
-const animation = ref(null)
+const animation = ref(null);
 onMounted(() => {
-	initAnim()
-})
+  initAnim();
+});
 
 function initAnim(data?: Record<string, any>) {
-	if (animation.value) {
-		lottie.loadAnimation({
-			container: animation.value,
-			renderer: 'svg',
-			loop: props.loop,
-			autoplay: props.autoplay,
-			path: props.src,
-			// animationData只能加载本地json，优先级高于path
-			animationData: data || props.jsonData,
-		})
-	}
+  if (animation.value) {
+    lottie.loadAnimation({
+      container: animation.value,
+      renderer: "svg",
+      loop: props.loop,
+      autoplay: props.autoplay,
+      path: props.src,
+      // animationData只能加载本地json，优先级高于path
+      animationData: data || props.jsonData,
+    });
+  }
 }
 // 重新加载动画
 function reloadAnim(data?: Record<string, any>) {
-	if (animation.value) {
-		lottie.destroy()
-		initAnim(data)
-	}
+  if (animation.value) {
+    lottie.destroy();
+    initAnim(data);
+  }
 }
 // 暴露给外部的方法
 defineExpose({
-	reloadAnim,
-})
+  reloadAnim,
+});
 </script>
 
 <template>

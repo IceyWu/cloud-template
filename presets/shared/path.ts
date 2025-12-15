@@ -1,9 +1,9 @@
-import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const _dirname = dirname(fileURLToPath(import.meta.url))
+const _dirname = dirname(fileURLToPath(import.meta.url));
 
-const root = resolve(_dirname, '../../')
+const root = resolve(_dirname, "../../");
 
 /**
  * 路径重写
@@ -11,5 +11,5 @@ const root = resolve(_dirname, '../../')
  * @returns 基于根目录的相对路径
  */
 export function r(path: string) {
-	return resolve(root, path).replaceAll('\\', '/')
+  return resolve(root, path).replaceAll("\\", "/");
 }

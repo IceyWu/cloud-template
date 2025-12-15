@@ -1,21 +1,17 @@
 <!-- 演示如何使用 vue-query 的示例组件 -->
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useLoginMutation, useTestDataQuery } from '@/api/mock'
-import { useInvalidateQueries } from '@/composables/useApi'
+import { ref } from "vue";
+import { useLoginMutation, useTestDataQuery } from "@/api/mock";
+import { useInvalidateQueries } from "@/composables/useApi";
 
 // 查询参数
-const enabled = ref(true)
-const params = ref({ page: 1, size: 10 })
+const enabled = ref(true);
+const params = ref({ page: 1, size: 10 });
 
 // 使用 query hook
-const {
-  data,
-  error,
-  isLoading,
-  isFetching,
-  refetch,
-} = useTestDataQuery(params, { enabled: enabled.value })
+const { data, error, isLoading, isFetching, refetch } = useTestDataQuery(params, {
+  enabled: enabled.value,
+});
 
 // 使用 mutation hook
 const {
@@ -26,27 +22,27 @@ const {
   isSuccess,
   isError,
   isIdle,
-} = useLoginMutation()
+} = useLoginMutation();
 
 // 缓存操作
-const { invalidateAll, invalidateByKey } = useInvalidateQueries()
+const { invalidateAll, invalidateByKey } = useInvalidateQueries();
 
 function toggleEnabled() {
-  enabled.value = !enabled.value
+  enabled.value = !enabled.value;
 }
 
 function handleLogin() {
   login({
-    url: '/login',
+    url: "/login",
     data: {
-      username: 'test@example.com',
-      password: '123456',
+      username: "test@example.com",
+      password: "123456",
     },
-  })
+  });
 }
 
 function invalidateTestData() {
-  invalidateByKey(['testData'])
+  invalidateByKey(["testData"]);
 }
 </script>
 

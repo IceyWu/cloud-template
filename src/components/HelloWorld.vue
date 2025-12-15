@@ -1,78 +1,76 @@
 <script setup lang="ts">
-import { to } from '@iceywu/utils'
-import { Button } from '@/components/ui/button'
-import { testRequestGet } from '~/api/mock'
-import Lottie_Data_404 from '~/assets/lottie/4.json'
-import lottieNoData from '~/assets/lottie/6.json'
-import { useUserStore } from '~/stores/user'
+import { to } from "@iceywu/utils";
+import { Button } from "@/components/ui/button";
+import { testRequestGet } from "~/api/mock";
+import Lottie_Data_404 from "~/assets/lottie/4.json";
+import lottieNoData from "~/assets/lottie/6.json";
+import { useUserStore } from "~/stores/user";
 
-defineProps<{ msg: string }>()
+defineProps<{ msg: string }>();
 
-const hasTypeonFinished = ref(false)
-const titleRef = useTyped(['Start your Project in '], () => {
-	hasTypeonFinished.value = true
-})
+const hasTypeonFinished = ref(false);
+const titleRef = useTyped(["Start your Project in "], () => {
+  hasTypeonFinished.value = true;
+});
 
-const { t } = useI18n()
-const counter = createCounter()
+const { t } = useI18n();
+const counter = createCounter();
 
-const resData = ref<any>({})
+const resData = ref<any>({});
 
-const getDataLoading = ref(false)
+const getDataLoading = ref(false);
 async function getData() {
-	if (getDataLoading.value)
-return
-	getDataLoading.value = true
-	const params = {
-		id: 1,
-	}
-	// to is a function form (@iceywu/utils)
-	const [err, res] = await to(testRequestGet(params))
-	if (res) {
-		const {
-			code,
-			msg,
-			data = [],
-		} = (res as any) || {
-			code: 500,
-			msg: '接口请求失败',
-		}
-		if (code === 200) {
-			resData.value = data
-			toast.success('接口请求成功')
-		}
- else {
-			toast.error(msg)
-		}
-	}
-	if (err) {
-		toast.error('接口请求失败')
-	}
-	getDataLoading.value = false
+  if (getDataLoading.value) return;
+  getDataLoading.value = true;
+  const params = {
+    id: 1,
+  };
+  // to is a function form (@iceywu/utils)
+  const [err, res] = await to(testRequestGet(params));
+  if (res) {
+    const {
+      code,
+      msg,
+      data = [],
+    } = (res as any) || {
+      code: 500,
+      msg: "接口请求失败",
+    };
+    if (code === 200) {
+      resData.value = data;
+      toast.success("接口请求成功");
+    } else {
+      toast.error(msg);
+    }
+  }
+  if (err) {
+    toast.error("接口请求失败");
+  }
+  getDataLoading.value = false;
 }
-const router = useRouter()
+const router = useRouter();
 
 function go404Page() {
-	// 随机跳转path
-	const path = Math.random() > 0.5 ? '/404' : '/500'
-	router.push({
-		path,
-	})
+  // 随机跳转path
+  const path = Math.random() > 0.5 ? "/404" : "/500";
+  router.push({
+    path,
+  });
 }
 function handleLogin() {
-	useUserStore()
-		.loginByUsername({ username: 'admin', password: 'admin123' })
-		.then((res) => {})
+  useUserStore()
+    .loginByUsername({ username: "admin", password: "admin123" })
+    .then((res) => {});
 }
-const isShowBtns = ref<boolean>(false)
-const showText = ref(false)
+const isShowBtns = ref<boolean>(false);
+const showText = ref(false);
 function toggleShow() {
-	isShowBtns.value = !isShowBtns.value
-	showText.value = true
+  isShowBtns.value = !isShowBtns.value;
+  showText.value = true;
 }
 onMounted(() => {
-	consolePlus.log('welcome to use cloud-template')
-})
+  consolePlus.log("welcome to use cloud-template");
+});
 </script>
 
 <template>

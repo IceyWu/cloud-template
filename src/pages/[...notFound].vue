@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import Lottie_Data_404_1 from '~/assets/lottie/404/404-1.json'
-import Lottie_Data_404_2 from '~/assets/lottie/404/404-2.json'
+import Lottie_Data_404_1 from "~/assets/lottie/404/404-1.json";
+import Lottie_Data_404_2 from "~/assets/lottie/404/404-2.json";
 
-const typedRef = useTyped([' is not found!'])
+const typedRef = useTyped([" is not found!"]);
 
 const Lottie_Data_404 = computed(() => {
-	return Math.random() > 0.5 ? Lottie_Data_404_1 : Lottie_Data_404_2
-})
+  return Math.random() > 0.5 ? Lottie_Data_404_1 : Lottie_Data_404_2;
+});
 </script>
 
 <template>

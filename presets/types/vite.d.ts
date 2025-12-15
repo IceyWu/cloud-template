@@ -4,16 +4,16 @@
 /// <reference types="vite-plugin-use-modules/client" />
 /// <reference types="@intlify/vite-plugin-vue-i18n/client" />
 
-declare module '*.vue' {
-  import type { DefineComponent } from 'vue'
+declare module "*.vue" {
+  import type { DefineComponent } from "vue";
 
-  const component: DefineComponent<unknown, unknown, any>
-  export default component
+  const component: DefineComponent<unknown, unknown, any>;
+  export default component;
 }
 
-declare module '*.md' {
-  import type { ComponentOptions } from 'vue'
+declare module "*.md" {
+  import type { ComponentOptions } from "vue";
 
-  const Component: ComponentOptions
-  export default Component
+  const Component: ComponentOptions;
+  export default Component;
 }

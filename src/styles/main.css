@@ -1,4 +1,4 @@
-@import './md.css';
+@import "./md.css";
 
 html.dark {
   background: #191a23 !important;
@@ -53,22 +53,22 @@ html.dark ::-webkit-scrollbar-thumb {
 }
 
 @font-face {
-  font-family: 'SmileySansOblique';
-  src: url('@/assets/font/SmileySans-Oblique.ttf');
+  font-family: "SmileySansOblique";
+  src: url("@/assets/font/SmileySans-Oblique.ttf");
   font-weight: normal;
   font-style: normal;
 }
 
 body::before {
   opacity: 0.56;
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('@/assets/img/bg.png');
+  background-image: url("@/assets/img/bg.png");
   background-position: top 0 right 0;
   background-size: 100% auto;
   background-repeat: no-repeat;

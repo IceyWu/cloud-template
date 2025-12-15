@@ -1,113 +1,108 @@
 <script setup lang="ts">
-import { list, sleep, to } from '@iceywu/utils'
-import { breakpointsTailwind } from '@vueuse/core'
+import { list, sleep, to } from "@iceywu/utils";
+import { breakpointsTailwind } from "@vueuse/core";
+
 // imp
-const [DefineTemplate, ReuseTemplate] = createReusableTemplate()
+const [DefineTemplate, ReuseTemplate] = createReusableTemplate();
 interface BaseParamsProps {
-	page: number
-	page_size: number
+  page: number;
+  page_size: number;
 }
 interface ListItem {
-	id: number
-	title: string
-	cover: string
-	content: string
-	create_time: string
+  id: number;
+  title: string;
+  cover: string;
+  content: string;
+  create_time: string;
 }
 const listObj = ref({
-	list: [] as ListItem[],
-	loading: false,
-	finished: false,
-	refreshing: false,
-})
+  list: [] as ListItem[],
+  loading: false,
+  finished: false,
+  refreshing: false,
+});
 const baseParams = reactive<BaseParamsProps>({
-	page: 1,
-	page_size: 10,
-})
-const breakpoints = useBreakpoints(breakpointsTailwind)
+  page: 1,
+  page_size: 10,
+});
+const breakpoints = useBreakpoints(breakpointsTailwind);
 
 const cols = computed(() => {
-	if (breakpoints.xl.value)
-return 4
-	if (breakpoints.lg.value)
-return 3
-	if (breakpoints.md.value)
-return 2
-	return 1
-})
+  if (breakpoints.xl.value) return 4;
+  if (breakpoints.lg.value) return 3;
+  if (breakpoints.md.value) return 2;
+  return 1;
+});
 
 const parts = computed(() => {
-	const result = Array.from(
-		{ length: cols.value },
-		() => [] as typeof listObj.value.list,
-	)
-	listObj.value.list.forEach((item, i) => {
-		result[i % cols.value].push(item)
-	})
-	return result
-})
-function handleItemClick(data: any) {
-
+  const result = Array.from({ length: cols.value }, () => [] as typeof listObj.value.list);
+  listObj.value.list.forEach((item, i) => {
+    result[i % cols.value].push(item);
+  });
+  return result;
+});
+function handleItemClick(_data: any) {
+  // TODO: 处理点击事件
 }
 // 触底加载
-async function onLoad() {
-	if (listObj.value.loading || listObj.value.finished)
-return
-	baseParams.page++
-	getData()
+function onLoad() {
+  if (listObj.value.loading || listObj.value.finished) return;
+  baseParams.page++;
+  getData();
 }
-async function getAllMessages(params: BaseParamsProps): Promise<{ code: number, msg: string, data: ListItem[] }> {
-	await sleep(500)
-	const { page = 1, page_size = 10 } = params
-	const data = list(0, page_size - 1, (index) => {
-		const indexVal = page_size * (page - 1) + index + 1
-		const width = Math.floor(Math.random() * 200 + 200)
-		const height = Math.floor(Math.random() * 300 + 300)
-		return {
-			id: indexVal,
-			title: `消息标题${indexVal}`,
-			cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
-			content: `消息内容${indexVal}`,
-			create_time: '2021-08-01 12:00:00',
-		}
-	})
-	return {
-		code: 200,
-		msg: 'success',
-		data,
-	}
+async function getAllMessages(
+  params: BaseParamsProps
+): Promise<{ code: number; msg: string; data: ListItem[] }> {
+  await sleep(500);
+  const { page = 1, page_size = 10 } = params;
+  const data = list(0, page_size - 1, (index) => {
+    const indexVal = page_size * (page - 1) + index + 1;
+    const width = Math.floor(Math.random() * 200 + 200);
+    const height = Math.floor(Math.random() * 300 + 300);
+    return {
+      id: indexVal,
+      title: `消息标题${indexVal}`,
+      cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
+      content: `消息内容${indexVal}`,
+      create_time: "2021-08-01 12:00:00",
+    };
+  });
+  return {
+    code: 200,
+    msg: "success",
+    data,
+  };
 }
 
 async function getData() {
-	listObj.value.loading = true
-	const params = {
-		...toRaw(baseParams),
-	}
-	const [err, ReData] = await to(getAllMessages(params))
-	if (err) {
-		listObj.value.finished = true
-		listObj.value.loading = false
-		return
-	}
+  listObj.value.loading = true;
+  const params = {
+    ...toRaw(baseParams),
+  };
+  const [err, ReData] = await to(getAllMessages(params));
+  if (err) {
+    listObj.value.finished = true;
+    listObj.value.loading = false;
+    return;
+  }
 
-	const { code, data } = ReData || { code: 0, data: [] as ListItem[] }
-	if (code === 200 && data) {
-		const content = data || []
-		listObj.value.list.push(...content)
-	}
- else {
-		listObj.value.finished = true
-	}
-	// 加载状态停止;
-	listObj.value.loading = false
+  const { code, data } = ReData || { code: 0, data: [] as ListItem[] };
+  if (code === 200 && data) {
+    const content = data || [];
+    listObj.value.list.push(...content);
+  } else {
+    listObj.value.finished = true;
+  }
+  // 加载状态停止;
+  listObj.value.loading = false;
 }
 function initData() {
-	// 获取数据
-	getData()
+  // 获取数据
+  getData();
 }
 onMounted(() => {
-	initData()
-})
+  initData();
+});
 </script>
 
 <template>

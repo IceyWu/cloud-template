@@ -1,33 +1,33 @@
 <script setup lang="ts">
 import {
-	NavigationMenu,
-	NavigationMenuContent,
-	NavigationMenuItem,
-	NavigationMenuLink,
-	NavigationMenuList,
-	NavigationMenuTrigger,
-	navigationMenuTriggerStyle,
-} from '@/components/ui/navigation-menu'
-import { getRoutes } from '@/plugins/router'
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { getRoutes } from "@/plugins/router";
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 const routes = getRoutes()
-	.filter(r => !r.path.includes('notFound'))
-	.map((r) => {
-		let { path, name } = r
-		if (path === '/') {
-			return { path, name: 'Home' }
-		}
+  .filter((r) => !r.path.includes("notFound"))
+  .map((r) => {
+    let { path, name } = r;
+    if (path === "/") {
+      return { path, name: "Home" };
+    }
 
-		if (!name) {
-			name = path
-		}
-		const nameVal = name.toString().slice(1).replaceAll('/', ' · ')
-		return { path, name: nameVal }
-	})
+    if (!name) {
+      name = path;
+    }
+    const nameVal = name.toString().slice(1).replaceAll("/", " · ");
+    return { path, name: nameVal };
+  });
 
-const { availableLocales, locale } = useI18n()
+const { availableLocales, locale } = useI18n();
 </script>
 
 <template>
