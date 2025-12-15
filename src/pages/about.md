@@ -14,7 +14,7 @@
 - **Vue 3** - 使用 Composition API 和 `<script setup>` 语法
 - **TypeScript** - 完整的类型支持
 - **Vite** - 极速的开发体验
-- **UnoCSS** - 原子化 CSS 引擎
+- **Tailwind CSS v4** - 原子化 CSS 引擎
 - **shadcn-vue** - 精美的 UI 组件库
 - **文件路由** - 基于文件系统的路由
 - **布局系统** - 灵活的页面布局
@@ -29,7 +29,7 @@ const techStack = {
   framework: 'Vue 3',
   bundler: 'Vite',
   language: 'TypeScript',
-  styling: ['UnoCSS', 'shadcn-vue'],
+  styling: ['Tailwind CSS v4', 'shadcn-vue'],
   state: 'Pinia',
   router: 'Vue Router (File-based)',
   i18n: 'Vue I18n'

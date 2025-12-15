@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { Languages } from "lucide-vue-next";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -28,6 +29,7 @@ const routes = getRoutes()
   });
 
 const { availableLocales, locale } = useI18n();
+const isDark = useDark();
 </script>
 
 <template>
@@ -40,21 +42,20 @@ const { availableLocales, locale } = useI18n();
 			:enter="{ opacity: 1, y: 0, scale: 1 }"
 			:variants="{ custom: { scale: 2 } }"
 			:hovered="{ scale: 1.2 }"
-			text="2xl"
-			font-bold flex items-center
+			class="text-2xl font-bold flex items-center"
 		>
-			<div ml-0 h-auto w-40>
+			<div class="ml-0 h-auto w-40">
 				<Logo />
 			</div>
 		</div>
-		<div flex-1 />
-		<div class="flex h-full items-center z-99 space-x-5">
+		<div class="flex-1" />
+		<div class="flex h-full items-center z-[99] space-x-5">
 			<!-- router list -->
 			<NavigationMenu>
 				<NavigationMenuList>
 					<NavigationMenuItem>
 						<NavigationMenuTrigger>
-							<i class="i-carbon-ibm-watson-language-translator" />
+							<Languages class="w-4 h-4" />
 						</NavigationMenuTrigger>
 						<NavigationMenuContent>
 							<ul
@@ -92,7 +93,7 @@ v-for="availableLocale of availableLocales"
 			</NavigationMenu>
 
 			<a
-				icon-btn
+				class="text-[1.2em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-sky-400 hover:scale-[1.3] outline-none"
 				rel="noreferrer"
 				href="https://github.com/IceyWu"
 				target="_blank"
@@ -162,15 +163,14 @@ v-for="availableLocale of availableLocales"
 						/>
 					</rect></svg></a>
 
-			<div
-
-				i-carbon-sun
-				dark:i-carbon-moon
-				icon-btn
-				ml-5
+			<button
+				class="text-[1.2em] inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-sky-400 hover:scale-[1.3] outline-none ml-5"
 				title="Change Theme"
 				@click="toggleDark()"
-			/>
+			>
+				<svg v-if="isDark" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M15 2h2v5h-2zm0 23h2v5h-2zM2 15h5v2H2zm23 0h5v2h-2zM6.22 5.636l3.54 3.536l-1.414 1.414l-3.54-3.536zM23.654 23.17l3.54 3.536l-1.414 1.414l-3.54-3.536zM23.654 8.464l1.414-1.414l3.54 3.536l-1.414 1.414zM6.22 26l1.414-1.414l3.54 3.536l-1.414 1.414zM16 10a6 6 0 1 0 0 12a6 6 0 0 0 0-12z"/></svg>
+				<svg v-else xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M13.503 5.414a15.076 15.076 0 0 0 11.593 18.194a11.1 11.1 0 0 1-7.975 3.39c-.138 0-.278.005-.418 0a11.094 11.094 0 0 1-3.2-21.584M14.98 3a1 1 0 0 0-.175.016a13.096 13.096 0 0 0 1.825 25.981c.164.006.328 0 .49 0a13.07 13.07 0 0 0 10.703-5.555a1.01 1.01 0 0 0-.783-1.565A13.08 13.08 0 0 1 15.89 4.38A1.015 1.015 0 0 0 14.98 3"/></svg>
+			</button>
 		</div>
 	</div>
 </template>

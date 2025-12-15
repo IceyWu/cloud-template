@@ -3,7 +3,7 @@
   "style": "new-york",
   "typescript": true,
   "tailwind": {
-    "config": "uno.config.ts",
+    "config": "",
     "css": "src/assets/index.css",
     "baseColor": "neutral",
     "cssVariables": true,

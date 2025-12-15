@@ -32,9 +32,9 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 - 🍍 [State Management via Pinia](https://pinia.vuejs.org/)
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss) - the instant on-demand atomic CSS engine
+- 🎨 [Tailwind CSS v4](https://tailwindcss.com/) - Modern atomic CSS framework
 
-- 😃 [Use icons from any icon sets with classes](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 😃 [Lucide Icons](https://lucide.dev/) - Beautiful open-source icon library
 
 - 📥 [APIs auto importing](https://github.com/antfu/unplugin-auto-import) - use Composition API and others directly
 
@@ -56,7 +56,7 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 <!-- i18n -->
 - 🌐 [i18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme) - internationalization
 
-- 🎨 [shadcn/ui](https://www.shadcn-vue.com/) - Re-usable components built with Radix Vue, and Tailwind CSS.
+- 🎨 [shadcn-vue](https://www.shadcn-vue.com/) - Re-usable components built with Reka UI and Tailwind CSS
 
 <br>
 

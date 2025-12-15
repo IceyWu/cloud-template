@@ -11,7 +11,7 @@ const Lottie_Data_404 = computed(() => {
 
 <template>
 	<div class="text-center flex flex-wrap h-screen items-center justify-around">
-		<div class="desc font-blod">
+		<div class="desc font-bold">
 			<div class="code text-7xl">
 404
 </div>
@@ -20,15 +20,13 @@ The Page
 </div>
 			<RouterLink :to="safeResolve('/')">
 				<button
-					class="text-lg px-5 py-2 rounded bg-light-800 transition"
-					hover="shadow-md"
-					dark="text-black"
+					class="text-lg px-5 py-2 rounded bg-gray-200 transition hover:shadow-md dark:text-black"
 				>
 					Go Home
 				</button>
 			</RouterLink>
 		</div>
-		<div flex-1>
+		<div class="flex-1">
 			<Lottie loop width="25em" height="25em" :json-data="Lottie_Data_404" />
 		</div>
 	</div>

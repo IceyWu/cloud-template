@@ -1,20 +1,16 @@
-import { MotionPlugin } from "@vueuse/motion"; // unocss reset
+import { MotionPlugin } from "@vueuse/motion";
 import App from "./App.vue";
 import i18n from "./plugins/i18n";
 
 import pinia from "./plugins/pinia";
 import routes from "./plugins/router";
 import vueQuery from "./plugins/vue-query";
-// https://unocss.dev/ 原子 css 库
-import "@unocss/reset/tailwind.css";
-import "virtual:uno.css";
-import "virtual:unocss-devtools";
+
+// Tailwind CSS v4
+import "./assets/index.css";
 
 // 你自定义的 css
 import "./styles/main.css";
-
-// shadcn-vue
-import "./assets/index.css";
 
 const app = createApp(App);
 app.use(routes);

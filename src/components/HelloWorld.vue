@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { to } from "@iceywu/utils";
+import { AlertTriangle, ArrowRight, Database, Github, LogIn, Plus } from "lucide-vue-next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -89,19 +90,19 @@ onMounted(() => {
 				<CardContent class="space-y-4">
 					<div class="grid grid-cols-2 gap-3">
 						<Button variant="default" class="w-full" @click="handleLogin">
-							<i class="i-carbon-login mr-2" />
+							<LogIn class="w-4 h-4 mr-2" />
 							登录
 						</Button>
 						<Button variant="secondary" class="w-full" :disabled="getDataLoading" @click="getData">
-							<i class="i-carbon-data-base mr-2" />
+							<Database class="w-4 h-4 mr-2" />
 							数据获取
 						</Button>
 						<Button variant="outline" class="w-full" @click="counter.inc()">
-							<i class="i-carbon-add mr-2" />
+							<Plus class="w-4 h-4 mr-2" />
 							Pinia {{ counter.count }}
 						</Button>
 						<Button variant="destructive" class="w-full" @click="go404Page">
-							<i class="i-carbon-warning mr-2" />
+							<AlertTriangle class="w-4 h-4 mr-2" />
 							404
 						</Button>
 					</div>
@@ -136,10 +137,10 @@ onMounted(() => {
 		<div v-show="hasTypeonFinished" class="flex gap-3">
 			<Button size="lg" class="group" @click="toggleShow">
 				{{ isShowBtns ? '返回首页' : '开始体验' }}
-				<i class="i-carbon-arrow-right ml-2 transition-transform group-hover:translate-x-1" />
+				<ArrowRight class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
 			</Button>
 			<Button size="lg" variant="outline" as="a" href="https://github.com/IceyWu/cloud-template" target="_blank">
-				<i class="i-carbon-logo-github mr-2" />
+				<Github class="w-4 h-4 mr-2" />
 				GitHub
 			</Button>
 		</div>

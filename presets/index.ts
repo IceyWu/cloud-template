@@ -1,11 +1,11 @@
 // 内置插件
 
 import I18N from "@intlify/unplugin-vue-i18n/vite";
+import tailwindcss from "@tailwindcss/vite";
 import Legacy from "@vitejs/plugin-legacy";
 import Vue from "@vitejs/plugin-vue";
 import Jsx from "@vitejs/plugin-vue-jsx";
 import Prism from "markdown-it-prism";
-import UnoCSS from "unocss/vite";
 import AutoImport from "unplugin-auto-import/vite";
 import {
   AntDesignVueResolver,
@@ -188,12 +188,10 @@ export default function () {
      */
     Restart(),
     /**
-     * css 原子引擎
-     * https://github.com/unocss/unocss
+     * Tailwind CSS v4
+     * https://tailwindcss.com/docs/v4-beta
      */
-    UnoCSS({
-      safelist: env.VITE_APP_MARKDOWN ? safelist.split(" ") : undefined,
-    }),
+    tailwindcss(),
   ];
   /**
    * 开发面板

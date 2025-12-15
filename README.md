@@ -35,9 +35,9 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 - 🍍 [通过 Pinia 进行状态管理](https://pinia.vuejs.org/)
 
-- 🎨 [UnoCSS](https://github.com/antfu/unocss) - 即时按需原子化 CSS 引擎
+- 🎨 [Tailwind CSS v4](https://tailwindcss.com/) - 现代化原子 CSS 框架
 
-- 😃 [通过类名使用任意图标集的图标](https://github.com/antfu/unocss/tree/main/packages/preset-icons)
+- 😃 [Lucide Icons](https://lucide.dev/) - 精美的开源图标库
 
 - 📥 [API 自动导入](https://github.com/antfu/unplugin-auto-import) - 直接使用 Composition API 等
 
@@ -57,7 +57,7 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 - 🌐 [i18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme) - 国际化支持
 
-- 🎨 [shadcn/ui](https://www.shadcn-vue.com/) - 基于 Radix Vue 和 Tailwind CSS 构建的可复用组件
+- 🎨 [shadcn-vue](https://www.shadcn-vue.com/) - 基于 Reka UI 和 Tailwind CSS 构建的可复用组件
 
 <br>
 
@@ -179,7 +179,7 @@ cloud-template/
 │   └── main.ts            # 入口文件
 ├── .oxlintrc.json         # oxlint 配置
 ├── eslint.config.js       # ESLint 配置
-├── uno.config.ts          # UnoCSS 配置
+├── components.json        # shadcn-vue 配置
 └── vite.config.ts         # Vite 配置
 ```
 
