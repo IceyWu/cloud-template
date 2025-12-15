@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import { list, sleep, to } from "@iceywu/utils";
 import { breakpointsTailwind } from "@vueuse/core";
+import { ArrowRight, Calendar } from "lucide-vue-next";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 
-// imp
 const [DefineTemplate, ReuseTemplate] = createReusableTemplate();
+const [DefineSkeletonTemplate, ReuseSkeletonTemplate] = createReusableTemplate();
+
 interface BaseParamsProps {
   page: number;
   page_size: number;
@@ -41,15 +47,17 @@ const parts = computed(() => {
   });
   return result;
 });
-function handleItemClick(_data: any) {
-  // TODO: 处理点击事件
+
+function handleItemClick(_data: ListItem) {
+  toast.info(`点击了: ${_data.title}`);
 }
-// 触底加载
+
 function onLoad() {
   if (listObj.value.loading || listObj.value.finished) return;
   baseParams.page++;
   getData();
 }
+
 async function getAllMessages(
   params: BaseParamsProps
 ): Promise<{ code: number; msg: string; data: ListItem[] }> {
@@ -61,111 +69,103 @@ async function getAllMessages(
     const height = Math.floor(Math.random() * 300 + 300);
     return {
       id: indexVal,
-      title: `消息标题${indexVal}`,
+      title: `消息标题 ${indexVal}`,
       cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
-      content: `消息内容${indexVal}`,
-      create_time: "2021-08-01 12:00:00",
+      content: `这是一段示例内容，用于展示卡片的描述信息。内容编号 ${indexVal}`,
+      create_time: "2024-12-15",
     };
   });
-  return {
-    code: 200,
-    msg: "success",
-    data,
-  };
+  return { code: 200, msg: "success", data };
 }
 
 async function getData() {
   listObj.value.loading = true;
-  const params = {
-    ...toRaw(baseParams),
-  };
+  const params = { ...toRaw(baseParams) };
   const [err, ReData] = await to(getAllMessages(params));
   if (err) {
     listObj.value.finished = true;
     listObj.value.loading = false;
     return;
   }
-
   const { code, data } = ReData || { code: 0, data: [] as ListItem[] };
   if (code === 200 && data) {
-    const content = data || [];
-    listObj.value.list.push(...content);
+    listObj.value.list.push(...data);
   } else {
     listObj.value.finished = true;
   }
-  // 加载状态停止;
   listObj.value.loading = false;
 }
-function initData() {
-  // 获取数据
-  getData();
-}
+
 onMounted(() => {
-  initData();
+  getData();
 });
 </script>
 
 <template>
+	<DefineSkeletonTemplate>
+		<Card class="overflow-hidden">
+			<Skeleton class="h-48 w-full rounded-none" />
+			<CardHeader class="space-y-2">
+				<Skeleton class="h-4 w-16" />
+				<Skeleton class="h-5 w-3/4" />
+			</CardHeader>
+			<CardContent>
+				<Skeleton class="h-4 w-full" />
+				<Skeleton class="mt-2 h-4 w-2/3" />
+			</CardContent>
+			<CardFooter>
+				<Skeleton class="h-9 w-28" />
+			</CardFooter>
+		</Card>
+	</DefineSkeletonTemplate>
+
 	<DefineTemplate v-slot="{ data }">
-		<div
-			class="text-gray-700 rounded-xl bg-white flex flex-row w-full shadow-md relative bg-clip-border"
-		>
-			<div
-				class="text-gray-700 m-0 rounded-xl rounded-r-none bg-white shrink-0 max-h-80 w-2/5 relative overflow-hidden bg-clip-border"
-			>
+		<Card class="group overflow-hidden transition-all duration-300 hover:shadow-lg dark:hover:shadow-primary/5">
+			<div class="relative h-48 overflow-hidden">
 				<img
 					:src="data.cover"
-					alt="card-image"
-					class="h-full w-full object-cover"
+					:alt="data.title"
+					class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
 				>
+				<Badge class="absolute top-3 left-3" variant="secondary">
+					#{{ data.id }}
+				</Badge>
 			</div>
-			<div class="p-6 w-full">
-				<h6
-					class="text-base text-gray-700 leading-relaxed tracking-normal font-sans font-semibold mb-4 block uppercase antialiased"
-				>
-					startups
-				</h6>
-				<h4
-					class="text-blue-gray-900 text-2xl leading-snug tracking-normal font-sans font-semibold mb-2 block antialiased"
-				>
+			<CardHeader class="pb-2">
+				<div class="flex items-center gap-2 text-xs text-muted-foreground">
+					<Calendar class="h-3 w-3" />
+					<span>{{ data.create_time }}</span>
+				</div>
+				<h3 class="text-lg font-semibold leading-tight line-clamp-1">
 					{{ data.title }}
-				</h4>
-				<p
-					class="text-base text-gray-700 leading-relaxed font-normal font-sans mb-8 block antialiased"
-				>
+				</h3>
+			</CardHeader>
+			<CardContent>
+				<p class="text-sm text-muted-foreground line-clamp-2">
 					{{ data.content }}
 				</p>
-				<a href="#" class="inline-block"><button
-						class="text-xs text-gray-900 font-bold font-sans px-6 py-3 text-center align-middle rounded-lg flex select-none uppercase transition-all items-center active:bg-gray-900/20 hover:bg-gray-900/10 disabled:opacity-50 disabled:pointer-events-none disabled:shadow-none space-x-2 space-y-2"
-						type="button"
-						@click="handleItemClick(data)"
-					>
-						Learn More<svg
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke="currentColor"
-							stroke-width="2"
-							class="h-4 w-4"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-							/>
-						</svg></button></a>
-			</div>
-		</div>
+			</CardContent>
+			<CardFooter>
+				<Button variant="ghost" class="group/btn" @click="handleItemClick(data)">
+					查看详情
+					<ArrowRight class="ml-1 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
+				</Button>
+			</CardFooter>
+		</Card>
 	</DefineTemplate>
-	<div class="p-5 h-[90vh] w-[95%] box-border">
+
+	<div class="p-6 w-full min-h-[90vh]">
 		<ScrollList v-model="listObj" @on-load="onLoad">
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-				<div v-for="(items, idx) of parts" :key="idx" class="flex flex-col space-y-4">
-					<ReuseTemplate v-for="data of items" :key="data.id" :data />
-				</div>
+				<template v-if="listObj.list.length === 0 && listObj.loading">
+					<ReuseSkeletonTemplate v-for="i in 8" :key="i" />
+				</template>
+				<template v-else>
+					<div v-for="(items, idx) of parts" :key="idx" class="flex flex-col gap-6">
+						<ReuseTemplate v-for="item of items" :key="item.id" :data="item" />
+					</div>
+				</template>
 			</div>
 		</ScrollList>
 	</div>
 </template>
-
-<style lang="less" scoped></style>
