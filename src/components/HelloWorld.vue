@@ -33,7 +33,7 @@ return
 			code,
 			msg,
 			data = [],
-		} = res || {
+		} = (res as any) || {
 			code: 500,
 			msg: '接口请求失败',
 		}
@@ -96,7 +96,7 @@ onMounted(() => {
 					<span ref="titleRef" class="block" />
 					<span
 						v-if="hasTypeonFinished"
-						class="bg-gradient-to-tl text-transparent mt-3 block from-blue-600 to-violet-600 bg-clip-text"
+						class="text-transparent mt-3 block from-blue-600 to-violet-600 bg-gradient-to-tl bg-clip-text"
 						>minutes!</span
 					>
 				</h1>

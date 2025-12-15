@@ -178,7 +178,7 @@ export default function () {
 		 * https://github.com/vbenjs/vite-plugin-compression
 		 */
 		Compression({
-			algorithm: env.VITE_APP_COMPRESSINON_ALGORITHM,
+			algorithm: env.VITE_APP_COMPRESSINON_ALGORITHM as 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw',
 		}),
 		/**
 		 * 别名插件 (内置)

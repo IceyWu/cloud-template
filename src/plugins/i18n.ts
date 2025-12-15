@@ -12,7 +12,7 @@ const languages = Object.entries(yamls).map(([key, value]) => {
 	if (key.includes('/')) {
 		key = key.split('/')[0]
 	}
-	return { [key]: value.default }
+	return { [key]: (value as { default: unknown }).default }
 })
 
 const messages = defu({}, ...languages)
@@ -30,6 +30,12 @@ export const i18n = createI18n({
 
 // 同步本地 localStorage 和 i18n
 // https://vueuse.org/shared/syncRef/#syncref
-syncRef(storageLocale, i18n.global.locale)
+syncRef(storageLocale, i18n.global.locale, {
+	direction: 'both',
+	transform: {
+		ltr: left => left ?? '简体中文',
+		rtl: right => right,
+	},
+})
 
 export default i18n

@@ -16,7 +16,7 @@ export const useUserStore = defineStore(
 	() => {
 		const username = ref('')
 		const userInfo = ref({})
-		const roles = ref([])
+		const roles = ref<string[]>([])
 
 		const SET_USERNAME = (name: string) => {
 			username.value = name
@@ -34,7 +34,7 @@ export const useUserStore = defineStore(
 			return new Promise<UserResult>((resolve, reject) => {
 				getLogin(dataT)
 					.then((res) => {
-						const { code, data } = res
+						const { code, data } = res as any
 						if (code === 200) {
 							const { admin, token } = data
 							const TokenInfo: DataInfo<number> = {
@@ -66,10 +66,10 @@ export const useUserStore = defineStore(
 		const handRefreshToken = (data: any) => {
 			return new Promise<any>((resolve, reject) => {
 				refreshTokenApi(data)
-					.then((data) => {
-						if (data) {
-							setToken(data.data)
-							resolve(data)
+					.then((res) => {
+						if (res) {
+							setToken((res as any).data)
+							resolve(res)
 						}
 					})
 					.catch((error) => {

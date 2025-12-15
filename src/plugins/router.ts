@@ -18,7 +18,7 @@ declare module 'vue-router' {
 
 export const router = createRouter({
 	history: createWebHashHistory(),
-	routes: setupLayouts(fileRoutes),
+	routes: setupLayouts([...fileRoutes]),
 })
 
 export const getRoutes = createGetRoutes(router)

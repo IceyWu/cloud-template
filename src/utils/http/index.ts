@@ -36,7 +36,7 @@ class PureHttp {
 	}
 
 	/** token过期后，暂存待执行的请求 */
-	private static requests = []
+	private static requests: Array<(token: string) => void> = []
 
 	/** 防止重复刷新token */
 	private static isRefreshing = false
@@ -110,7 +110,7 @@ class PureHttp {
 							const data = getToken(roleName)
 							if (data) {
 								const now = new Date().getTime()
-								const expired = Number.parseInt(data.expires) - now <= 0
+								const expired = data.expires - now <= 0
 
 								if (expired) {
 									if (!PureHttp.isRefreshing) {

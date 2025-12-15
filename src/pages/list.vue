@@ -7,8 +7,15 @@ interface BaseParamsProps {
 	page: number
 	page_size: number
 }
+interface ListItem {
+	id: number
+	title: string
+	cover: string
+	content: string
+	create_time: string
+}
 const listObj = ref({
-	list: [],
+	list: [] as ListItem[],
 	loading: false,
 	finished: false,
 	refreshing: false,
@@ -49,7 +56,7 @@ return
 	baseParams.page++
 	getData()
 }
-async function getAllMessages(params: BaseParamsProps): any {
+async function getAllMessages(params: BaseParamsProps): Promise<{ code: number, msg: string, data: ListItem[] }> {
 	await sleep(500)
 	const { page = 1, page_size = 10 } = params
 	const data = list(0, page_size - 1, (index) => {
@@ -83,7 +90,7 @@ async function getData() {
 		return
 	}
 
-	const { code, data } = ReData || {}
+	const { code, data } = ReData || { code: 0, data: [] as ListItem[] }
 	if (code === 200 && data) {
 		const content = data || []
 		listObj.value.list.push(...content)
