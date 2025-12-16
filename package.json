@@ -29,7 +29,8 @@
     "auto:create": "plop --plopfile scripts/create.cjs",
     "build:debug": "cross-env NODE_ENV=debug vite build",
     "safe:init": "plop --plopfile scripts/safe-init.cjs",
-    "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs"
+    "deps:fresh": "plop --plopfile scripts/deps-fresh.cjs",
+    "syn_rpo": "npx template-syncer --repo https://github.com/IceyWu/cloud-template.git --branch main"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.92.1",
