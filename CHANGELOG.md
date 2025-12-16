@@ -1,4 +1,32 @@
 
+## v0.1.2
+
+[compare changes](https://github.com/IceyWu/cloud-template/compare/v0.1.1...v0.1.2)
+
+### 🚀 Enhancements
+
+- 集成 Vue Query，重构 API 调用方式并添加示例组件 ([1fef544](https://github.com/IceyWu/cloud-template/commit/1fef544))
+- **echarts:** Import VChart component from vue-echarts ([f32d1cd](https://github.com/IceyWu/cloud-template/commit/f32d1cd))
+- **ui:** Add avatar, hover-card, scroll-area, skeleton, and tooltip components ([40295f8](https://github.com/IceyWu/cloud-template/commit/40295f8))
+- **viewport-scaling:** Add responsive viewport scaling composable and PostCSS configuration ([2c28690](https://github.com/IceyWu/cloud-template/commit/2c28690))
+
+### 🏡 Chore
+
+- Vite to 7.0.0 ([e61f049](https://github.com/IceyWu/cloud-template/commit/e61f049))
+- Update deps ([f0095e9](https://github.com/IceyWu/cloud-template/commit/f0095e9))
+- Upgrade dependencies and remove bun lockfile ([59cdf08](https://github.com/IceyWu/cloud-template/commit/59cdf08))
+- Migrate from ESLint/Prettier/Oxlint to Biome ([40944da](https://github.com/IceyWu/cloud-template/commit/40944da))
+- Migrate from UnoCSS to Tailwind CSS v4 ([17d1c3a](https://github.com/IceyWu/cloud-template/commit/17d1c3a))
+- **scripts:** Add template synchronization script ([75b5f90](https://github.com/IceyWu/cloud-template/commit/75b5f90))
+
+### 🎨 Styles
+
+- Refactor Tailwind CSS classes and improve layout consistency ([68c9347](https://github.com/IceyWu/cloud-template/commit/68c9347))
+
+### ❤️ Contributors
+
+- IceyWu ([@Life-Palette](https://github.com/Life-Palette))
+
 ## v0.1.1
 
 [compare changes](https://github.com/IceyWu/cloud-template/compare/v0.1.0...v0.1.1)
