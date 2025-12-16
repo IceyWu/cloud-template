@@ -1,5 +1,6 @@
 dist
 .nitro
+.kiro
 .output
 env.d.ts
 node_modules

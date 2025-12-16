@@ -61,6 +61,7 @@ export default function () {
      */
     Legacy({
       targets: defaultBuildTargets,
+      modernPolyfills: true,
     }),
     /**
      * 智能启动 lightningcss

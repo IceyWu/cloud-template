@@ -75,3 +75,17 @@ body::before {
   pointer-events: none;
   z-index: -1;
 }
+
+/*
+* 视口缩放适配
+* 使用 CSS transform 实现缩放，绕过浏览器最小字体限制（如360浏览器的12px限制）
+*/
+#app {
+  transform-origin: top left;
+  overflow: hidden;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}

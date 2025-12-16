@@ -1,3 +1,10 @@
+// Polyfill for ResizeObserver (360浏览器等旧浏览器)
+import ResizeObserver from "resize-observer-polyfill";
+
+if (!window.ResizeObserver) {
+  window.ResizeObserver = ResizeObserver;
+}
+
 import { MotionPlugin } from "@vueuse/motion";
 import App from "./App.vue";
 import i18n from "./plugins/i18n";
