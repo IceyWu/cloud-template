@@ -40,9 +40,11 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 - 🦾 [Api](./src/api) - a simple wrapper for [axios]
 
-- 🔍 [oxlint](https://oxc.rs/) - Ultra-fast JavaScript/TypeScript linter written in Rust
+- 🔍 [Ultracite](https://github.com/haydenbleasel/ultracite) + [Biome](https://biomejs.dev/) - Ultra-fast linter and formatter written in Rust
 
 - 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library
+
+- 🔄 [TanStack Query](https://tanstack.com/query) - Powerful async state management
 <!-- - 🚀  自动版本更新并生成 `CHANGELOG` -->
 - 🚀 auto version update and generate `CHANGELOG`
 <!-- Lottie -->
@@ -64,28 +66,21 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 ### Build Tool
 
-- **[Rolldown-Vite](https://rolldown.rs/)** - Next-generation bundler powered by Rust, offering significantly faster build times and hot reload
+- **[Vite 7](https://vite.dev/)** - Next-generation frontend build tool with blazing fast development experience
 
 ### Linting
 
-- **[oxlint](https://oxc.rs/)** - Ultra-fast JavaScript/TypeScript linter written in Rust
-- **[ESLint](https://eslint.org/)** - Traditional linting with `eslint-plugin-oxlint` for seamless integration
-- **Dual Linting Strategy**: oxlint for speed + ESLint for comprehensive rules
+- **[Ultracite](https://github.com/haydenbleasel/ultracite)** - Modern linting and formatting tool based on Biome
+- **[Biome](https://biomejs.dev/)** - Ultra-fast linter and formatter written in Rust
 
 ### Scripts
 
 ```bash
-# Run both linters
-bun run lint
-
-# Run only oxlint (fastest)
-bun run lint:oxlint
-
-# Run only ESLint
-bun run lint:eslint
+# Run linting
+pnpm lint
 
 # Auto-fix issues
-bun run lint:fix
+pnpm lint:fix
 ```
 
 <br>

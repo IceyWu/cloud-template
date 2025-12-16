@@ -43,9 +43,11 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 - 🦾 [API 封装](./src/api) - 基于 [axios] 的简单封装
 
-- 🔍 [oxlint](https://oxc.rs/) - 基于 Rust 的超快速 JavaScript/TypeScript 代码检查工具
+- 🔍 [Ultracite](https://github.com/haydenbleasel/ultracite) + [Biome](https://biomejs.dev/) - 基于 Rust 的超快速代码检查和格式化工具
 
 - 🎨 [Element Plus](https://element-plus.org/) - Vue 3.0 UI 组件库
+
+- 🔄 [TanStack Query](https://tanstack.com/query) - 强大的异步状态管理
 
 - 🚀 自动版本更新并生成 `CHANGELOG`
 
@@ -65,28 +67,21 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 ### 构建工具
 
-- **[Rolldown-Vite](https://rolldown.rs/)** - 基于 Rust 的下一代打包工具，提供显著更快的构建时间和热重载
+- **[Vite 7](https://vite.dev/)** - 下一代前端构建工具，极速开发体验
 
 ### 代码检查
 
-- **[oxlint](https://oxc.rs/)** - 基于 Rust 编写的超快速 JavaScript/TypeScript 代码检查工具
-- **[ESLint](https://eslint.org/)** - 传统代码检查，配合 `eslint-plugin-oxlint` 实现无缝集成
-- **双重检查策略**: oxlint 提供极速检查 + ESLint 提供全面规则覆盖
+- **[Ultracite](https://github.com/haydenbleasel/ultracite)** - 基于 Biome 的现代化代码检查和格式化工具
+- **[Biome](https://biomejs.dev/)** - 基于 Rust 的超快速代码检查和格式化工具
 
 ### 脚本命令
 
 ```bash
-# 运行所有代码检查
-bun run lint
-
-# 仅运行 oxlint（最快）
-bun run lint:oxlint
-
-# 仅运行 ESLint
-bun run lint:eslint
+# 运行代码检查
+pnpm lint
 
 # 自动修复问题
-bun run lint:fix
+pnpm lint:fix
 ```
 
 <br>
@@ -140,11 +135,8 @@ pnpm lint
 
 # 自动修复代码问题
 pnpm lint:fix
-```
 
-### 类型检查
-
-```bash
+# 类型检查
 pnpm typecheck
 ```
 
@@ -177,9 +169,9 @@ cloud-template/
 │   ├── styles/            # 样式
 │   ├── utils/             # 工具函数
 │   └── main.ts            # 入口文件
-├── .oxlintrc.json         # oxlint 配置
-├── eslint.config.js       # ESLint 配置
+├── biome.jsonc            # Biome 配置
 ├── components.json        # shadcn-vue 配置
+├── postcss.config.js      # PostCSS 配置
 └── vite.config.ts         # Vite 配置
 ```
 
@@ -189,20 +181,19 @@ cloud-template/
 
 ### 代码检查配置
 
-项目使用双重代码检查策略：
+项目使用 **Ultracite** + **Biome** 进行代码检查和格式化：
 
-1. **oxlint**: 提供极速的基础代码检查
-2. **ESLint**: 提供更全面的代码规范检查
-
-通过 `eslint-plugin-oxlint` 自动禁用重复规则，避免冲突。
+- 配置文件：`biome.jsonc`
+- 基于 Rust 实现，提供极速的代码检查体验
+- 集成代码格式化和 lint 功能
 
 ### 构建工具
 
-使用 `rolldown-vite` 替代传统 Vite，基于 Rust 实现，提供：
+使用 **Vite 7** 作为构建工具，提供：
 
-- 更快的冷启动时间
-- 更快的热重载
-- 更快的生产构建
+- 极速的冷启动时间
+- 快速的热模块替换 (HMR)
+- 优化的生产构建
 
 <br>
 
