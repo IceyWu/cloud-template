@@ -27,9 +27,9 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 ## 🐳 特性
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
+- ⚡️ [Vue 3](https://github.com/vuejs/core), [Rolldown-Vite](https://rolldown.rs/), [pnpm](https://pnpm.io/)
 
-<!-- - 🚀 [Rolldown-Vite](https://rolldown.rs/) - 基于 Rust 的下一代构建工具，极致性能 -->
+- 🚀 [Rolldown-Vite](https://rolldown.rs/) - 基于 Rust 的下一代构建工具，极致性能
 
 - 📦 [组件自动导入](./src/components)
 
@@ -67,7 +67,7 @@ cloud-template <b>vite + vue3 + ts</b><sup><em>(极速)</em></sup><br>
 
 ### 构建工具
 
-- **[Vite 7](https://vite.dev/)** - 下一代前端构建工具，极速开发体验
+- **[Rolldown-Vite](https://rolldown.rs/)** - 基于 Rust 的下一代打包工具，提供显著更快的构建时间和热重载
 
 ### 代码检查
 
@@ -189,11 +189,11 @@ cloud-template/
 
 ### 构建工具
 
-使用 **Vite 7** 作为构建工具，提供：
+使用 **Rolldown-Vite** 替代传统 Vite，基于 Rust 实现，提供：
 
-- 极速的冷启动时间
-- 快速的热模块替换 (HMR)
-- 优化的生产构建
+- 更快的冷启动时间
+- 更快的热重载
+- 更快的生产构建
 
 <br>
 

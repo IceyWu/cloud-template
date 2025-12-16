@@ -24,9 +24,9 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 ## 🐳Features
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Vite](https://github.com/vitejs/vite), [pnpm](https://pnpm.io/)
+- ⚡️ [Vue 3](https://github.com/vuejs/core), [Rolldown-Vite](https://rolldown.rs/), [pnpm](https://pnpm.io/)
 
-<!-- - � [Rolldown-Vite](https://rolldown.rs/) - Next-generation bundler powered by Rust for extreme performance -->
+- 🚀 [Rolldown-Vite](https://rolldown.rs/) - Next-generation bundler powered by Rust for extreme performance
 
 - �📦 [Components auto importing](./src/components)
 
@@ -66,7 +66,7 @@ cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
 
 ### Build Tool
 
-- **[Vite 7](https://vite.dev/)** - Next-generation frontend build tool with blazing fast development experience
+- **[Rolldown-Vite](https://rolldown.rs/)** - Next-generation bundler powered by Rust, offering significantly faster build times and hot reload
 
 ### Linting
 
