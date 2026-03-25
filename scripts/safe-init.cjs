@@ -19,7 +19,6 @@ const entrys = [
   "mock",
   "layouts/default.vue",
   "src/pages/index.vue",
-  "src/pages/about.md",
   "src/pages/echarts.vue",
   "src/stores",
   "locales/简体中文",
@@ -90,7 +89,6 @@ function safeInit(plop) {
           templateFile: "./template/page.hbs",
           data: {
             name: "index",
-            isMarkdown: false,
           },
         },
         {

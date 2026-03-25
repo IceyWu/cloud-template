@@ -5,7 +5,6 @@ import tailwindcss from "@tailwindcss/vite";
 import Legacy from "@vitejs/plugin-legacy";
 import Vue from "@vitejs/plugin-vue";
 import Jsx from "@vitejs/plugin-vue-jsx";
-import Prism from "markdown-it-prism";
 import AutoImport from "unplugin-auto-import/vite";
 import {
   AntDesignVueResolver,
@@ -27,7 +26,6 @@ import {
   VueUseComponentsResolver,
 } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
-import Markdown from "unplugin-vue-markdown/vite";
 import type { PluginOption } from "vite";
 import { AutoGenerateImports, vue3Presets } from "vite-auto-import-resolvers";
 import Compression from "vite-plugin-compression";
@@ -44,8 +42,6 @@ import { r } from "./shared/path";
 
 export default function () {
   const env = useEnv();
-  const safelist =
-    "prose prose-gray px-4 sm:px-6 md:prose-lg lg:prose-lg dark:prose-invert text-left max-w-4xl mx-auto prose-img:rounded-xl prose-a:text-blue-600";
 
   const plugins: PluginOption[] = [
     /**
@@ -87,15 +83,13 @@ export default function () {
     VueRouter({
       routesFolder: r("src/pages"),
       dts: r("presets/types/type-router.d.ts"),
-      extensions: [".md", ".vue", ".tsx", ".jsx"],
+      extensions: [".vue", ".tsx", ".jsx"],
     }),
     /**
      * vue 官方插件，用来解析 sfc 单文件组件
      * https://www.npmjs.com/package/@vitejs/plugin-vue
      */
-    Vue({
-      include: [/\.vue$/, /\.md$/],
-    }),
+    Vue(),
     /**
      * 布局系统
      * https://github.com/dishait/vite-plugin-vue-layouts
@@ -120,8 +114,8 @@ export default function () {
      */
     Components({
       directoryAsNamespace: true,
-      include: [/\.vue$/, /\.vue\?vue/, /\.[tj]sx$/, /\.md$/],
-      extensions: ["md", "vue", "tsx", "jsx"],
+      include: [/\.vue$/, /\.vue\?vue/, /\.[tj]sx$/],
+      extensions: ["vue", "tsx", "jsx"],
       dts: r("presets/types/components.d.ts"),
       types: [
         {
@@ -206,21 +200,6 @@ export default function () {
    */
   if (process.env.NODE_ENV !== "debug") {
     plugins.push(Removelog());
-  }
-
-  /**
-   * markdown 渲染插件
-   * https://github.com/mdit-vue/unplugin-vue-markdown
-   */
-  if (env.VITE_APP_MARKDOWN) {
-    plugins.push(
-      Markdown({
-        wrapperClasses: safelist,
-        markdownItSetup(md) {
-          md.use(Prism as any);
-        },
-      })
-    );
   }
 
   /**

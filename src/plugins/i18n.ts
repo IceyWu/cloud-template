@@ -1,4 +1,3 @@
-import { defu } from "defu";
 import { createI18n } from "vue-i18n";
 
 const yamls = import.meta.glob("../../locales/*/**.y(a)?ml", {
@@ -15,7 +14,7 @@ const languages = Object.entries(yamls).map(([key, value]) => {
   return { [key]: (value as { default: unknown }).default };
 });
 
-const messages = defu({}, ...languages);
+const messages = Object.assign({}, ...languages);
 
 // localStorage 中的 locale，第二个参数为默认值
 // https://vueuse.org/core/useStorage/#usestorage

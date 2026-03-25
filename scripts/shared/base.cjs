@@ -2,13 +2,11 @@
 /**
  * 获取扩展名
  * @param {string} type 模块类型
- * @param {boolean} isMarkdown 是否是 markdown，默认为 false
  * @returns {string} 扩展名
  */
-function showExt(type, isMarkdown = false) {
+function showExt(type) {
   const isTs = type === "api" || type === "store" || type === "module";
-  const ext = isMarkdown ? "md" : isTs ? "ts" : "vue";
-  return ext;
+  return isTs ? "ts" : "vue";
 }
 
 /**

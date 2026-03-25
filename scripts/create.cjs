@@ -22,16 +22,6 @@ function create(plop) {
         choices: moduleTypes,
       },
       {
-        name: "isMarkdown",
-        type: "confirm",
-        message: "是否 markdown 类型?",
-        default: false,
-        // 如果是 page 类型需要询问是否为 markdown 类型
-        when({ type }) {
-          return type === "page";
-        },
-      },
-      {
         name: "name",
         type: "input",
         message({ type }) {
@@ -45,10 +35,9 @@ function create(plop) {
         message({ type }) {
           return `目标 ${type} 已存在，是否重置?`;
         },
-        // 确认模块是否已存在，是则询问是否重置
-        when({ type, name, isMarkdown }) {
+        when({ type, name }) {
           const dir = showDir(type);
-          const ext = showExt(type, isMarkdown);
+          const ext = showExt(type);
           modulePath = `src/${dir}/${name}.${ext}`;
           exist = existsSync(modulePath);
           if (exist) {

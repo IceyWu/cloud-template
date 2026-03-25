@@ -1,17 +1,18 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
+import ToastContainer from "@/components/ToastContainer.vue";
 import { useViewportScaling } from "@/composables/viewportScaling";
 
-// 初始化视口缩放
 useViewportScaling();
 </script>
 
 <template>
-	<router-view />
+<router-view />
+<ToastContainer />
 </template>
 
 <style>
 /* a {
-	color: rgba(37, 99, 235);
+color: rgba(37, 99, 235);
 } */
 
 p {
