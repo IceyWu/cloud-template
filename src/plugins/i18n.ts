@@ -14,7 +14,15 @@ const languages = Object.entries(yamls).map(([key, value]) => {
   return { [key]: (value as { default: unknown }).default };
 });
 
-const messages = Object.assign({}, ...languages);
+const messages = languages.reduce(
+  (acc, cur) => {
+    for (const [locale, val] of Object.entries(cur)) {
+      acc[locale] = Object.assign(acc[locale] || {}, val);
+    }
+    return acc;
+  },
+  {} as Record<string, unknown>
+);
 
 // localStorage 中的 locale，第二个参数为默认值
 // https://vueuse.org/core/useStorage/#usestorage

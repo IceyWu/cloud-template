@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { Home } from "lucide-vue-next";
+import { Button } from "@/components/ui/button";
 import Lottie_Data_404_1 from "~/assets/lottie/404/404-1.json";
 import Lottie_Data_404_2 from "~/assets/lottie/404/404-2.json";
 
@@ -10,56 +12,34 @@ const Lottie_Data_404 = computed(() => {
 </script>
 
 <template>
-	<div class="text-center flex flex-wrap h-screen items-center justify-around">
-		<div class="desc font-bold">
-			<div class="code text-7xl">
-404
-</div>
-			<div ref="typedRef" class="content text-3xl mb-5">
-The Page
-</div>
-			<RouterLink :to="safeResolve('/')">
-				<button
-					class="text-lg px-5 py-2 rounded bg-gray-200 transition hover:shadow-md dark:text-black"
-				>
-					Go Home
-				</button>
-			</RouterLink>
-		</div>
-		<div class="flex-1">
-			<Lottie loop width="25em" height="25em" :json-data="Lottie_Data_404" />
-		</div>
-	</div>
+  <div class="flex flex-col md:flex-row h-screen items-center justify-center gap-12 px-6">
+    <div class="flex flex-col items-center md:items-start gap-4 text-center md:text-left">
+      <p class="text-sm font-medium text-muted-foreground uppercase tracking-widest">Error 404</p>
+      <h1 class="text-8xl font-bold tracking-tight">404</h1>
+      <div class="text-2xl font-semibold text-muted-foreground h-9">
+        The Page<span ref="typedRef" />
+      </div>
+      <p class="text-muted-foreground max-w-sm">
+        抱歉，您访问的页面不存在或已被移除。
+      </p>
+      <RouterLink :to="safeResolve('/')">
+        <Button size="lg" class="mt-2">
+          <Home class="w-4 h-4 mr-2" />
+          返回首页
+        </Button>
+      </RouterLink>
+    </div>
+    <div class="flex-shrink-0">
+      <Lottie loop width="22em" height="22em" :json-data="Lottie_Data_404" />
+    </div>
+  </div>
 </template>
-
-<style>
-.code {
-  margin-bottom: 20px;
-}
-
-.content {
-  height: 40px;
-}
-
-.cover {
-  height: auto;
-  width: 700px;
-  margin: 0 5px;
-  max-width: 100%;
-  max-height: 100%;
-}
-
-.desc {
-  flex: 1;
-  width: 300px;
-}
-</style>
 
 <route lang="json">
 {
-	"meta": {
-		"title": "404",
-		"layout": "notFound"
-	}
+  "meta": {
+    "title": "404",
+    "layout": "notFound"
+  }
 }
 </route>

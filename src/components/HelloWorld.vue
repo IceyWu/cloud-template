@@ -1,9 +1,18 @@
-<script setup lang="ts">
+﻿<script setup lang="ts">
 import { to } from "@iceywu/utils";
-import { AlertTriangle, ArrowRight, Database, Github, LogIn, Plus } from "lucide-vue-next";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Database,
+  Github,
+  LogIn,
+  Plus,
+  Sparkles,
+} from "lucide-vue-next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { testRequestGet } from "~/api/mock";
 import Lottie_Data_404 from "~/assets/lottie/4.json";
 import lottieNoData from "~/assets/lottie/6.json";
@@ -16,139 +25,138 @@ const titleRef = useTyped(["Start your Project in "], () => {
   hasTypeonFinished.value = true;
 });
 
-const { t } = useI18n();
 const counter = createCounter();
-
 const resData = ref<any>({});
-
 const getDataLoading = ref(false);
+
 async function getData() {
   if (getDataLoading.value) return;
   getDataLoading.value = true;
-  const params = {
-    id: 1,
-  };
-  const [err, res] = await to(testRequestGet(params));
+  const [err, res] = await to(testRequestGet({ id: 1 }));
   if (res) {
-    const {
-      code,
-      msg,
-      data = [],
-    } = (res as any) || {
-      code: 500,
-      msg: "接口请求失败",
-    };
+    const { code, msg, data = [] } = (res as any) || { code: 500, msg: "failed" };
     if (code === 200) {
       resData.value = data;
-      toast.success("接口请求成功");
+      toast.success("success");
     } else {
       toast.error(msg);
     }
   }
-  if (err) {
-    toast.error("接口请求失败");
-  }
+  if (err) toast.error("failed");
   getDataLoading.value = false;
 }
-const router = useRouter();
 
+const router = useRouter();
 function go404Page() {
-  const path = Math.random() > 0.5 ? "/404" : "/500";
-  router.push({
-    path,
-  });
+  router.push({ path: "/404" });
 }
 function handleLogin() {
   useUserStore()
     .loginByUsername({ username: "admin", password: "admin123" })
-    .then((res) => {});
+    .then(() => {});
 }
-const isShowBtns = ref<boolean>(false);
+
+const isShowBtns = ref(false);
 const showText = ref(false);
 function toggleShow() {
   isShowBtns.value = !isShowBtns.value;
   showText.value = true;
 }
+
 onMounted(() => {
   consolePlus.log("welcome to use cloud-template");
 });
 </script>
 
 <template>
-	<div class="flex flex-col items-center space-y-8 py-10">
-		<div class="relative">
-			<div class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-violet-500/20 rounded-full blur-3xl opacity-50" />
-			<LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" class="relative" />
-		</div>
+  <div class="flex flex-col items-center gap-10 py-16 px-4 w-full max-w-4xl mx-auto">
+    <div class="relative">
+      <div class="absolute -inset-8 bg-gradient-to-r from-primary/10 via-violet-500/10 to-primary/10 rounded-full blur-3xl" />
+      <LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" class="relative" />
+    </div>
 
-		<template v-if="isShowBtns">
-			<Card v-motion-roll-bottom class="w-full max-w-md">
-				<CardHeader class="text-center">
-					<CardTitle>功能演示</CardTitle>
-					<CardDescription>点击按钮体验各项功能</CardDescription>
-				</CardHeader>
-				<CardContent class="space-y-4">
-					<div class="grid grid-cols-2 gap-3">
-						<Button variant="default" class="w-full" @click="handleLogin">
-							<LogIn class="w-4 h-4 mr-2" />
-							登录
-						</Button>
-						<Button variant="secondary" class="w-full" :disabled="getDataLoading" @click="getData">
-							<Database class="w-4 h-4 mr-2" />
-							数据获取
-						</Button>
-						<Button variant="outline" class="w-full" @click="counter.inc()">
-							<Plus class="w-4 h-4 mr-2" />
-							Pinia {{ counter.count }}
-						</Button>
-						<Button variant="destructive" class="w-full" @click="go404Page">
-							<AlertTriangle class="w-4 h-4 mr-2" />
-							404
-						</Button>
-					</div>
-					<div v-if="Object.keys(resData).length" class="p-3 rounded-lg bg-muted">
-						<div class="flex items-center gap-2 mb-2">
-							<Badge variant="outline">Response</Badge>
-						</div>
-						<pre class="text-xs text-muted-foreground overflow-auto">{{ JSON.stringify(resData, null, 2) }}</pre>
-					</div>
-				</CardContent>
-			</Card>
-		</template>
+    <Transition name="fade" mode="out-in">
+      <div v-if="!isShowBtns" v-motion-fade class="text-center space-y-4 max-w-2xl">
+        <div class="flex items-center justify-center gap-2 mb-2">
+          <Badge variant="secondary" class="gap-1 px-3 py-1">
+            <Sparkles class="w-3 h-3" />
+            Vue 3 + Vite + TypeScript
+          </Badge>
+        </div>
+        <h1 class="base-font text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+          <span v-if="showText" class="text-foreground">Start your Project in</span>
+          <span ref="titleRef" class="text-foreground" />
+          <span
+            v-if="hasTypeonFinished"
+            class="block text-transparent bg-gradient-to-r from-blue-500 via-violet-500 to-purple-500 bg-clip-text"
+          >
+            minutes!
+          </span>
+        </h1>
+        <p v-if="hasTypeonFinished" class="text-lg text-muted-foreground">
+          A modern Vue 3 + Vite + TypeScript template, ready to use out of the box
+        </p>
+      </div>
 
-		<template v-else>
-			<div v-motion-roll-right class="mx-auto text-center max-w-3xl px-4">
-				<h1 class="base-font text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight">
-					<span v-if="showText" class="block text-foreground mb-2">Start your Project in</span>
-					<span ref="titleRef" class="block text-foreground" />
-					<span
-						v-if="hasTypeonFinished"
-						class="text-transparent mt-4 block bg-gradient-to-r from-blue-600 via-violet-600 to-purple-600 bg-clip-text animate-pulse"
-					>
-						minutes!
-					</span>
-				</h1>
-				<p v-if="hasTypeonFinished" class="mt-6 text-lg text-muted-foreground max-w-xl mx-auto">
-					一个现代化的 Vue 3 + Vite + TypeScript 开发模板，开箱即用
-				</p>
-			</div>
-		</template>
+      <Card v-else v-motion-fade class="w-full max-w-md shadow-lg">
+        <CardHeader class="text-center pb-2">
+          <CardTitle class="text-xl">Feature Demo</CardTitle>
+          <CardDescription>Click buttons to explore features</CardDescription>
+        </CardHeader>
+        <Separator />
+        <CardContent class="pt-4 space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <Button variant="default" class="w-full" @click="handleLogin">
+              <LogIn class="w-4 h-4 mr-2" />
+              Login
+            </Button>
+            <Button variant="secondary" class="w-full" :disabled="getDataLoading" @click="getData">
+              <Database class="w-4 h-4 mr-2" />
+              {{ getDataLoading ? "Loading..." : "Fetch Data" }}
+            </Button>
+            <Button variant="outline" class="w-full" @click="counter.inc()">
+              <Plus class="w-4 h-4 mr-2" />
+              Pinia {{ counter.count }}
+            </Button>
+            <Button variant="destructive" class="w-full" @click="go404Page">
+              <AlertTriangle class="w-4 h-4 mr-2" />
+              404 Page
+            </Button>
+          </div>
+          <div v-if="Object.keys(resData).length" class="rounded-lg border bg-muted/50 p-3">
+            <div class="flex items-center gap-2 mb-2">
+              <Badge variant="outline" class="text-xs">Response</Badge>
+            </div>
+            <pre class="text-xs text-muted-foreground overflow-auto max-h-32">{{ JSON.stringify(resData, null, 2) }}</pre>
+          </div>
+        </CardContent>
+      </Card>
+    </Transition>
 
-		<div v-show="hasTypeonFinished" class="flex gap-3">
-			<Button size="lg" class="group" @click="toggleShow">
-				{{ isShowBtns ? '返回首页' : '开始体验' }}
-				<ArrowRight class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-			</Button>
-			<Button size="lg" variant="outline" as="a" href="https://github.com/IceyWu/cloud-template" target="_blank">
-				<Github class="w-4 h-4 mr-2" />
-				GitHub
-			</Button>
-		</div>
-	</div>
+    <div v-show="hasTypeonFinished" class="flex flex-wrap gap-3 justify-center">
+      <Button size="lg" class="group gap-2" @click="toggleShow">
+        {{ isShowBtns ? "Back to Home" : "Get Started" }}
+        <ArrowRight class="w-4 h-4 transition-transform group-hover:translate-x-1" />
+      </Button>
+      <Button size="lg" variant="outline" as="a" href="https://github.com/IceyWu/cloud-template" target="_blank" class="gap-2">
+        <Github class="w-4 h-4" />
+        GitHub
+      </Button>
+    </div>
+  </div>
 </template>
 
 <style scoped>
 .base-font {
-  font-family: 'SmileySansOblique', system-ui, sans-serif;
+  font-family: "SmileySansOblique", system-ui, sans-serif;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
 }
 </style>
