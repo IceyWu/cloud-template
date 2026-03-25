@@ -13,15 +13,15 @@ html.dark {
 }
 
 #nprogress .bar {
-  background: rgba(29, 78, 216, 0.75);
-  background: repeating-linear-gradient(90deg, #00dc82 0, #34cdfe 50%, #0047e1);
   position: fixed;
-  z-index: 1031;
   top: 0;
   left: 0;
+  z-index: 1031;
 
   width: 100%;
   height: 2px;
+  background: rgba(29, 78, 216, 0.75);
+  background: repeating-linear-gradient(90deg, #00dc82 0, #34cdfe 50%, #0047e1);
 }
 
 /*
@@ -60,20 +60,20 @@ html.dark ::-webkit-scrollbar-thumb {
 }
 
 body::before {
-  opacity: 0.56;
-  content: "";
-  display: block;
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
+  display: block;
   width: 100%;
   height: 100%;
+  pointer-events: none;
+  content: "";
   background-image: url("@/assets/img/bg.png");
+  background-repeat: no-repeat;
   background-position: top 0 right 0;
   background-size: 100% auto;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: -1;
+  opacity: 0.56;
 }
 
 /*
@@ -81,8 +81,8 @@ body::before {
 * 使用 CSS transform 实现缩放，绕过浏览器最小字体限制（如360浏览器的12px限制）
 */
 #app {
-  transform-origin: top left;
   overflow: hidden;
+  transform-origin: top left;
 }
 
 html,

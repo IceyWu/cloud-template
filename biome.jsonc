@@ -1,6 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
-  "extends": ["ultracite/core"],
+  "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
+  "extends": ["ultracite/biome/core"],
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -46,10 +46,7 @@
       },
       "nursery": {
         "noIncrementDecrement": "off",
-        "useConsistentArrowReturn": "off",
-        "noEmptySource": "off",
-        "noShadow": "warn",
-        "noUnusedExpressions": "off"
+        "noShadow": "warn"
       },
       "performance": {
         "noBarrelFile": "off",

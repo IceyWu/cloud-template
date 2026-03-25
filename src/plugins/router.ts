@@ -6,8 +6,8 @@ declare module "vue-router" {
   // 在这里定义你的 meta 类型
 
   interface RouteMeta {
-    title?: string;
     layout?: string;
+    title?: string;
   }
 }
 

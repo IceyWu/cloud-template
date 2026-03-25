@@ -15,11 +15,11 @@ interface BaseParamsProps {
   page_size: number;
 }
 interface ListItem {
+  content: string;
+  cover: string;
+  create_time: string;
   id: number;
   title: string;
-  cover: string;
-  content: string;
-  create_time: string;
 }
 const listObj = ref({
   list: [] as ListItem[],

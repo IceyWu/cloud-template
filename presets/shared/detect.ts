@@ -22,8 +22,8 @@ export const defaultBuildTargets = browserslistLoadConfig({
 type Arrayable<T> = T | T[];
 
 interface Options {
-  onlyExist?: [Arrayable<ComponentResolver>, string][];
   include?: ComponentResolver[];
+  onlyExist?: [Arrayable<ComponentResolver>, string][];
 }
 
 /**

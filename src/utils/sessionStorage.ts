@@ -1,10 +1,10 @@
 interface ProxyStorage {
-  setItem: <T>(k: string, v: T) => void;
+  clear: () => void;
 
   getItem: <T>(k: string) => T;
 
   removeItem: (k: string) => void;
-  clear: () => void;
+  setItem: <T>(k: string, v: T) => void;
 }
 
 // declare class sessionStorageProxy implements ProxyStorage {

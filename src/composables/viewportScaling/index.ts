@@ -55,25 +55,25 @@ export function parseScalingConfig(): { enabled: boolean; baseWidth: number } {
 export interface ViewportScalingOptions {
   /** 设计稿基准宽度，默认从环境变量读取或使用 1920 */
   baseWidth?: number;
-  /** 最小缩放比例，默认 0.5 */
-  minScale?: number;
-  /** 最大缩放比例，默认 1.5 */
-  maxScale?: number;
   /** 防抖延迟(ms)，默认 100 */
   debounceMs?: number;
+  /** 最大缩放比例，默认 1.5 */
+  maxScale?: number;
+  /** 最小缩放比例，默认 0.5 */
+  minScale?: number;
   /** 目标元素选择器，默认 #app */
   targetSelector?: string;
 }
 
 export interface ViewportScalingReturn {
-  /** 当前缩放比例 */
-  scale: ReturnType<typeof ref<number>>;
-  /** 是否启用 */
-  isEnabled: ReturnType<typeof ref<boolean>>;
-  /** 手动启用 */
-  enable: () => void;
   /** 手动禁用 */
   disable: () => void;
+  /** 手动启用 */
+  enable: () => void;
+  /** 是否启用 */
+  isEnabled: ReturnType<typeof ref<boolean>>;
+  /** 当前缩放比例 */
+  scale: ReturnType<typeof ref<number>>;
 }
 
 // ============ Composable ============

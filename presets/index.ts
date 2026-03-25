@@ -28,18 +28,16 @@ import {
 } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
 import Markdown from "unplugin-vue-markdown/vite";
-import { VueRouterAutoImports } from "unplugin-vue-router";
-import VueRouter from "unplugin-vue-router/vite";
 import type { PluginOption } from "vite";
 import { AutoGenerateImports, vue3Presets } from "vite-auto-import-resolvers";
 import Compression from "vite-plugin-compression";
 import EnvTypes from "vite-plugin-env-types";
-
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import Removelog from "vite-plugin-removelog";
 import VueDevTools from "vite-plugin-vue-devtools";
-
 import Layouts from "vite-plugin-vue-layouts";
+import { VueRouterAutoImports } from "vue-router/unplugin";
+import VueRouter from "vue-router/vite";
 import { Alias, Layers, Lightningcss, Optimize, Restart, Warmup } from "./plugins";
 import { defaultBuildTargets, detectResolvers, useEnv } from "./shared/detect";
 import { r } from "./shared/path";
@@ -219,7 +217,7 @@ export default function () {
       Markdown({
         wrapperClasses: safelist,
         markdownItSetup(md) {
-          md.use(Prism);
+          md.use(Prism as any);
         },
       })
     );
@@ -247,7 +245,7 @@ export default function () {
           VueRouterAutoImports,
           {
             // add any other imports you were relying on
-            "vue-router/auto": ["useLink"],
+            "vue-router": ["useLink"],
           },
           {
             "@iceywu/utils": ["to", "list", "sleep", "consolePlus"],

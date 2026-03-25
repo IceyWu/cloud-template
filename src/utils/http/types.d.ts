@@ -21,22 +21,22 @@ export interface PureHttpRequestConfig extends AxiosRequestConfig {
   beforeRequestCallback?: (request: PureHttpRequestConfig) => void;
 
   beforeResponseCallback?: (response: PureHttpResponse) => void;
-  isNeedToken?: boolean;
-  isNeedLoading?: boolean;
-  serverName?: string;
-  roleName?: string;
   headers?: any;
+  isNeedLoading?: boolean;
+  isNeedToken?: boolean;
+  roleName?: string;
+  serverName?: string;
 }
 
 export interface PureHttpInstance {
+  get<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
+  post<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
   request<T>(
     method: RequestMethods,
     url: string,
     param?: AxiosRequestConfig,
     axiosConfig?: PureHttpRequestConfig
   ): Promise<T>;
-  post<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
-  get<T, P>(url: string, params?: T, config?: PureHttpRequestConfig): Promise<P>;
 }
 
 declare const PureHttp: PureHttpInstance;

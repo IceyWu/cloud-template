@@ -6,7 +6,7 @@ export function isRequestSuccess(data: any) {
     return sucessCodes.includes(data);
   }
   if (isObject(data)) {
-    return sucessCodes.includes(data.code);
+    return sucessCodes.includes(data.code as number);
   }
   return false;
 }
@@ -16,8 +16,8 @@ const requestValOptions = [
   },
 ];
 interface RequestToOptions {
-  valList?: any;
   isOnlyData?: boolean;
+  valList?: any;
 }
 
 export async function requestTo(promise: Promise<unknown>, requestToOptions?: RequestToOptions) {

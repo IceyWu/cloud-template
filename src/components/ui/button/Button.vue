@@ -7,9 +7,9 @@ import type { ButtonVariants } from "."
 import { buttonVariants } from "."
 
 interface Props extends PrimitiveProps {
-  variant?: ButtonVariants["variant"]
-  size?: ButtonVariants["size"]
   class?: HTMLAttributes["class"]
+  size?: ButtonVariants["size"]
+  variant?: ButtonVariants["variant"]
 }
 
 const props = withDefaults(defineProps<Props>(), {

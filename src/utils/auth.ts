@@ -8,10 +8,10 @@ export interface DataInfo<T> {
   expires: T;
   /** 用于调用刷新accessToken的接口时所需的token */
   refreshToken: string;
-  /** 用户名 */
-  username?: string;
   /** 当前登陆用户的角色 */
   roles?: string[];
+  /** 用户名 */
+  username?: string;
 }
 
 export const userKeyBase = "user-info";

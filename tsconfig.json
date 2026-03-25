@@ -5,15 +5,14 @@
     "jsxImportSource": "vue",
     "lib": ["esnext", "dom"],
     "useDefineForClassFields": true,
-    "baseUrl": ".",
     "module": "esnext",
     "moduleResolution": "Bundler",
     "paths": {
-      "~/*": ["src/*"],
-      "@/*": ["src/*"]
+      "~/*": ["./src/*"],
+      "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["unplugin-vue-router/client", "vite-plugin-vue-layouts/client"],
+    "types": ["vite-plugin-vue-layouts/client"],
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -28,8 +27,7 @@
     "src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
-    "./vite.config.ts",
-    "./typed-router.d.ts"
+    "./vite.config.ts"
   ],
   "exclude": ["node_modules", "dist"]
 }
