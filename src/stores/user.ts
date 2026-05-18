@@ -23,8 +23,8 @@ export const useUserStore = defineStore(
       userInfo.value = data;
     };
 
-    const loginByUsername = (dataT: any) => {
-      return new Promise<UserResult>((resolve, reject) => {
+    const loginByUsername = (dataT: any) =>
+      new Promise<UserResult>((resolve, reject) => {
         getLogin(dataT)
           .then((res) => {
             const { code, data } = res as any;
@@ -47,7 +47,6 @@ export const useUserStore = defineStore(
             reject(error);
           });
       });
-    };
 
     const logOut = () => {
       username.value = "";
@@ -55,8 +54,8 @@ export const useUserStore = defineStore(
       removeToken();
     };
 
-    const handRefreshToken = (data: any) => {
-      return new Promise<any>((resolve, reject) => {
+    const handRefreshToken = (data: any) =>
+      new Promise<any>((resolve, reject) => {
         refreshTokenApi(data)
           .then((res) => {
             if (res) {
@@ -68,7 +67,6 @@ export const useUserStore = defineStore(
             reject(error);
           });
       });
-    };
 
     return {
       username,

@@ -1,21 +1,21 @@
 ﻿<script setup lang="ts">
-import ToastContainer from "@/components/ToastContainer.vue";
-import { useViewportScaling } from "@/composables/viewportScaling";
+  import ToastContainer from "@/components/ToastContainer.vue";
+  import { useViewportScaling } from "@/composables/viewportScaling";
 
-useViewportScaling();
+  useViewportScaling();
 </script>
 
 <template>
-<router-view />
-<ToastContainer />
+  <router-view />
+  <ToastContainer />
 </template>
 
 <style>
-/* a {
-color: rgba(37, 99, 235);
-} */
+  /* a {
+        color: rgba(37, 99, 235);
+        } */
 
-p {
-  padding: 0 10px;
-}
+  p {
+    padding: 0 10px;
+  }
 </style>

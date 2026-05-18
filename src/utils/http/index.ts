@@ -142,9 +142,7 @@ class PureHttp {
             })
           : config;
       },
-      (error) => {
-        return Promise.reject(error);
-      }
+      (error) => Promise.reject(error)
     );
   }
 

@@ -1,7 +1,7 @@
 import type { AxiosRequestConfig, AxiosResponse } from "axios";
 import axios from "axios";
 import { formatToken, getToken } from "@/utils/auth";
-import baseUrl from "@/utils/http/base.js";
+import baseUrl from "@/utils/http/base";
 import NProgress from "@/utils/progress";
 
 // 响应数据接口

@@ -4,14 +4,12 @@ export default defineFakeRoute([
   {
     url: "/api/mock/get",
     method: "get",
-    response: () => {
-      return {
-        code: 200,
-        data: {
-          name: "mock",
-        },
-      };
-    },
+    response: () => ({
+      code: 200,
+      data: {
+        name: "mock",
+      },
+    }),
   },
   {
     url: "/api/mock/post",

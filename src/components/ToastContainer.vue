@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ToastClose, ToastDescription, ToastProvider, ToastRoot, ToastViewport } from "reka-ui";
-import { toasts } from "@/composables/toast";
+  import { ToastClose, ToastDescription, ToastProvider, ToastRoot, ToastViewport } from "reka-ui";
+  import { toasts } from "@/composables/toast";
 </script>
 
 <template>
@@ -21,62 +21,90 @@ import { toasts } from "@/composables/toast";
 </template>
 
 <style scoped>
-.toast-viewport {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 360px;
-  max-width: 100vw;
-  z-index: 9999;
-}
+  .toast-viewport {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 360px;
+    max-width: 100vw;
+  }
 
-.toast-root {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 12px 16px;
-  border-radius: 8px;
-  font-size: 14px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  background: #fff;
-  color: #333;
-}
+  .toast-root {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #333;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
 
-.dark .toast-root {
-  background: #1e1e2e;
-  color: #cdd6f4;
-}
+  .dark .toast-root {
+    color: #cdd6f4;
+    background: #1e1e2e;
+  }
 
-.toast-success { border-left: 4px solid #22c55e; }
-.toast-error   { border-left: 4px solid #ef4444; }
-.toast-info    { border-left: 4px solid #3b82f6; }
-.toast-warning { border-left: 4px solid #f59e0b; }
-.toast-default { border-left: 4px solid #6b7280; }
+  .toast-success {
+    border-left: 4px solid #22c55e;
+  }
+  .toast-error {
+    border-left: 4px solid #ef4444;
+  }
+  .toast-info {
+    border-left: 4px solid #3b82f6;
+  }
+  .toast-warning {
+    border-left: 4px solid #f59e0b;
+  }
+  .toast-default {
+    border-left: 4px solid #6b7280;
+  }
 
-.toast-root[data-state="open"]  { animation: slideIn 200ms ease-out; }
-.toast-root[data-state="closed"] { animation: slideOut 150ms ease-in; }
+  .toast-root[data-state="open"] {
+    animation: slideIn 200ms ease-out;
+  }
+  .toast-root[data-state="closed"] {
+    animation: slideOut 150ms ease-in;
+  }
 
-.toast-close {
-  cursor: pointer;
-  font-size: 16px;
-  opacity: 0.5;
-  background: none;
-  border: none;
-  padding: 0;
-  line-height: 1;
-}
-.toast-close:hover { opacity: 1; }
+  .toast-close {
+    padding: 0;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    background: none;
+    border: none;
+    opacity: 0.5;
+  }
+  .toast-close:hover {
+    opacity: 1;
+  }
 
-@keyframes slideIn {
-  from { transform: translateX(100%); opacity: 0; }
-  to   { transform: translateX(0);    opacity: 1; }
-}
-@keyframes slideOut {
-  from { transform: translateX(0);    opacity: 1; }
-  to   { transform: translateX(100%); opacity: 0; }
-}
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  @keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
 </style>

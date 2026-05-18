@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 import Legacy from "@vitejs/plugin-legacy";
 import Vue from "@vitejs/plugin-vue";
 import Jsx from "@vitejs/plugin-vue-jsx";
+import { browserslistToTargets } from "lightningcss";
 import AutoImport from "unplugin-auto-import/vite";
 import {
   AntDesignVueResolver,
@@ -28,15 +29,12 @@ import {
 import Components from "unplugin-vue-components/vite";
 import type { PluginOption } from "vite";
 import { AutoGenerateImports, vue3Presets } from "vite-auto-import-resolvers";
-import Compression from "vite-plugin-compression";
-import EnvTypes from "vite-plugin-env-types";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
-import Removelog from "vite-plugin-removelog";
 import VueDevTools from "vite-plugin-vue-devtools";
 import Layouts from "vite-plugin-vue-layouts";
 import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
-import { Alias, Layers, Lightningcss, Optimize, Restart, Warmup } from "./plugins";
+import { Alias, Restart, Warmup } from "./plugins";
 import { defaultBuildTargets, detectResolvers, useEnv } from "./shared/detect";
 import { r } from "./shared/path";
 
@@ -44,11 +42,6 @@ export default function () {
   const env = useEnv();
 
   const plugins: PluginOption[] = [
-    /**
-     * vite 配置层
-     * 通过 mode 区分 vite 配置文件 (experimental)
-     */
-    Layers(),
     /**
      * 兼容不支持 esmModule 的浏览器
      * https://www.npmjs.com/package/@vitejs/plugin-legacy
@@ -58,20 +51,25 @@ export default function () {
       modernPolyfills: true,
     }),
     /**
-     * 智能启动 lightningcss
+     * 启动优化 + lightningcss
      */
-    Lightningcss(),
-    /**
-     * 启动优化
-     */
-    Optimize(),
-    /**
-     * 环境变量类型提示
-     * https://github.com/dishait/vite-plugin-env-types
-     */
-    EnvTypes({
-      dts: r("presets/types/env.d.ts"),
-    }),
+    {
+      name: "vite-inline-config",
+      config(config) {
+        // 优化
+        config.css ??= {};
+        config.build ??= {};
+        config.optimizeDeps ??= {};
+        config.css.preprocessorMaxWorkers = true;
+        config.optimizeDeps.holdUntilCrawlEnd = false;
+
+        // lightningcss
+        config.css.transformer = "lightningcss";
+        config.build.cssMinify = "lightningcss";
+        config.css.lightningcss ??= {};
+        config.css.lightningcss.targets = browserslistToTargets(defaultBuildTargets);
+      },
+    },
     /**
      * 内置的预热，可以加快冷启动
      */
@@ -94,14 +92,10 @@ export default function () {
      * 布局系统
      * https://github.com/dishait/vite-plugin-vue-layouts
      */
-    Layouts({
-      // skipTopLevelRouteLayout: true,
-    }),
+    Layouts(),
     /**
      * mock 服务
      */
-
-    // mock支持
     vitePluginFakeServer({
       logger: false,
       include: "mock",
@@ -136,7 +130,7 @@ export default function () {
           [VarletUIResolver(), "@varlet/ui"],
           [IduxResolver(), "@idux/components"],
           [InklineResolver(), "@inkline/inkline"],
-          [ElementPlusResolver(), "element-plus"],
+          [ElementPlusResolver({ importStyle: "css" }), "element-plus"],
           [HeadlessUiResolver(), "@headlessui/vue"],
           [ArcoResolver(), "@arco-design/web-vue"],
           [AntDesignVueResolver({ importStyle: false }), "ant-design-vue"],
@@ -150,7 +144,7 @@ export default function () {
      * https://www.npmjs.com/package/@intlify/unplugin-vue-i18n
      */
     I18N({
-      runtimeOnly: false,
+      runtimeOnly: true,
       compositionOnly: true,
       include: ["locales/**"],
     }),
@@ -159,17 +153,6 @@ export default function () {
      * https://www.npmjs.com/package/@vitejs/plugin-vue-jsx
      */
     Jsx(),
-    /**
-     * 生产环境资源压缩
-     * https://github.com/vbenjs/vite-plugin-compression
-     */
-    Compression({
-      algorithm: env.VITE_APP_COMPRESSINON_ALGORITHM as
-        | "gzip"
-        | "brotliCompress"
-        | "deflate"
-        | "deflateRaw",
-    }),
     /**
      * 别名插件 (内置)
      * 支持 `~` 和 `@` 别名到 `src`
@@ -186,20 +169,13 @@ export default function () {
      */
     tailwindcss(),
   ];
+
   /**
    * 开发面板
    * https://github.com/webfansplz/vite-plugin-vue-devtools
    */
   if (env.VITE_APP_DEV_TOOLS) {
     plugins.push(VueDevTools());
-  }
-
-  /**
-   * 生产环境下移除 console.log, console.warn, console.error
-   * https://github.com/dishait/vite-plugin-removelog
-   */
-  if (process.env.NODE_ENV !== "debug") {
-    plugins.push(Removelog());
   }
 
   /**
@@ -232,7 +208,7 @@ export default function () {
         ],
         resolvers: detectResolvers({
           onlyExist: [
-            [ElementPlusResolver(), "element-plus"],
+            [ElementPlusResolver({ importStyle: "css" }), "element-plus"],
             [TDesignResolver({ library: "vue-next" }), "tdesign-vue-next"],
           ],
         }),

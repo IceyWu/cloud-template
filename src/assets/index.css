@@ -178,3 +178,5 @@
     @apply bg-background text-foreground;
   }
 }
+
+@import "../styles/main.css";

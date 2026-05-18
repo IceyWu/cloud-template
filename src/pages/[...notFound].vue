@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import { Home } from "lucide-vue-next";
-import { Button } from "@/components/ui/button";
-import Lottie_Data_404_1 from "~/assets/lottie/404/404-1.json";
-import Lottie_Data_404_2 from "~/assets/lottie/404/404-2.json";
+  import { Home } from "lucide-vue-next";
+  import { Button } from "@/components/ui/button";
 
-const typedRef = useTyped([" is not found!"]);
-
-const Lottie_Data_404 = computed(() => {
-  return Math.random() > 0.5 ? Lottie_Data_404_1 : Lottie_Data_404_2;
-});
+  const typedRef = useTyped([" is not found!"]);
 </script>
 
 <template>
@@ -19,9 +13,7 @@ const Lottie_Data_404 = computed(() => {
       <div class="text-2xl font-semibold text-muted-foreground h-9">
         The Page<span ref="typedRef" />
       </div>
-      <p class="text-muted-foreground max-w-sm">
-        抱歉，您访问的页面不存在或已被移除。
-      </p>
+      <p class="text-muted-foreground max-w-sm">抱歉，您访问的页面不存在或已被移除。</p>
       <RouterLink :to="safeResolve('/')">
         <Button size="lg" class="mt-2">
           <Home class="w-4 h-4 mr-2" />
@@ -29,17 +21,8 @@ const Lottie_Data_404 = computed(() => {
         </Button>
       </RouterLink>
     </div>
-    <div class="flex-shrink-0">
-      <Lottie loop width="22em" height="22em" :json-data="Lottie_Data_404" />
-    </div>
+    <div class="flex-shrink-0 text-9xl select-none">🚀</div>
   </div>
 </template>
 
-<route lang="json">
-{
-  "meta": {
-    "title": "404",
-    "layout": "notFound"
-  }
-}
-</route>
+<route lang="json"> { "meta": { "title": "404", "layout": "notFound" } } </route>

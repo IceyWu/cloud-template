@@ -55,6 +55,7 @@ html.dark ::-webkit-scrollbar-thumb {
   src: url("@/assets/font/SmileySans-Oblique.ttf");
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 body::before {

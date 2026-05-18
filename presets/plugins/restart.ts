@@ -2,7 +2,6 @@ import { utimes } from "node:fs/promises";
 import { resolve } from "node:path";
 import { debounce } from "@iceywu/utils";
 import type { Plugin } from "vite";
-import { slash } from "vite-layers";
 import { r } from "../shared/path";
 
 const defaultPaths = ["package.json", "pnpm-lock.yaml"];
@@ -13,7 +12,7 @@ const defaultPaths = ["package.json", "pnpm-lock.yaml"];
  * @param  paths 监听重启路径，默认为 ['package.json', 'pnpm-lock.yaml']
  */
 export function Restart(paths = defaultPaths): Plugin {
-  paths = paths.map((path) => slash(resolve(path)));
+  paths = paths.map((path) => resolve(path).replaceAll("\\", "/"));
   const restart = debounce(async () => {
     const time = new Date();
     await utimes(r("vite.config.ts"), time, time);

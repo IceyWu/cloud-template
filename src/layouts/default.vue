@@ -5,31 +5,23 @@
     </div>
 
     <div class="flex flex-col flex-1 w-full overflow-auto">
-      <router-view v-if="$route.meta.keepAlive" v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <keep-alive>
-            <component :is="Component" />
-          </keep-alive>
-        </transition>
-      </router-view>
-
-      <router-view v-if="!$route.meta.keepAlive" v-slot="{ Component }">
-        <transition name="fade" mode="out-in">
-          <component :is="Component" />
-        </transition>
+      <router-view v-slot="{ Component, route }">
+        <keep-alive>
+          <component :is="Component" :key="route.path" />
+        </keep-alive>
       </router-view>
     </div>
   </div>
 </template>
 
 <style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s ease;
-}
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.2s ease;
+  }
 
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
+  .fade-enter-from,
+  .fade-leave-to {
+    opacity: 0;
+  }
 </style>

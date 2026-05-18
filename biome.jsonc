@@ -1,6 +1,6 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.4.8/schema.json",
-  "extends": ["ultracite/biome/core"],
+  "extends": ["ultracite/biome/core", "ultracite/biome/vue"],
+  "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -24,6 +24,7 @@
         "noDuplicateProperties": "off",
         "noDuplicateCustomProperties": "off",
         "noEmptyBlockStatements": "off",
+        "noEmptySource": "off",
         "useAwait": "warn"
       },
       "correctness": {
@@ -46,7 +47,8 @@
       },
       "nursery": {
         "noIncrementDecrement": "off",
-        "noShadow": "warn"
+        "noShadow": "warn",
+        "useSortedClasses": "off"
       },
       "performance": {
         "noBarrelFile": "off",

@@ -1,42 +1,40 @@
 <script setup lang="ts">
-import { Skeleton } from "@/components/ui/skeleton";
+  import { Skeleton } from "@/components/ui/skeleton";
 
-interface Props {
-  disAbleInfinite?: boolean;
-}
-withDefaults(defineProps<Props>(), {
-  disAbleInfinite: false,
-});
-const emit = defineEmits(["onRefresh", "onLoad"]);
-const listObj = defineModel({
-  type: Object,
-  default: () => ({
-    loading: false,
-    finished: false,
-    list: [],
-  }),
-});
-
-const containerRef = ref<HTMLElement>();
-
-function load() {
-  emit("onLoad");
-}
-
-const isEmpty = computed(() => {
-  return listObj.value.list?.length === 0 && !listObj.value?.loading;
-});
-
-function onScroll() {
-  if (!containerRef.value) return;
-  const { scrollTop, scrollHeight, clientHeight } = containerRef.value;
-  if (
-    scrollHeight - scrollTop - clientHeight < 100 &&
-    !(listObj.value.loading || listObj.value.finished)
-  ) {
-    load();
+  interface Props {
+    disAbleInfinite?: boolean;
   }
-}
+  withDefaults(defineProps<Props>(), {
+    disAbleInfinite: false,
+  });
+  const emit = defineEmits(["onRefresh", "onLoad"]);
+  const listObj = defineModel({
+    type: Object,
+    default: () => ({
+      loading: false,
+      finished: false,
+      list: [],
+    }),
+  });
+
+  const containerRef = ref<HTMLElement>();
+
+  function load() {
+    emit("onLoad");
+  }
+
+  const isEmpty = computed(() => listObj.value.list?.length === 0 && !listObj.value?.loading);
+
+  function onScroll() {
+    if (!containerRef.value) return;
+    const { scrollTop, scrollHeight, clientHeight } = containerRef.value;
+    if (
+      scrollHeight - scrollTop - clientHeight < 100 &&
+      !(listObj.value.loading || listObj.value.finished)
+    ) {
+      load();
+    }
+  }
 </script>
 
 <template>
@@ -49,11 +47,17 @@ function onScroll() {
       </div>
     </div>
 
-    <p v-if="listObj.finished && !isEmpty" class="mt-5 flex items-center justify-center text-sm text-muted-foreground py-4">
+    <p
+      v-if="listObj.finished && !isEmpty"
+      class="mt-5 flex items-center justify-center text-sm text-muted-foreground py-4"
+    >
       没有更多了
     </p>
 
-    <div v-if="isEmpty" class="flex flex-col items-center justify-center py-16 text-muted-foreground">
+    <div
+      v-if="isEmpty"
+      class="flex flex-col items-center justify-center py-16 text-muted-foreground"
+    >
       <p class="text-sm">暂无数据</p>
     </div>
   </div>

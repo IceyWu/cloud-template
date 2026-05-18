@@ -3,12 +3,13 @@
  * @description 自动检测环境并智能生成
  */
 
+import { createRequire } from "node:module";
 import browserslist from "browserslist";
-import { isPackageExists } from "local-pkg";
 import type { ComponentResolver } from "unplugin-vue-components";
 import { loadEnv } from "vite";
-import { detectMode } from "vite-layers";
 import { r } from "./path";
+
+const require = createRequire(import.meta.url);
 
 const { loadConfig: browserslistLoadConfig } = browserslist;
 
@@ -26,6 +27,15 @@ interface Options {
   onlyExist?: [Arrayable<ComponentResolver>, string][];
 }
 
+function isPackageExists(pkg: string): boolean {
+  try {
+    require.resolve(pkg);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 /**
  * 发现 resolvers
  */
@@ -35,11 +45,7 @@ export function detectResolvers(options: Options = {}) {
   const existedResolvers = [];
   for (let i = 0; i < onlyExist.length; i++) {
     const [resolver, packageName] = onlyExist[i];
-    if (
-      isPackageExists(packageName, {
-        paths: [r("./")],
-      })
-    ) {
+    if (isPackageExists(packageName)) {
       existedResolvers.push(resolver);
     }
   }
@@ -54,19 +60,19 @@ export function useEnv() {
     return Boolean(v === "true");
   }
 
+  const mode = process.env.NODE_ENV || "development";
+
   const {
     VITE_APP_TITLE,
     VITE_APP_DEV_TOOLS,
     VITE_APP_API_AUTO_IMPORT,
     VITE_APP_MOCK_IN_PRODUCTION,
     VITE_APP_DIR_API_AUTO_IMPORT,
-    VITE_APP_COMPRESSINON_ALGORITHM,
     VITE_BASE_URL,
-  } = loadEnv(detectMode(), ".");
+  } = loadEnv(mode, ".");
 
   return {
     VITE_APP_TITLE,
-    VITE_APP_COMPRESSINON_ALGORITHM,
     VITE_APP_DEV_TOOLS: stringToBoolean(VITE_APP_DEV_TOOLS),
     VITE_APP_API_AUTO_IMPORT: stringToBoolean(VITE_APP_API_AUTO_IMPORT),
     VITE_APP_MOCK_IN_PRODUCTION: stringToBoolean(VITE_APP_MOCK_IN_PRODUCTION),
