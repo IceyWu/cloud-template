@@ -1,4 +1,4 @@
 allowBuilds:
-  core-js: false
-  esbuild: false
-  vue-demi: false
+  core-js: true
+  esbuild: true
+  vue-demi: true
