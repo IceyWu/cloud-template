@@ -1,14 +1,8 @@
 <script setup lang="ts">
 import { Home } from "lucide-vue-next";
 import { Button } from "@/components/ui/button";
-import Lottie_Data_404_1 from "~/assets/lottie/404/404-1.json";
-import Lottie_Data_404_2 from "~/assets/lottie/404/404-2.json";
 
 const typedRef = useTyped([" is not found!"]);
-
-const Lottie_Data_404 = computed(() => {
-  return Math.random() > 0.5 ? Lottie_Data_404_1 : Lottie_Data_404_2;
-});
 </script>
 
 <template>
@@ -29,9 +23,7 @@ const Lottie_Data_404 = computed(() => {
         </Button>
       </RouterLink>
     </div>
-    <div class="flex-shrink-0">
-      <Lottie loop width="22em" height="22em" :json-data="Lottie_Data_404" />
-    </div>
+    <div class="flex-shrink-0 text-9xl select-none">🚀</div>
   </div>
 </template>
 

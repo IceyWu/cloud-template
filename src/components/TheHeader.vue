@@ -39,17 +39,8 @@ const isDark = useDark();
 		<div
 			class="px-6 md:px-10 border-b border-border/40 bg-background/80 flex h-14 w-full items-center box-border top-0 sticky z-50 backdrop-blur-md"
 		>
-			<div
-				v-motion-roll-bottom
-				:initial="{ opacity: 0, y: 100 }"
-				:enter="{ opacity: 1, y: 0, scale: 1 }"
-				:variants="{ custom: { scale: 2 } }"
-				:hovered="{ scale: 1.05 }"
-				class="text-2xl font-bold flex items-center cursor-pointer"
-			>
-				<div class="ml-0 h-auto w-40">
-					<Logo />
-				</div>
+			<div class="text-2xl font-bold flex items-center cursor-pointer">
+				<span class="ml-0">Cloud Template</span>
 			</div>
 
 			<div class="flex-1" />

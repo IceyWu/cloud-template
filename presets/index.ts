@@ -136,7 +136,7 @@ export default function () {
           [VarletUIResolver(), "@varlet/ui"],
           [IduxResolver(), "@idux/components"],
           [InklineResolver(), "@inkline/inkline"],
-          [ElementPlusResolver(), "element-plus"],
+          [ElementPlusResolver({ importStyle: "css" }), "element-plus"],
           [HeadlessUiResolver(), "@headlessui/vue"],
           [ArcoResolver(), "@arco-design/web-vue"],
           [AntDesignVueResolver({ importStyle: false }), "ant-design-vue"],
@@ -232,7 +232,7 @@ export default function () {
         ],
         resolvers: detectResolvers({
           onlyExist: [
-            [ElementPlusResolver(), "element-plus"],
+            [ElementPlusResolver({ importStyle: "css" }), "element-plus"],
             [TDesignResolver({ library: "vue-next" }), "tdesign-vue-next"],
           ],
         }),

@@ -1,5 +1,6 @@
 ﻿<script setup lang="ts">
 import { to } from "@iceywu/utils";
+import { ElMessage } from "element-plus";
 import {
   AlertTriangle,
   ArrowRight,
@@ -14,8 +15,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { testRequestGet } from "~/api/mock";
-import Lottie_Data_404 from "~/assets/lottie/4.json";
-import lottieNoData from "~/assets/lottie/6.json";
 import { useUserStore } from "~/stores/user";
 
 defineProps<{ msg: string }>();
@@ -70,13 +69,8 @@ onMounted(() => {
 
 <template>
   <div class="flex flex-col items-center gap-10 py-16 px-4 w-full max-w-4xl mx-auto">
-    <div class="relative">
-      <div class="absolute -inset-8 bg-gradient-to-r from-primary/10 via-violet-500/10 to-primary/10 rounded-full blur-3xl" />
-      <LottiieCom :lottie-json-data="isDark ? Lottie_Data_404 : lottieNoData" class="relative" />
-    </div>
-
     <Transition name="fade" mode="out-in">
-      <div v-if="!isShowBtns" v-motion-fade class="text-center space-y-4 max-w-2xl">
+      <div v-if="!isShowBtns" class="text-center space-y-4 max-w-2xl">
         <div class="flex items-center justify-center gap-2 mb-2">
           <Badge variant="secondary" class="gap-1 px-3 py-1">
             <Sparkles class="w-3 h-3" />
@@ -98,7 +92,7 @@ onMounted(() => {
         </p>
       </div>
 
-      <Card v-else v-motion-fade class="w-full max-w-md shadow-lg">
+      <Card v-else class="w-full max-w-md shadow-lg">
         <CardHeader class="text-center pb-2">
           <CardTitle class="text-xl">Feature Demo</CardTitle>
           <CardDescription>Click buttons to explore features</CardDescription>
@@ -122,6 +116,11 @@ onMounted(() => {
               <AlertTriangle class="w-4 h-4 mr-2" />
               404 Page
             </Button>
+          </div>
+          <div class="pt-1">
+            <el-button type="primary" class="w-full" @click="ElMessage.success('Element Plus 集成成功 🎉')">
+              Element Plus Button
+            </el-button>
           </div>
           <div v-if="Object.keys(resData).length" class="rounded-lg border bg-muted/50 p-3">
             <div class="flex items-center gap-2 mb-2">
