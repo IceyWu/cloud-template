@@ -2,3 +2,6 @@ allowBuilds:
   core-js: true
   esbuild: true
   vue-demi: true
+minimumReleaseAgeExclude:
+  - browserslist@4.28.5
+  - ultracite@7.9.2
