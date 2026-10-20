@@ -48,7 +48,8 @@
     "vue": "^3.5.39",
     "vue-echarts": "^8.0.1",
     "vue-i18n": "^11.4.6",
-    "vue-router": "^5.1.0"
+    "vue-router": "^5.1.0",
+    "vue-tsc": "3.3.13"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,vue}": [
@@ -63,7 +64,7 @@
     "dev:host": "vite --host",
     "dev:open": "vite --open",
     "preview": "vite preview",
-    "typecheck": "npx vue-tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit",
     "preview:host": "vite preview --host",
     "preview:open": "vite preview --open",
     "syn_rpo": "npx template-syncer --repo https://github.com/IceyWu/cloud-template.git --branch main",
