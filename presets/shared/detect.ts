@@ -46,8 +46,8 @@ export function detectResolvers(options: Options = {}) {
 
 // 获取环境变量
 export function useEnv() {
-  function stringToBoolean(v: string) {
-    return Boolean(v === "true");
+  function stringToBoolean(v: string | undefined, fallback = false) {
+    return v === undefined ? fallback : v === "true";
   }
 
   const mode = process.env.NODE_ENV || "development";
@@ -62,9 +62,9 @@ export function useEnv() {
   } = loadEnv(mode, ".");
 
   return {
-    VITE_APP_API_AUTO_IMPORT: stringToBoolean(VITE_APP_API_AUTO_IMPORT),
+    VITE_APP_API_AUTO_IMPORT: stringToBoolean(VITE_APP_API_AUTO_IMPORT, true),
     VITE_APP_DEV_TOOLS: stringToBoolean(VITE_APP_DEV_TOOLS),
-    VITE_APP_DIR_API_AUTO_IMPORT: stringToBoolean(VITE_APP_DIR_API_AUTO_IMPORT),
+    VITE_APP_DIR_API_AUTO_IMPORT: stringToBoolean(VITE_APP_DIR_API_AUTO_IMPORT, true),
     VITE_APP_MOCK_IN_PRODUCTION: stringToBoolean(VITE_APP_MOCK_IN_PRODUCTION),
     VITE_APP_TITLE,
     VITE_BASE_URL,
