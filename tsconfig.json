@@ -12,7 +12,7 @@
       "@/*": ["./src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite-plugin-vue-layouts/client"],
+    "types": ["vite/client"],
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -21,7 +21,7 @@
     "strictNullChecks": true
   },
   "include": [
-    "srcipts",
+    "src",
     "presets",
     "src/**/*.ts",
     "src/**/*.d.ts",

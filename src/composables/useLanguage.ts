@@ -1,10 +1,10 @@
 export default () => {
   const { t, locale } = useI18n();
   const toggleLocale = () => {
-    locale.value = locale.value === "zh-CN" ? "en" : "zh-CN";
+    locale.value = locale.value === "简体中文" ? "English" : "简体中文";
   };
 
-  const language = computed(() => (locale.value === "zh-CN" ? "中文" : "English"));
+  const language = computed(() => (locale.value === "简体中文" ? "中文" : "English"));
 
-  return { t, language, toggleLocale };
+  return { language, t, toggleLocale };
 };

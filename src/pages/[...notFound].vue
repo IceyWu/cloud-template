@@ -1,5 +1,5 @@
-<script setup lang="ts">
-  import { Home } from "lucide-vue-next";
+<script lang="ts" setup>
+  import { Home } from "@lucide/vue";
   import { Button } from "@/components/ui/button";
 
   const typedRef = useTyped([" is not found!"]);
@@ -15,7 +15,7 @@
       </div>
       <p class="text-muted-foreground max-w-sm">抱歉，您访问的页面不存在或已被移除。</p>
       <RouterLink :to="safeResolve('/')">
-        <Button size="lg" class="mt-2">
+        <Button class="mt-2" size="lg">
           <Home class="w-4 h-4 mr-2" />
           返回首页
         </Button>

@@ -1,7 +1,7 @@
-<script setup lang="ts">
+<script lang="ts" setup>
   import { list, sleep, to } from "@iceywu/utils";
+  import { ArrowRight, Calendar } from "@lucide/vue";
   import { breakpointsTailwind } from "@vueuse/core";
-  import { ArrowRight, Calendar } from "lucide-vue-next";
   import { Badge } from "@/components/ui/badge";
   import { Button } from "@/components/ui/button";
   import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
@@ -22,9 +22,9 @@
     title: string;
   }
   const listObj = ref({
+    finished: false,
     list: [] as ListItem[],
     loading: false,
-    finished: false,
     refreshing: false,
   });
   const baseParams = reactive<BaseParamsProps>({
@@ -68,14 +68,14 @@
       const width = Math.floor(Math.random() * 200 + 200);
       const height = Math.floor(Math.random() * 300 + 300);
       return {
+        content: `这是一段示例内容，用于展示卡片的描述信息。内容编号 ${indexVal}`,
+        cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
+        create_time: "2024-12-15",
         id: indexVal,
         title: `消息标题 ${indexVal}`,
-        cover: `https://picsum.photos/${width}/${height}?random=${indexVal}`,
-        content: `这是一段示例内容，用于展示卡片的描述信息。内容编号 ${indexVal}`,
-        create_time: "2024-12-15",
       };
     });
-    return { code: 200, msg: "success", data };
+    return { code: 200, data, msg: "success" };
   }
 
   async function getData() {
@@ -125,9 +125,9 @@
     >
       <div class="relative h-48 overflow-hidden">
         <img
-          :src="data.cover"
-          :alt="data.title"
           class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          :alt="data.title"
+          :src="data.cover"
         >
         <Badge class="absolute top-3 left-3" variant="secondary"> #{{ data.id }} </Badge>
       </div>
@@ -146,7 +146,7 @@
         </p>
       </CardContent>
       <CardFooter>
-        <Button variant="ghost" class="group/btn" @click="handleItemClick(data)">
+        <Button class="group/btn" variant="ghost" @click="handleItemClick(data)">
           查看详情
           <ArrowRight class="ml-1 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
         </Button>
@@ -161,7 +161,7 @@
           <ReuseSkeletonTemplate v-for="i in 8" :key="i" />
         </template>
         <template v-else>
-          <div v-for="(items, idx) of parts" :key="idx" class="flex flex-col gap-6">
+          <div class="flex flex-col gap-6" v-for="(items, idx) of parts" :key="idx">
             <ReuseTemplate v-for="item of items" :key="item.id" :data="item" />
           </div>
         </template>

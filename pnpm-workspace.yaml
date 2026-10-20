@@ -3,5 +3,4 @@ allowBuilds:
   esbuild: true
   vue-demi: true
 minimumReleaseAgeExclude:
-  - browserslist@4.28.5
-  - ultracite@7.9.2
+  - '@lucide/vue@1.60.0'

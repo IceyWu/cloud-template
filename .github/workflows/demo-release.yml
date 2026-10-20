@@ -15,7 +15,10 @@ concurrency:
 
 jobs:
   publish:
-    if: github.event.pull_request.merged == true && contains(github.event.pull_request.labels.*.name, 'demo-update')
+    if: >-
+      github.event.pull_request.merged == true &&
+      (contains(github.event.pull_request.labels.*.name, 'demo-update') ||
+      github.event.pull_request.title == 'chore: release packages')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

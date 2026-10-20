@@ -25,7 +25,8 @@
         "noDuplicateCustomProperties": "off",
         "noEmptyBlockStatements": "off",
         "noEmptySource": "off",
-        "useAwait": "warn"
+        "useAwait": "warn",
+        "noUnnecessaryConditions": "off"
       },
       "correctness": {
         "noUnusedVariables": "off",
@@ -43,21 +44,22 @@
         "useForOf": "off",
         "noNestedTernary": "off",
         "noExportedImports": "off",
-        "useConsistentMemberAccessibility": "off"
-      },
-      "nursery": {
+        "useConsistentMemberAccessibility": "off",
         "noIncrementDecrement": "off",
-        "noShadow": "warn",
-        "useSortedClasses": "off"
+        "useReadonlyClassProperties": "off",
+        "useConsistentMethodSignatures": "off",
+        "useDestructuring": "off",
+        "useVueMultiWordComponentNames": "off"
+      },
+      "complexity": {
+        "noRedundantDefaultExport": "off",
+        "noExcessiveCognitiveComplexity": "off",
+        "noForEach": "off"
       },
       "performance": {
         "noBarrelFile": "off",
         "useTopLevelRegex": "off"
       },
-      "complexity": {
-        "noExcessiveCognitiveComplexity": "off",
-        "noForEach": "off"
-      }
     }
   },
   "overrides": [
@@ -88,20 +90,6 @@
         "enabled": false
       }
     },
-    {
-      "includes": ["**/*.vue"],
-      "linter": {
-        "rules": {
-          "nursery": {
-            "useVueHyphenatedAttributes": "off",
-            "useVueMultiWordComponentNames": "off",
-            "useVueValidVElse": "off",
-            "useVueValidVBind": "off",
-            "useVueValidVElseIf": "off"
-          }
-        }
-      }
-    }
   ],
   "formatter": {
     "enabled": true,
