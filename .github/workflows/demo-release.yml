@@ -38,7 +38,7 @@ jobs:
             VITE_API_BASE_URL=https://api-demo.tonomemo.com/api
             VITE_KNOBBLE_SERVER_URL=https://api-demo.tonomemo.com/api
           cache-from: type=gha,scope=lev-stack-demo-frontend
-          cache-to: type=gha,scope=lev-stack-demo-frontend,mode=max
+          cache-to: type=gha,scope=lev-stack-demo-frontend,mode=max,ignore-error=true
       - uses: actions/create-github-app-token@v2
         id: app-token
         with:
