@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: corepack enable && corepack prepare pnpm@10 --activate
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run typecheck
+      - run: pnpm run build
+      - name: Build demo container
+        run: >-
+          docker build --tag lev-stack-demo-frontend:ci
+          --build-arg VITE_API_BASE_URL=https://api-demo.tonomemo.com/api
+          --build-arg VITE_KNOBBLE_SERVER_URL=https://api-demo.tonomemo.com/api .
+      - name: Smoke-test static container
+        run: |
+          docker run --detach --rm --name lev-stack-frontend-ci -p 18051:9651 lev-stack-demo-frontend:ci
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:18051/health; then exit 0; fi
+            sleep 1
+          done
+          docker logs lev-stack-frontend-ci
+          exit 1
