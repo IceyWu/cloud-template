@@ -1,10 +1,4 @@
-// Polyfill for ResizeObserver (360浏览器等旧浏览器)
-import ResizeObserver from "resize-observer-polyfill";
-
-if (!window.ResizeObserver) {
-  window.ResizeObserver = ResizeObserver;
-}
-
+import { createApp } from "vue";
 import App from "./App.vue";
 import i18n from "./plugins/i18n";
 
@@ -15,8 +9,8 @@ import vueQuery from "./plugins/vue-query";
 // Tailwind CSS v4 + 全局样式
 import "./assets/index.css";
 
-// Element Plus
-import "element-plus/dist/index.css";
+// Element Plus message API
+import "element-plus/es/components/message/style/css";
 
 const app = createApp(App);
 app.use(routes);

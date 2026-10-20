@@ -19,8 +19,9 @@ const ServerNumber = import.meta.env.VITE_APP_SERVER_ID ? import.meta.env.VITE_A
 const selectedBase: Record<string, string> = baseLsit[ServerNumber];
 const baseUrl = {
   apiServer: import.meta.env.VITE_API_BASE_URL || selectedBase.apiServer,
-  knobbleServer:
-    import.meta.env.VITE_KNOBBLE_SERVER_URL || selectedBase.knobbleServer,
+  knobbleServer: import.meta.env.VITE_KNOBBLE_SERVER_URL || selectedBase.knobbleServer,
 };
 
 export default baseUrl;
+
+export type ServerName = keyof typeof baseUrl;

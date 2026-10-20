@@ -1,4 +1,3 @@
-import { createGetRoutes, setupLayouts } from "virtual:generated-layouts";
 import { createRouter, createWebHashHistory } from "vue-router";
 import { routes as fileRoutes } from "vue-router/auto-routes";
 
@@ -18,9 +17,9 @@ declare module "vue-router" {
 
 export const router = createRouter({
   history: createWebHashHistory(),
-  routes: setupLayouts([...fileRoutes]),
+  routes: [...fileRoutes],
 });
 
-export const getRoutes = createGetRoutes(router);
+export const getRoutes = () => router.getRoutes();
 
 export default router;

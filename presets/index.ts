@@ -2,10 +2,8 @@
 
 import I18N from "@intlify/unplugin-vue-i18n/vite";
 import tailwindcss from "@tailwindcss/vite";
-import Legacy from "@vitejs/plugin-legacy";
 import Vue from "@vitejs/plugin-vue";
 import Jsx from "@vitejs/plugin-vue-jsx";
-import { browserslistToTargets } from "lightningcss";
 import AutoImport from "unplugin-auto-import/vite";
 import {
   AntDesignVueResolver,
@@ -31,45 +29,16 @@ import type { PluginOption } from "vite";
 import { AutoGenerateImports, vue3Presets } from "vite-auto-import-resolvers";
 import { vitePluginFakeServer } from "vite-plugin-fake-server";
 import VueDevTools from "vite-plugin-vue-devtools";
-import Layouts from "vite-plugin-vue-layouts";
 import { VueRouterAutoImports } from "vue-router/unplugin";
 import VueRouter from "vue-router/vite";
 import { Alias, Restart, Warmup } from "./plugins";
-import { defaultBuildTargets, detectResolvers, useEnv } from "./shared/detect";
+import { detectResolvers, useEnv } from "./shared/detect";
 import { r } from "./shared/path";
 
 export default function () {
   const env = useEnv();
 
   const plugins: PluginOption[] = [
-    /**
-     * 兼容不支持 esmModule 的浏览器
-     * https://www.npmjs.com/package/@vitejs/plugin-legacy
-     */
-    Legacy({
-      targets: defaultBuildTargets,
-      modernPolyfills: true,
-    }),
-    /**
-     * 启动优化 + lightningcss
-     */
-    {
-      name: "vite-inline-config",
-      config(config) {
-        // 优化
-        config.css ??= {};
-        config.build ??= {};
-        config.optimizeDeps ??= {};
-        config.css.preprocessorMaxWorkers = true;
-        config.optimizeDeps.holdUntilCrawlEnd = false;
-
-        // lightningcss
-        config.css.transformer = "lightningcss";
-        config.build.cssMinify = "lightningcss";
-        config.css.lightningcss ??= {};
-        config.css.lightningcss.targets = browserslistToTargets(defaultBuildTargets);
-      },
-    },
     /**
      * 内置的预热，可以加快冷启动
      */
@@ -79,9 +48,9 @@ export default function () {
      * https://github.com/posva/unplugin-vue-router
      */
     VueRouter({
-      routesFolder: r("src/pages"),
       dts: r("presets/types/type-router.d.ts"),
       extensions: [".vue", ".tsx", ".jsx"],
+      routesFolder: r("src/pages"),
     }),
     /**
      * vue 官方插件，用来解析 sfc 单文件组件
@@ -89,18 +58,13 @@ export default function () {
      */
     Vue(),
     /**
-     * 布局系统
-     * https://github.com/dishait/vite-plugin-vue-layouts
-     */
-    Layouts(),
-    /**
      * mock 服务
      */
     vitePluginFakeServer({
-      logger: false,
+      enableProd: env.VITE_APP_MOCK_IN_PRODUCTION,
       include: "mock",
       infixName: false,
-      enableProd: env.VITE_APP_MOCK_IN_PRODUCTION,
+      logger: false,
     }),
     /**
      * 组件自动按需引入
@@ -108,15 +72,9 @@ export default function () {
      */
     Components({
       directoryAsNamespace: true,
-      include: [/\.vue$/, /\.vue\?vue/, /\.[tj]sx$/],
-      extensions: ["vue", "tsx", "jsx"],
       dts: r("presets/types/components.d.ts"),
-      types: [
-        {
-          from: "vue-router",
-          names: ["RouterLink", "RouterView"],
-        },
-      ],
+      extensions: ["vue", "tsx", "jsx"],
+      include: [/\.vue$/, /\.vue\?vue/, /\.[tj]sx$/],
       resolvers: detectResolvers({
         onlyExist: [
           [VantResolver(), "vant"],
@@ -138,15 +96,21 @@ export default function () {
           [TDesignResolver({ library: "vue-next" }), "tdesign-vue-next"],
         ],
       }),
+      types: [
+        {
+          from: "vue-router",
+          names: ["RouterLink", "RouterView"],
+        },
+      ],
     }),
     /**
      * i18n 国际化支持
      * https://www.npmjs.com/package/@intlify/unplugin-vue-i18n
      */
     I18N({
-      runtimeOnly: true,
       compositionOnly: true,
       include: ["locales/**"],
+      runtimeOnly: true,
     }),
     /**
      * jsx 和 tsx 支持
@@ -189,12 +153,11 @@ export default function () {
     plugins.push(
       AutoImport({
         dirs,
-        vueTemplate: true,
         dts: r("presets/types/auto-imports.d.ts"),
         imports: [
           ...AutoGenerateImports({
-            include: [...vue3Presets],
             exclude: ["vue-router"],
+            include: [...vue3Presets],
           }),
 
           VueRouterAutoImports,
@@ -212,6 +175,7 @@ export default function () {
             [TDesignResolver({ library: "vue-next" }), "tdesign-vue-next"],
           ],
         }),
+        vueTemplate: true,
       })
     );
   }

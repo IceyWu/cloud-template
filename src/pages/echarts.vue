@@ -1,4 +1,5 @@
-<script setup lang="ts">
+<script lang="ts" setup>
+  import { ArrowDown, ArrowUp, Eye, MousePointerClick, TrendingUp, Users } from "@lucide/vue";
   import type { EChartsOption } from "echarts";
   import { BarChart, LineChart, PieChart } from "echarts/charts";
   import {
@@ -9,7 +10,6 @@
   } from "echarts/components";
   import { use } from "echarts/core";
   import { CanvasRenderer } from "echarts/renderers";
-  import { ArrowDown, ArrowUp, Eye, MousePointerClick, TrendingUp, Users } from "lucide-vue-next";
   import VChart, { THEME_KEY } from "vue-echarts";
   import { Badge } from "@/components/ui/badge";
   import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,101 +34,101 @@
 
   // 统计数据
   const stats = ref([
-    { title: "总访问量", value: "12,543", change: "+12.5%", trend: "up", icon: Eye },
-    { title: "活跃用户", value: "3,234", change: "+8.2%", trend: "up", icon: Users },
-    { title: "点击率", value: "24.8%", change: "-2.1%", trend: "down", icon: MousePointerClick },
-    { title: "转化率", value: "3.2%", change: "+0.8%", trend: "up", icon: TrendingUp },
+    { change: "+12.5%", icon: Eye, title: "总访问量", trend: "up", value: "12,543" },
+    { change: "+8.2%", icon: Users, title: "活跃用户", trend: "up", value: "3,234" },
+    { change: "-2.1%", icon: MousePointerClick, title: "点击率", trend: "down", value: "24.8%" },
+    { change: "+0.8%", icon: TrendingUp, title: "转化率", trend: "up", value: "3.2%" },
   ]);
 
   const pieOption = ref<EChartsOption>({
-    tooltip: {
-      trigger: "item",
-      formatter: "{b} : {c} ({d}%)",
-    },
     legend: {
-      orient: "horizontal",
       bottom: "0",
       data: ["Direct", "Email", "Ad Networks", "Video Ads", "Search Engines"],
+      orient: "horizontal",
     },
     series: [
       {
-        name: "Traffic Sources",
-        type: "pie",
-        radius: ["40%", "70%"],
-        center: ["50%", "45%"],
         avoidLabelOverlap: false,
+        center: ["50%", "45%"],
+        data: [
+          { name: "Direct", value: 335 },
+          { name: "Email", value: 310 },
+          { name: "Ad Networks", value: 234 },
+          { name: "Video Ads", value: 135 },
+          { name: "Search Engines", value: 1548 },
+        ],
+        emphasis: {
+          label: { fontSize: 20, fontWeight: "bold", show: true },
+        },
         itemStyle: {
-          borderRadius: 10,
           borderColor: "transparent",
+          borderRadius: 10,
           borderWidth: 2,
         },
-        label: { show: false, position: "center" },
-        emphasis: {
-          label: { show: true, fontSize: 20, fontWeight: "bold" },
-        },
+        label: { position: "center", show: false },
         labelLine: { show: false },
-        data: [
-          { value: 335, name: "Direct" },
-          { value: 310, name: "Email" },
-          { value: 234, name: "Ad Networks" },
-          { value: 135, name: "Video Ads" },
-          { value: 1548, name: "Search Engines" },
-        ],
+        name: "Traffic Sources",
+        radius: ["40%", "70%"],
+        type: "pie",
       },
     ],
+    tooltip: {
+      formatter: "{b} : {c} ({d}%)",
+      trigger: "item",
+    },
   });
 
   const barOption = ref<EChartsOption>({
-    tooltip: {
-      trigger: "axis",
-      axisPointer: { type: "shadow" },
-    },
     grid: {
-      left: "3%",
-      right: "4%",
       bottom: "3%",
       containLabel: true,
+      left: "3%",
+      right: "4%",
     },
-    xAxis: {
-      type: "category",
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
-    },
-    yAxis: { type: "value" },
     series: [
       {
-        name: "Visits",
-        type: "bar",
         data: [120, 200, 150, 80, 70, 110, 130],
         itemStyle: { borderRadius: [6, 6, 0, 0] },
+        name: "Visits",
+        type: "bar",
       },
     ],
+    tooltip: {
+      axisPointer: { type: "shadow" },
+      trigger: "axis",
+    },
+    xAxis: {
+      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      type: "category",
+    },
+    yAxis: { type: "value" },
   });
 
   const lineOption = ref<EChartsOption>({
+    grid: {
+      bottom: "3%",
+      containLabel: true,
+      left: "3%",
+      right: "4%",
+    },
+    series: [
+      {
+        areaStyle: { opacity: 0.3 },
+        data: [820, 932, 901, 1234, 1290, 1530],
+        name: "Revenue",
+        smooth: true,
+        type: "line",
+      },
+    ],
     tooltip: {
       trigger: "axis",
     },
-    grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "3%",
-      containLabel: true,
-    },
     xAxis: {
-      type: "category",
       boundaryGap: false,
       data: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      type: "category",
     },
     yAxis: { type: "value" },
-    series: [
-      {
-        name: "Revenue",
-        type: "line",
-        smooth: true,
-        areaStyle: { opacity: 0.3 },
-        data: [820, 932, 901, 1234, 1290, 1530],
-      },
-    ],
   });
 
   const totalVisits = computed(() => {
@@ -145,18 +145,18 @@
   <div class="p-6 w-full min-h-full overflow-auto space-y-6">
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-      <Card v-for="stat in stats" :key="stat.title" class="relative overflow-hidden">
+      <Card class="relative overflow-hidden" v-for="stat in stats" :key="stat.title">
         <CardHeader class="flex flex-row items-center justify-between pb-2">
           <CardTitle class="text-sm font-medium text-muted-foreground">
             {{ stat.title }}
           </CardTitle>
-          <component :is="stat.icon" class="h-4 w-4 text-muted-foreground" />
+          <component class="h-4 w-4 text-muted-foreground" :is="stat.icon" />
         </CardHeader>
         <CardContent>
           <div class="text-2xl font-bold">{{ stat.value }}</div>
           <div class="flex items-center gap-1 text-xs mt-1">
-            <ArrowUp v-if="stat.trend === 'up'" class="h-3 w-3 text-green-500" />
-            <ArrowDown v-else class="h-3 w-3 text-red-500" />
+            <ArrowUp class="h-3 w-3 text-green-500" v-if="stat.trend === 'up'" />
+            <ArrowDown class="h-3 w-3 text-red-500" v-else />
             <span :class="stat.trend === 'up' ? 'text-green-500' : 'text-red-500'">
               {{ stat.change }}
             </span>
@@ -182,7 +182,7 @@
         <CardContent>
           <div class="h-80 w-full">
             <!-- @vue-ignore -->
-            <VChart class="h-full w-full" :option="pieOption" autoresize />
+            <VChart autoresize class="h-full w-full" :option="pieOption" />
           </div>
         </CardContent>
       </Card>
@@ -198,7 +198,7 @@
         <CardContent>
           <div class="h-80 w-full">
             <!-- @vue-ignore -->
-            <VChart class="h-full w-full" :option="barOption" autoresize />
+            <VChart autoresize class="h-full w-full" :option="barOption" />
           </div>
         </CardContent>
       </Card>
@@ -216,7 +216,7 @@
       <CardContent>
         <div class="h-64 w-full">
           <!-- @vue-ignore -->
-          <VChart class="h-full w-full" :option="lineOption" autoresize />
+          <VChart autoresize class="h-full w-full" :option="lineOption" />
         </div>
       </CardContent>
     </Card>

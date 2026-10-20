@@ -1,4 +1,5 @@
 import type { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from "axios";
+import type { ServerName } from "./base";
 
 export interface resultType {
   accessToken?: string;
@@ -25,7 +26,7 @@ export interface PureHttpRequestConfig extends AxiosRequestConfig {
   isNeedLoading?: boolean;
   isNeedToken?: boolean;
   roleName?: string;
-  serverName?: string;
+  serverName?: ServerName;
 }
 
 export interface PureHttpInstance {

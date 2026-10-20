@@ -1,124 +1,60 @@
-<p align="center">
-  <br>
-  <img width="100" src="./public/logo.svg" alt="logo of vue-awesome repository">
-  <br>
-  <br>
-</p>
-<p align='center'>
-cloud-template <b>vite + v3 +ts</b><sup><em>(speed)</em></sup><br>
-</p>
+# cloud-template
 
-<br>
+A Vue 3, TypeScript, and Vite starter with routing, state management, localization, API examples, UI components, charts, and code-quality tooling ready to use.
 
-<p align='center'>
-<a href="https://cloud-template.netlify.app/">Live Demo</a>
-</p>
+[Live preview](https://cloud-template.netlify.app/) · [简体中文](./README.md)
 
-<br>
+## Features
 
-<p align='center'>
-<a href="./README.md">简体中文</a> | <b>English</b>
-</p>
+- Vue 3, TypeScript, Vite 8, and pnpm
+- File-based Vue Router pages and layouts
+- Pinia state management with persistence
+- Vue I18n with YAML locale files
+- Tailwind CSS v4, Reka UI, and Element Plus
+- TanStack Vue Query, Axios, and API/mock examples
+- On-demand ECharts and VueUse utilities
+- Ultracite and Biome linting and formatting
 
-<br>
+## Requirements
 
-## 🐳Features
+- Node.js 22.18 or a newer LTS release
+- pnpm 12.14.0
 
-- ⚡️ [Vue 3](https://github.com/vuejs/core), [Rolldown-Vite](https://rolldown.rs/), [pnpm](https://pnpm.io/)
-
-- 🚀 [Rolldown-Vite](https://rolldown.rs/) - Next-generation bundler powered by Rust for extreme performance
-
-- �📦 [Components auto importing](./src/components)
-
-- 🍍 [State Management via Pinia](https://pinia.vuejs.org/)
-
-- 🎨 [Tailwind CSS v4](https://tailwindcss.com/) - Modern atomic CSS framework
-
-- 😃 [Lucide Icons](https://lucide.dev/) - Beautiful open-source icon library
-
-- 📥 [APIs auto importing](https://github.com/antfu/unplugin-auto-import) - use Composition API and others directly
-
-- 🦾 [Api](./src/api) - a simple wrapper for [axios]
-
-- 🔍 [Ultracite](https://github.com/haydenbleasel/ultracite) + [Biome](https://biomejs.dev/) - Ultra-fast linter and formatter written in Rust
-
-- 🎨 [Element Plus](https://element-plus.org/) - a Vue 3.0 UI library
-
-- 🔄 [TanStack Query](https://tanstack.com/query) - Powerful async state management
-<!-- - 🚀  自动版本更新并生成 `CHANGELOG` -->
-- 🚀 auto version update and generate `CHANGELOG`
-<!-- Lottie -->
-- 🎨 [Lottie](https://github.com/airbnb/lottie-web) - a Javascript library for web and react native that parses After Effects animations exported as json with bodymovin and renders them natively on your web page or react native app
-<!-- echarts,vue echarts 封装 -->
-- 📊 [Echarts](https://echarts.apache.org/zh/index.html) - use Echarts in Vue
-
-<!-- iceywu/utils -->
-
-- 📊 [Utils-@iceywu/utils](https://github.com/iceywu/utils) - a set of common utils
-<!-- i18n -->
-- 🌐 [i18n](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n#readme) - internationalization
-
-- 🎨 [shadcn-vue](https://www.shadcn-vue.com/) - Re-usable components built with Reka UI and Tailwind CSS
-
-<br>
-
-## 🚀 Code Quality & Performance
-
-### Build Tool
-
-- **[Rolldown-Vite](https://rolldown.rs/)** - Next-generation bundler powered by Rust, offering significantly faster build times and hot reload
-
-### Linting
-
-- **[Ultracite](https://github.com/haydenbleasel/ultracite)** - Modern linting and formatting tool based on Biome
-- **[Biome](https://biomejs.dev/)** - Ultra-fast linter and formatter written in Rust
-
-### Scripts
+## Get started
 
 ```bash
-# Run linting
-pnpm lint
-
-# Auto-fix issues
-pnpm lint:fix
-```
-
-<br>
-
-## Motivation
-
-Why do this **template**?
-
-1. Save time wasted on configuration for the next development
-2. Combine mainstream plug-ins to integrate modern development architecture and improve development efficiency
-
-<br />
-
-<!-- ## 启发 🐃
-
-该模板受 **[vitesse](https://github.com/antfu/vitesse)** 启发，如果你有 `SSG`
-的场景，推荐你使用 **[vitesse](https://github.com/antfu/vitesse)**。 -->
-
-## Inspiration
-
-This template is inspired by **[tov-template](https://github.com/dishait/tov-template)**
-
-<br />
-
-## Usage
-
-### Development
-
-Just run and visit <http://localhost:5173/>
-
-```bash
+pnpm install
 pnpm dev
 ```
 
-### Build
-
-To build the App, run
+The development server listens on <http://localhost:9500> by default.
 
 ```bash
-pnpm build
+pnpm check       # Lint and TypeScript type checking
+pnpm build       # Production build
+pnpm preview     # Preview the production build locally
+pnpm fix         # Apply available lint and formatting fixes
 ```
+
+Configure the app title, base path, mock server, API auto-import, and devtools through `.env`. See the environment reader in the project for the available variable names.
+
+## Project structure
+
+```text
+src/
+  api/          API and mock examples
+  components/   App and UI components
+  composables/  Vue composables
+  layouts/      Page layouts
+  pages/        File-based routes
+  plugins/      Vue plugin setup
+  stores/       Pinia stores
+  utils/        Request and shared utilities
+locales/        Localization files
+mock/           Development mock routes
+presets/        Vite plugins and template configuration
+```
+
+## License
+
+[MIT](./LICENSE) © 2023 IceyWu
