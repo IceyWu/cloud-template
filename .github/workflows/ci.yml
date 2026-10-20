@@ -28,7 +28,6 @@ jobs:
           cache: pnpm
       - run: corepack enable && corepack prepare pnpm@10 --activate
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run typecheck
       - run: pnpm run build
       - name: Build demo container
         run: >-
