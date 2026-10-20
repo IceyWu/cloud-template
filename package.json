@@ -64,7 +64,7 @@
     "typecheck": "vue-tsc --noEmit",
     "preview:host": "vite preview --host",
     "preview:open": "vite preview --open",
-    "check": "biome lint src presets && vue-tsc --noEmit",
+    "check": "biome lint src presets && vite build && vue-tsc --noEmit",
     "fix": "ultracite fix"
   },
   "type": "module",

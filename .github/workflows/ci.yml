@@ -28,7 +28,6 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm run check
-      - run: pnpm run build
       - name: Build demo container
         run: >-
           docker build --tag lev-stack-demo-frontend:ci

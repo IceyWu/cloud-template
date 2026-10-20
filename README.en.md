@@ -30,7 +30,7 @@ pnpm dev
 The development server listens on <http://localhost:9500> by default.
 
 ```bash
-pnpm check       # Lint and TypeScript type checking
+pnpm check       # Lint, production build, and TypeScript type checking
 pnpm build       # Production build
 pnpm preview     # Preview the production build locally
 pnpm fix         # Apply available lint and formatting fixes

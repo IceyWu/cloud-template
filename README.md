@@ -30,7 +30,7 @@ pnpm dev
 开发服务器默认使用 <http://localhost:9500>。
 
 ```bash
-pnpm check       # 代码规范与 TypeScript 类型检查
+pnpm check       # 代码规范、生产构建和 TypeScript 类型检查
 pnpm build       # 生产构建
 pnpm preview     # 本地预览构建结果
 pnpm fix         # 自动修复可处理的代码规范问题
