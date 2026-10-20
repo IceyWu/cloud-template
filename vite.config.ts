@@ -5,7 +5,7 @@ import { useEnv } from "./presets/shared/detect";
 const env = useEnv();
 
 export default defineConfig({
-  base: env.VITE_BASE_URL,
+  base: env.VITE_BASE_URL || "/",
   server: {
     // host: '0.0.0.0',
     port: 9500,
