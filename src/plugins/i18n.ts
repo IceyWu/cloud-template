@@ -1,4 +1,5 @@
 import { createI18n } from "vue-i18n";
+import { syncRef, useStorage } from "@vueuse/core";
 
 const yamls = import.meta.glob("../../locales/*/**.y(a)?ml", {
   eager: true,
